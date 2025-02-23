@@ -1,5 +1,6 @@
 import styles from "./header.module.css";
 import Link from "next/link";
+import Search from "./Search";
 import {
     ShoppingCartIcon
   } from '@heroicons/react/24/outline';
@@ -18,7 +19,7 @@ export default function Header() {
             </div></Link> 
         </div>
         <div className={styles.headerBottom}>
-          <p>Search element here</p>
+            <Search />
         </div>
       </div>
     </>
