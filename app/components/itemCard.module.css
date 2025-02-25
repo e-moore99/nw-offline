@@ -4,4 +4,26 @@
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.itemCard img{
+    height: 20vh;
+}
+
+.cartAdd {
+    display: flex;
+    justify-content: space-between;
+    gap: 3vw;
+}
+
+.cartAdd button {
+    background-color: rgb(176, 250, 250);
+    color: #111;
+    padding: 0 10px;
+    height: 30px;
+    border-radius: 10px;
+    cursor: pointer;
 }

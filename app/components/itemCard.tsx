@@ -15,8 +15,9 @@ export default function ItemCard(props: {
         <div>
           <h3>#{props.id}</h3>
         </div>
-        <div>
+        <div className={styles.cartAdd}>
           <h2>${props.id}</h2>
+          <button>Add to cart</button>
         </div>
       </div>
     </>

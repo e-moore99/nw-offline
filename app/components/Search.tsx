@@ -50,7 +50,16 @@ export default function Search({
       >
         <MagnifyingGlassIcon className="w-6" />
       </button>
-      <button onClick={setSearchQuery("pokemon?limit=100000&offset=0")} >Find all!</button>
+      <button
+        onClick={() => {
+          setSearchQuery("pokemon?limit=100000&offset=0");
+          handleSearch();
+        }}
+        className={styles.button}
+      >
+        Find all!
+      </button>
+      {/* <button onClick={setSearchQuery("pokemon?limit=100000&offset=0")} >Find all!</button> */}
     </>
   );
 }
