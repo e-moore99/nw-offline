@@ -22,7 +22,7 @@ export default function Header({
           </Link>
         </div>
         <div className={styles.headerBottom}>
-          <Search setSearchQuery={setSearchQuery} handleSearch={handleSearch}/>
+          <Search setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
         </div>
       </div>
     </>

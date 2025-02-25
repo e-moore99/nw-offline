@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Header from "./components/header";
 import React from "react";
 import { Pokemon, fetchPokemon } from "./lib/fetch";
@@ -9,7 +8,6 @@ import styles from "./page.module.css";
 export default function Home() {
   const [pokemon, setPokemon] = React.useState<Pokemon[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
-  const [findAll, setFindAll] = React.useState<string>("");
   const [searchQuery, setSearchQuery] = React.useState<string>("");
 
   const handleSearch = async () => {
@@ -39,11 +37,10 @@ export default function Home() {
     <>
       <Header setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
       <div>
-        {/* <h1>Display stuff here</h1> */}
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <div  className={styles.displayArea}>
+          <div className={styles.displayArea}>
             {pokemon &&
               Array.isArray(pokemon) &&
               pokemon.map((poke) => (
@@ -51,12 +48,14 @@ export default function Home() {
                   key={poke.id}
                   name={poke.name}
                   id={poke.id}
-                  image={poke.sprites?.front_default || "https://media.istockphoto.com/id/1399588872/vector/corrupted-pixel-file-icon-damage-document-symbol-sign-broken-data-vector.jpg?s=612x612&w=0&k=20&c=ffG6gVLUPfxZkTwjeqdxD67LWd8R1pQTIyIVUi-Igx0="}
+                  image={
+                    poke.sprites?.front_default ||
+                    "https://media.istockphoto.com/id/1399588872/vector/corrupted-pixel-file-icon-damage-document-symbol-sign-broken-data-vector.jpg?s=612x612&w=0&k=20&c=ffG6gVLUPfxZkTwjeqdxD67LWd8R1pQTIyIVUi-Igx0="
+                  }
                 />
               ))}
           </div>
         )}
-        {/* <ItemCard name={pokemon.name} key={pokemon.id} id={pokemon.id} type={pokemon.types} image={pokemon.sprites}></ItemCard> */}
       </div>
     </>
   );
