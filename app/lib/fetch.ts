@@ -13,7 +13,7 @@ export const fetchPokemon = async (options: {
     const { name, id, findAll } = options;
     let searchQuery = "";
     if (findAll) {
-        searchQuery = `${findAll}`;
+      searchQuery = `${findAll}`;
     } else if (name) {
       searchQuery = `pokemon/${name}`;
     } else if (id) {
@@ -26,6 +26,18 @@ export const fetchPokemon = async (options: {
 
     const data = await response.json();
     console.log(data);
+
+    if (data.results) {
+      const allPokemon = await Promise.all(
+        data.results.map(async (pokemon: { name: string }) => {
+          const pokemonResponse = await fetch(
+            `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
+          );
+          return await pokemonResponse.json();
+        })
+      );
+      return allPokemon;
+    }
 
     if (data) {
       return [data];

@@ -1,0 +1,6 @@
+.displayArea {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
