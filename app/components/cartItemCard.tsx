@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./cartItemCard.module.css";
+import { TrashIcon, PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 
 export default function CartItemCard(props: {
   name: string;
@@ -13,20 +14,23 @@ export default function CartItemCard(props: {
   return (
     <>
       <div className={styles.cartItemCard}>
-        <div>
-          <h1>{props.name}</h1>
+        <div className={styles.cartItemLeft}>
           <img src={props.image} alt="Pokemon image" />
+          <h1>{props.name}</h1>
         </div>
-        <div>
+        {/* <div>
           <h3>#{props.id}</h3>
-        </div>
-        <div>
+        </div> */}
+        {/* <div>
+        </div> */}
+        <div className={styles.cartItemRight}>
           <h3>Quantity: {props.quantity}</h3>
-        </div>
-        <div className={styles.cartAdd}>
-          <button onClick={props.increaseItems}>+</button>
-          <button onClick={props.decreaseItems}>-</button>
-          <button onClick={props.removeItem}>Remove</button>
+          <div className={styles.btnBox}>
+          <button onClick={props.decreaseItems}><MinusIcon className="w-6"/></button>
+          <button onClick={props.increaseItems}><PlusIcon className="w-6"/></button>
+          <button onClick={props.removeItem}><TrashIcon className="w-6"/></button>
+          </div>
+          <h4>Price: ${props.id*props.quantity}</h4>
         </div>
       </div>
     </>

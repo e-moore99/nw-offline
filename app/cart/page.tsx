@@ -25,6 +25,7 @@ export default function Cart() {
   return (
     <>
       <Header />
+      <div className={styles.cartContainer}>
       <CartItemCard  
             name="test"
             id={1}
@@ -47,6 +48,7 @@ export default function Cart() {
             removeItem={() => removeItem(index)}
           />
         ))}
+      </div>
       </div>
     </>
   );

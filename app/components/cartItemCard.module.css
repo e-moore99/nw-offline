@@ -1,0 +1,36 @@
+.cartItemCard {
+    /* background-color: red; */
+    width: 80vw;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cartItemLeft {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    /* justify-content: space-between; */
+    gap: 5%;
+    padding-left: 5%;
+}
+
+.cartItemLeft img{
+    height: 20vh;
+}
+
+.cartItemRight {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 5%;
+}
+
+.btnBox {
+    display: flex;
+    gap: 2%;
+}
