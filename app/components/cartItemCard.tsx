@@ -24,9 +24,9 @@ export default function CartItemCard(props: {
         {/* <div>
         </div> */}
         <div className={styles.cartItemRight}>
-          <h3>Quantity: {props.quantity}</h3>
           <div className={styles.btnBox}>
           <button onClick={props.decreaseItems}><MinusIcon className="w-6"/></button>
+          <h3>{props.quantity}</h3>
           <button onClick={props.increaseItems}><PlusIcon className="w-6"/></button>
           <button onClick={props.removeItem}><TrashIcon className="w-6"/></button>
           </div>
