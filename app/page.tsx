@@ -15,6 +15,8 @@ export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
   const cartArray = useAppSelector((state) => state.cart);
 
+ 
+
   const handleSearch = async () => {
     if (!searchQuery) return;
 

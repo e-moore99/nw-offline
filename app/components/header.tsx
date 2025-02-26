@@ -3,6 +3,8 @@ import Link from "next/link";
 import Search from "./Search";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch, useAppSelector } from "@/redux/store";
 
 export default function Header({
   setSearchQuery,
@@ -12,12 +14,20 @@ export default function Header({
   handleSearch: () => void;
 }) {
   const [cartItems, setCartItems] = React.useState<number>(0);
+  const dispatch = useDispatch<AppDispatch>();
+  const cartArray = useAppSelector((state) => state.cart);
+
+  React.useEffect(() => {
+    setCartItems(cartArray.length);
+  }, [cartArray]);
 
   return (
     <>
       <div className={styles.header}>
         <div className={styles.headerTop}>
+          <Link href="/">
           <h1>Welcome to Ecomm test site!</h1>
+          </Link>
           <Link href="/cart">
             <div className={styles.cartIcon}>
               <ShoppingCartIcon className="w-6" />
