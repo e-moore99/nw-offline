@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    /* background-color: aqua; */
+    margin-top: 20px;
 }
 
 .itemCard img{

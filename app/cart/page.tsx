@@ -35,26 +35,21 @@ export default function Cart() {
   };
   const decreaseItems = (index: number) => {
     let tempCartItems = cartArray.map((item, i) =>
-      i === index ? { ...item, quantity: item.quantity - 1 } : item
+      i === index && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
     );
     dispatch(updateCart(tempCartItems));
   };
-  const removeItem = (index: number) => {};
+  const removeItem = (index: number) => {
+    let tempCartItems = [...cartArray];
+    tempCartItems.splice(index, 1);
+    dispatch(updateCart(tempCartItems));
+  };
 
   useEffect(() => {}, []);
   return (
     <>
       <Header />
       <div className={styles.cartContainer}>
-        {/* <CartItemCard
-          name="test"
-          id={1}
-          image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFUAfyVe3Easiycyh3isP9wDQTYuSmGPsPQvLIJdEYvQ_DsFq5Ez2Nh_QjiS3oZ3B8ZPfK9cZQyIStmQMV1lDPLw"
-          quantity={3}
-          increaseItems={() => increaseItems(index)}
-          decreaseItems={() => decreaseItems(index)}
-          removeItem={() => removeItem(index)}
-        /> */}
         {cartItems.length === 0 ? <h1>Cart is empty!</h1> : null}
         <div>
           {cartItems.map((item, index) => (
@@ -70,6 +65,9 @@ export default function Cart() {
             />
           ))}
         </div>
+      </div>
+      <div>
+        <h1>Total: {}</h1>
       </div>
     </>
   );
