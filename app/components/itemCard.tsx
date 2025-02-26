@@ -4,6 +4,7 @@ export default function ItemCard(props: {
   name: string;
   id: number;
   image: string;
+  addToCart: () => void;
 }) {
   return (
     <>
@@ -17,7 +18,7 @@ export default function ItemCard(props: {
         </div>
         <div className={styles.cartAdd}>
           <h2>${props.id}</h2>
-          <button>Add to cart</button>
+          <button onClick={props.addToCart}>Add to cart</button>
         </div>
       </div>
     </>

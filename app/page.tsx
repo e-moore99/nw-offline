@@ -33,10 +33,14 @@ export default function Home() {
     setLoading(false);
   };
 
+  const addToCart = (pokemon: Pokemon) => {
+    console.log("added to cart: ", pokemon);
+  }
+
   return (
     <>
       <Header setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
-      <div>
+      <div className={styles.container}>
         {loading ? (
           <p>Loading...</p>
         ) : (
@@ -45,7 +49,9 @@ export default function Home() {
               Array.isArray(pokemon) &&
               pokemon.map((poke) => (
                 <ItemCard
-                  key={poke.id}
+                addToCart={() => addToCart(poke)}
+                
+                  key={poke.id+1}
                   name={poke.name}
                   id={poke.id}
                   image={

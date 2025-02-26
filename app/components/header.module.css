@@ -6,8 +6,9 @@
 .headerTop {
   height: 30%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+  padding: 2%;
 }
 
 .headerTop h1 {
@@ -19,4 +20,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+.cartIcon {
+  display: flex;
 }
