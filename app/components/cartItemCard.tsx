@@ -20,7 +20,7 @@ export default function CartItemCard(props: {
             src={props.image}
             alt="Pokemon image"
             height={100}
-            width={100}
+            width={150}
           />
 
           <h1>{props.name}</h1>

@@ -19,10 +19,6 @@
     padding-left: 5%;
 }
 
-.cartItemLeft img{
-    height: 20vh;
-}
-
 .cartItemRight {
     width: 50%;
     display: flex;
