@@ -15,7 +15,7 @@ export default function ItemCard(props: {
           <Image
             src={props.image}
             alt="Pokemon image"
-            width={100}
+            width={150}
             height={100}
           />
         </div>

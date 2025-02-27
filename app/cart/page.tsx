@@ -26,7 +26,7 @@ export default function Cart() {
   }, [cartArray]);
 
   const handleSearch = async () => {
-    console.log("Wrong page to search on!");
+    console.log("Wrong page to search on!", searchQuery);
   };
 
   const increaseItems = (index: number) => {
