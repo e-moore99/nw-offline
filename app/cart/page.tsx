@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 import Header from ".././components/header";
 import React from "react";
-// import ItemCard from "../components/itemCard";
 import CartItemCard from "../components/cartItemCard";
 import styles from "./page.module.css";
 import { useDispatch } from "react-redux";
@@ -18,13 +17,17 @@ interface CartItem {
 
 export default function Cart() {
   const [cartItems, setCartItems] = React.useState<CartItem[]>([]);
-
+  const [searchQuery, setSearchQuery] = React.useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
   const cartArray = useAppSelector((state) => state.cart);
 
   useEffect(() => {
     setCartItems(cartArray);
   }, [cartArray]);
+
+  const handleSearch = async () => {
+    console.log("Wrong page to search on!");
+  };
 
   const increaseItems = (index: number) => {
     const tempCartItems = cartArray.map((item, i) =>
@@ -44,10 +47,9 @@ export default function Cart() {
     dispatch(updateCart(tempCartItems));
   };
 
-  useEffect(() => {}, []);
   return (
     <>
-      <Header />
+      <Header setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
       <div className={styles.cartContainer}>
         {cartItems.length === 0 ? <h1>Cart is empty!</h1> : null}
         <div>
