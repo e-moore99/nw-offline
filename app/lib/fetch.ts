@@ -11,6 +11,24 @@ export const fetchPokemon = async (options: {
 }): Promise<Pokemon[]> => {
   try {
     const { name, id, findAll } = options;
+
+    // search cached data before online
+    const cachedData = await caches.match('all-pokemon');
+    if (cachedData) {
+      const allPokemonData = await cachedData.json();
+
+      if (findAll) {
+        return allPokemonData.filter((pokemon: Pokemon) => pokemon.name.toLowerCase().includes(findAll.toLowerCase()))
+      } else if (name) {  
+        return allPokemonData.filter((pokemon: Pokemon) => pokemon.name.toLowerCase() === name.toLowerCase());
+      } else if (id) {
+        return allPokemonData.filter((pokemon: Pokemon) => pokemon.id === id);
+      } else {
+        // default response of first 20 if no specific search
+        return allPokemonData.slice(0, 20);
+      }
+    }
+
     let searchQuery = "";
     if (findAll) {
       searchQuery = `${findAll}`;

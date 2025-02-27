@@ -1,0 +1,17 @@
+{
+  "name": "Pokemon PWA",
+  "short_name": "PokePWA",
+  "description": "A Progressive Web App for Pokemon shopping and browsing",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff0000",
+  "icons": [
+    {
+      "src": "/pokeball.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
