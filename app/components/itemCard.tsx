@@ -1,4 +1,5 @@
 import styles from "./itemCard.module.css";
+import Image from "next/image";
 
 export default function ItemCard(props: {
   name: string;
@@ -11,7 +12,12 @@ export default function ItemCard(props: {
       <div className={styles.itemCard}>
         <div>
           <h1>{props.name}</h1>
-          <img src={props.image} alt="Pokemon image" />
+          <Image
+            src={props.image}
+            alt="Pokemon image"
+            width={100}
+            height={100}
+          />
         </div>
         <div>
           <h3>#{props.id}</h3>

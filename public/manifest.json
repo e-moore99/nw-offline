@@ -8,7 +8,7 @@
   "theme_color": "#ff0000",
   "icons": [
     {
-      "src": "/pokeball.png",
+      "src": "/avatar.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
