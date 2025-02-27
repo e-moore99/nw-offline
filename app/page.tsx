@@ -68,7 +68,7 @@ export default function Home() {
       <Header setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
       <div className={styles.container}>
         {loading ? (
-          <p>Loading...</p>
+          <p>Waiting for you to search for what you need!</p>
         ) : (
           <div className={styles.displayArea}>
             {pokemon &&
