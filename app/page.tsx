@@ -15,8 +15,6 @@ export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
   const cartArray = useAppSelector((state) => state.cart);
 
- 
-
   const handleSearch = async () => {
     if (!searchQuery) return;
 
@@ -45,21 +43,21 @@ export default function Home() {
     const itemIndex = cartArray.findIndex((item) => item.id === pokemon.id);
 
     if (itemIndex !== -1) {
-      const updatedCart = cartArray.map((item, index)=>
-        index === itemIndex ? {...item, quantity: item.quantity + 1} : item
-      )
-      dispatch(updateCart(updatedCart))
+      const updatedCart = cartArray.map((item, index) =>
+        index === itemIndex ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      dispatch(updateCart(updatedCart));
     } else {
       const newCartItem = {
         name: pokemon.name,
         id: pokemon.id,
         sprites: pokemon.sprites,
         quantity: 1,
-      }
-      const updatedCart = [...cartArray, newCartItem]
-      dispatch(updateCart(updatedCart))
+      };
+      const updatedCart = [...cartArray, newCartItem];
+      dispatch(updateCart(updatedCart));
     }
-  }
+  };
 
   useEffect(() => {
     console.log("Cart array: ", cartArray);
@@ -77,9 +75,8 @@ export default function Home() {
               Array.isArray(pokemon) &&
               pokemon.map((poke) => (
                 <ItemCard
-                addToCart={() => addToCart(poke)}
-                
-                  key={poke.id+1}
+                  addToCart={() => addToCart(poke)}
+                  key={poke.id + 1}
                   name={poke.name}
                   id={poke.id}
                   image={

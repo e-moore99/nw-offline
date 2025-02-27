@@ -7,10 +7,10 @@ export default function Search({
   setSearchQuery,
   handleSearch,
 }: {
-  setSearchQuery: any;
+  setSearchQuery: (query: string) => void;
   handleSearch: () => void;
 }) {
-  const debouncedSearch = useDebouncedCallback((term) => {
+  const debouncedSearch = useDebouncedCallback((term: string) => {
     setSearchQuery(term);
     handleSearch();
   }, 300);
@@ -21,12 +21,9 @@ export default function Search({
         type="text"
         placeholder="Search for anything!"
         className={styles.input}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        onChange={(e) => debouncedSearch(e.target.value)}
       />
-      <button
-        onClick={() => debouncedSearch(setSearchQuery)}
-        className={styles.button}
-      >
+      <button onClick={handleSearch} className={styles.button}>
         <MagnifyingGlassIcon className="w-6" />
       </button>
       <button
