@@ -1,6 +1,6 @@
 'use client';
 import { useEffect } from "react";
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/redux/provider";
@@ -42,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/avatar.png" />
+        <link rel="favicon" href="/avatar.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ff0000" />
       </head>

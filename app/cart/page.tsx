@@ -1,5 +1,5 @@
 "use client";
-import { use, useEffect } from "react";
+import { useEffect } from "react";
 import Header from ".././components/header";
 import React from "react";
 // import ItemCard from "../components/itemCard";
@@ -18,7 +18,6 @@ interface CartItem {
 
 export default function Cart() {
   const [cartItems, setCartItems] = React.useState<CartItem[]>([]);
-  const [loading, setLoading] = React.useState<boolean>(true);
 
   const dispatch = useDispatch<AppDispatch>();
   const cartArray = useAppSelector((state) => state.cart);
@@ -28,19 +27,19 @@ export default function Cart() {
   }, [cartArray]);
 
   const increaseItems = (index: number) => {
-    let tempCartItems = cartArray.map((item, i) =>
+    const tempCartItems = cartArray.map((item, i) =>
       i === index ? { ...item, quantity: item.quantity + 1 } : item
     );
     dispatch(updateCart(tempCartItems));
   };
   const decreaseItems = (index: number) => {
-    let tempCartItems = cartArray.map((item, i) =>
+    const tempCartItems = cartArray.map((item, i) =>
       i === index && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
     );
     dispatch(updateCart(tempCartItems));
   };
   const removeItem = (index: number) => {
-    let tempCartItems = [...cartArray];
+    const tempCartItems = [...cartArray];
     tempCartItems.splice(index, 1);
     dispatch(updateCart(tempCartItems));
   };

@@ -3,18 +3,16 @@ import Link from "next/link";
 import Search from "./Search";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { AppDispatch, useAppSelector } from "@/redux/store";
+import { useAppSelector } from "@/redux/store";
 
 export default function Header({
   setSearchQuery,
   handleSearch,
 }: {
-  setSearchQuery: any;
+  setSearchQuery: (query: string) => void;
   handleSearch: () => void;
 }) {
   const [cartItems, setCartItems] = React.useState<number>(0);
-  const dispatch = useDispatch<AppDispatch>();
   const cartArray = useAppSelector((state) => state.cart);
 
   React.useEffect(() => {
