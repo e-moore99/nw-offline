@@ -15,6 +15,12 @@ export default function Search({
     handleSearch();
   }, 300);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  }
+
   return (
     <>
       <input
@@ -22,6 +28,7 @@ export default function Search({
         placeholder="Search for anything!"
         className={styles.input}
         onChange={(e) => debouncedSearch(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
       <button onClick={handleSearch} className={styles.button}>
         <MagnifyingGlassIcon className="w-6" />
