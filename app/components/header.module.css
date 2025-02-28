@@ -26,3 +26,16 @@
 .cartIcon {
   display: flex;
 }
+
+@media screen and (max-width: 450px) {
+  .header {
+    height: 20vh;
+  }
+  .headerTop h1 {
+    font-size: 1rem;
+  }
+  .headerBottom {
+    height: 80%;
+  }
+  
+}
