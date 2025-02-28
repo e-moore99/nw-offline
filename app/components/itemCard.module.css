@@ -1,6 +1,6 @@
 .itemCard {
-    width: 20vw;
-    height: 35vh;
+    width: 20%;
+    height: 100%;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
