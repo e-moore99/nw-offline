@@ -4,6 +4,8 @@ import Search from "./Search";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import { useAppSelector } from "@/redux/store";
+import Pokeball from "@/public/pokeball.png";
+import Image from "next/image";
 
 export default function Header({
   setSearchQuery,
@@ -23,8 +25,9 @@ export default function Header({
     <>
       <div className={styles.header}>
         <div className={styles.headerTop}>
-          <Link href="/">
-          <h1>Welcome to Ecomm test site!</h1>
+          <Link href="/" className="flex items-center">
+          <Image src={Pokeball} alt="Pokeball" className="w-8" />
+          <h1>Welcome to PokeStore!</h1>
           </Link>
           <Link href="/cart">
             <div className={styles.cartIcon}>

@@ -1,5 +1,5 @@
-'use client';
-import { useEffect } from "react";;
+"use client";
+import { useEffect } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/redux/provider";
@@ -20,14 +20,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-          .then(registration => {
-            console.log('Service Worker registered successfully:', registration.scope);
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("/service-worker.js")
+          .then((registration) => {
+            console.log(
+              "Service Worker registered successfully:",
+              registration.scope
+            );
           })
-          .catch(error => {
-            console.log('Service Worker registration failed:', error);
+          .catch((error) => {
+            console.log("Service Worker registration failed:", error);
           });
       });
     }
@@ -36,17 +40,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="favicon" href="/avatar.png" />
+        <link rel="icon" href="/pokeball.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ffffff" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>PokeStore</title>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ReduxProvider>
-        {children}
-        </ReduxProvider>
+        <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
   );
