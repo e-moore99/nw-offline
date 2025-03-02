@@ -1,12 +1,12 @@
 "use client";
-import Header from "./components/header";
 import React, { useEffect } from "react";
 import { Pokemon, fetchPokemon } from "./lib/fetch";
-import ItemCard from "./components/itemCard";
-import styles from "./page.module.css";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { updateCart } from "@/redux/features/cart-slice";
+import Header from "./components/header";
+import ItemCard from "./components/itemCard";
+import styles from "./page.module.css";
 
 export default function Home() {
   const [pokemon, setPokemon] = React.useState<Pokemon[]>([]);
