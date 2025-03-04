@@ -11,7 +11,6 @@ const ASSETS_TO_CACHE = [
   "/manifest.json",
   "/favicon.ico",
   "/offline.html",
-
   // css files
   "/app/globals.css",
   "/app/cart/page.module.css",
@@ -75,6 +74,10 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
+// check online status
+const isOnline = navigator.onLine;
+
+  // Intercept API calls to Pokemon API
   if (event.request.url.startsWith(POKEMON_API_BASE_URL)) {
     event.respondWith(
       caches.open(POKEMON_API_CACHE).then((cache) => {
@@ -101,9 +104,28 @@ self.addEventListener("fetch", (event) => {
   // Default caching strategy for other requests
   else {
     event.respondWith(
-      caches.match(event.request).then((response) => {
-        return response || fetch(event.request);
-      })
+      (async () => {
+        try {
+          // Try to fetch from network first
+          const networkResponse = await fetch(event.request);
+          return networkResponse;
+        } catch (error) {
+          // If offline or network fails
+          if (!isOnline || event.request.destination === 'document') {
+            // Redirect to home page for document requests when offline
+            return caches.match('/') || new Response('Offline', { status: 200 });
+          }
+          
+          // Try to match cached response
+          const cachedResponse = await caches.match(event.request);
+          if (cachedResponse) {
+            return cachedResponse;
+          }
+          
+          // If no cache, return offline response
+          return new Response('Offline', { status: 200 });
+        }
+      })()
     );
   }
 });
@@ -127,8 +149,6 @@ self.addEventListener("activate", (event) => {
     })
   );
 });
-
-
 
 // self.addEventListener('fetch', (event) => {
 //   // Intercept API calls to Pokemon API
