@@ -3,33 +3,40 @@ const POKEMON_API_CACHE = "pokemon-api-cache";
 const POKEMON_API_BASE_URL = "https://pokeapi.co/api/v2/pokemon";
 
 const ASSETS_TO_CACHE = [
+  // routes
   "/",
+  "/cart",
+  // static files
   "/index.html",
   "/manifest.json",
   "/favicon.ico",
   "/offline.html",
+
+  // css files
   "/app/globals.css",
+  "/app/cart/page.module.css",
+  "/app/page.module.css",
+  "/app/components/itemCard.module.css",
+  "/app/components/search.module.css",
+  "/app/components/header.module.css",
+  "/app/components/cartItemCard.module.css",
+  // pages + ts files
   "/app/layout.tsx",
   "/app/page.tsx",
-  "/app/page.module.css",
+  "/app/cart/page.tsx",
   "/app/lib/fetch.ts",
   "/app/lib/cart.ts",
-  "/app/cart/page.tsx",
-  "/app/cart/page.module.css",
+  // components
   "/app/components/itemCard.tsx",
-  "/app/components/itemCard.module.css",
   "/app/components/Search.tsx",
-  "/app/components/search.module.css",
   "/app/components/header.tsx",
-  "/app/components/header.module.css",
   "/app/components/cartItemCard.tsx",
-  "/app/components/cartItemCard.module.css",
 ];
 
 async function fetchAllPokemonData() {
   try {
     const initialResponse = await fetch(
-      `${POKEMON_API_BASE_URL}?limit=100000&offset=0`
+      `${POKEMON_API_BASE_URL}?limit=1304&offset=0`
     );
     const data = await initialResponse.json();
     const pokemonData = await Promise.all(
@@ -41,7 +48,7 @@ async function fetchAllPokemonData() {
     console.log("cached pokemon! Slay");
     return pokemonData;
   } catch (err) {
-    console.log("error fetching all data to cache:", err);
+    console.error("error fetching all data to cache:", err);
     return [];
   }
 }
@@ -54,16 +61,17 @@ self.addEventListener("install", (event) => {
       const pokemonData = await fetchAllPokemonData();
 
       const pokemonCache = await caches.open(POKEMON_API_CACHE);
-      pokemonCache.put(
+      await pokemonCache.put(
         "all-pokemon",
         new Response(JSON.stringify(pokemonData), {
           headers: { "Content-Type": "application/json" },
         })
       );
-      console.log("Cache ", pokemonData.length, " Pokemon");
+      console.log("Cached ", pokemonData.length, " Pokemon");
       return cache;
     })
   );
+  self.skipWaiting();
 });
 
 self.addEventListener("fetch", (event) => {
@@ -79,7 +87,13 @@ self.addEventListener("fetch", (event) => {
           return fetch(event.request).then((response) => {
             cache.put("all-pokemon", response.clone());
             return response;
-          });
+          }).catch(() => {
+            // if cache and network fail, fallback
+            return new Response(JSON.stringify({ error: "No internet connection" }), {
+              headers: { "Content-Type": "application/json" },
+              status: offline,
+            });
+          })
         });
       })
     );
@@ -108,9 +122,13 @@ self.addEventListener("activate", (event) => {
           }
         })
       );
+    }).then(() => {
+      return self.clients.claim();
     })
   );
 });
+
+
 
 // self.addEventListener('fetch', (event) => {
 //   // Intercept API calls to Pokemon API
