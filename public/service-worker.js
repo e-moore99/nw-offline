@@ -1,5 +1,5 @@
-const CACHE_NAME = "pokemon-pwa-cache-v1";
-const POKEMON_API_CACHE = "pokemon-api-cache";
+const CACHE_NAME = "pokemon-pwa-cache-v2";
+const POKEMON_API_CACHE = "pokemon-api-cache-v2";
 const POKEMON_API_BASE_URL = "https://pokeapi.co/api/v2/pokemon";
 
 const ASSETS_TO_CACHE = [
@@ -29,7 +29,7 @@ const ASSETS_TO_CACHE = [
   "/app/components/itemCard.tsx",
   "/app/components/Search.tsx",
   "/app/components/header.tsx",
-  "/app/components/cartItemCard.tsx",
+  "/app/components/cartItemCard.tsx"
 ];
 
 async function fetchAllPokemonData() {
@@ -47,7 +47,7 @@ async function fetchAllPokemonData() {
     console.log("cached pokemon! Slay");
     return pokemonData;
   } catch (err) {
-    console.error("error fetching all data to cache:", err);
+    console.error("Error fetching Pokemon data to cache:", err);
     return [];
   }
 }
@@ -55,8 +55,10 @@ async function fetchAllPokemonData() {
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
+      // Cache all site assets
       await cache.addAll(ASSETS_TO_CACHE);
 
+      // Fetch and cache Pokemon data
       const pokemonData = await fetchAllPokemonData();
 
       const pokemonCache = await caches.open(POKEMON_API_CACHE);
@@ -70,33 +72,30 @@ self.addEventListener("install", (event) => {
       return cache;
     })
   );
+  // Force the waiting service worker to become active
   self.skipWaiting();
 });
 
 self.addEventListener("fetch", (event) => {
-// check online status
-const isOnline = navigator.onLine;
-
   // Intercept API calls to Pokemon API
   if (event.request.url.startsWith(POKEMON_API_BASE_URL)) {
     event.respondWith(
       caches.open(POKEMON_API_CACHE).then((cache) => {
-        // getting all cached data
         return cache.match("all-pokemon").then((cachedResponse) => {
           if (cachedResponse) {
             return cachedResponse;
           }
-          // use network if no cached response
+          // Fallback to network if no cached response
           return fetch(event.request).then((response) => {
             cache.put("all-pokemon", response.clone());
             return response;
           }).catch(() => {
-            // if cache and network fail, fallback
+            // If both cache and network fail, return a fallback
             return new Response(JSON.stringify({ error: "No internet connection" }), {
               headers: { "Content-Type": "application/json" },
-              status: offline,
+              status: 200
             });
-          })
+          });
         });
       })
     );
@@ -107,30 +106,41 @@ const isOnline = navigator.onLine;
       (async () => {
         try {
           // Try to fetch from network first
-          const networkResponse = await fetch(event.request);
-          return networkResponse;
+          return await fetch(event.request);
         } catch (error) {
-          // If offline or network fails
-          if (!isOnline || event.request.destination === 'document') {
-            // Redirect to home page for document requests when offline
-            return caches.match('/') || new Response('Offline', { status: 200 });
+          // If network fails, handle offline scenario
+          if (event.request.destination === 'document') {
+            // Always return cached home page for document requests
+            const homePageResponse = await caches.match('/');
+            if (homePageResponse) {
+              return homePageResponse;
+            }
+            
+            // Fallback to cached index.html
+            const indexResponse = await caches.match('/index.html');
+            if (indexResponse) {
+              return indexResponse;
+            }
           }
           
-          // Try to match cached response
+          // Try to match any cached response
           const cachedResponse = await caches.match(event.request);
           if (cachedResponse) {
             return cachedResponse;
           }
           
-          // If no cache, return offline response
-          return new Response('Offline', { status: 200 });
+          // Absolute last resort
+          return new Response('Offline', { 
+            status: 200, 
+            headers: { 'Content-Type': 'text/html' }
+          });
         }
       })()
     );
   }
 });
 
-// Activate event: Clean up old caches when service worker updates
+// Activate event: Clean up old caches
 self.addEventListener("activate", (event) => {
   const cacheWhitelist = [CACHE_NAME, POKEMON_API_CACHE];
 
@@ -138,7 +148,6 @@ self.addEventListener("activate", (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          // Delete caches not in the whitelist
           if (cacheWhitelist.indexOf(cacheName) === -1) {
             return caches.delete(cacheName);
           }
@@ -149,50 +158,3 @@ self.addEventListener("activate", (event) => {
     })
   );
 });
-
-// self.addEventListener('fetch', (event) => {
-//   // Intercept API calls to Pokemon API
-//   if (event.request.url.startsWith(POKEMON_API_BASE_URL)) {
-//     event.respondWith(
-//       caches.open(POKEMON_API_CACHE).then((cache) => {
-//         return fetch(event.request).then((response) => {
-//           // Clone the response to save it to the cache
-//           const responseClone = response.clone();
-//           cache.put(event.request, responseClone);
-//           return response;
-//         }).catch(() => {
-//           // If fetch fails, try to return from cache
-//           return cache.match(event.request);
-//         });
-//       })
-//     );
-//   }
-//   // Handle other requests with cache-first strategy
-//   else {
-//     event.respondWith(
-//       caches.match(event.request)
-//         .then((response) => {
-//           if (response) {
-//             return response;
-//           }
-//           return fetch(event.request);
-//         })
-//     );
-//   }
-// });
-
-// self.addEventListener('activate', (event) => {
-//   const cacheWhitelist = [CACHE_NAME, POKEMON_API_CACHE];
-
-//   event.waitUntil(
-//     caches.keys().then((cacheNames) => {
-//       return Promise.all(
-//         cacheNames.map((cacheName) => {
-//           if (cacheWhitelist.indexOf(cacheName) === -1) {
-//             return caches.delete(cacheName);
-//           }
-//         })
-//       );
-//     })
-//   );
-// });
