@@ -1,4 +1,4 @@
-const CACHE_NAME = "pokemon-pwa-cache-v2";
+const PWA_CACHE = "pokemon-pwa-cache-v2";
 const POKEMON_API_CACHE = "pokemon-api-cache-v2";
 const POKEMON_API_BASE_URL = "https://pokeapi.co/api/v2/pokemon";
 
@@ -9,8 +9,8 @@ const ASSETS_TO_CACHE = [
   // static files
   "/index.html",
   "/manifest.json",
-  "/favicon.ico",
-  "/offline.html",
+  // "/favicon.ico",
+  // "/offline.html",
   // css files
   "/app/globals.css",
   "/app/cart/page.module.css",
@@ -29,7 +29,7 @@ const ASSETS_TO_CACHE = [
   "/app/components/itemCard.tsx",
   "/app/components/Search.tsx",
   "/app/components/header.tsx",
-  "/app/components/cartItemCard.tsx"
+  "/app/components/cartItemCard.tsx",
 ];
 
 async function fetchAllPokemonData() {
@@ -54,13 +54,16 @@ async function fetchAllPokemonData() {
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(async (cache) => {
-      // Cache all site assets
-      await cache.addAll(ASSETS_TO_CACHE);
+    (async () => {
+      const cache = await caches.open(PWA_CACHE);
+      try {
+        await cache.addAll(ASSETS_TO_CACHE);
+        console.log("Cached assets: ", ASSETS_TO_CACHE);
+      } catch (err) {
+        console.error("Error caching assets: ", err);
+      }
 
-      // Fetch and cache Pokemon data
       const pokemonData = await fetchAllPokemonData();
-
       const pokemonCache = await caches.open(POKEMON_API_CACHE);
       await pokemonCache.put(
         "all-pokemon",
@@ -69,12 +72,20 @@ self.addEventListener("install", (event) => {
         })
       );
       console.log("Cached ", pokemonData.length, " Pokemon");
-      return cache;
-    })
+    })()
   );
-  // Force the waiting service worker to become active
+
+  // caches.open(PWA_CACHE).then((cache) => {
+  //   // Cache all site assets
+  //   cache.addAll(ASSETS_TO_CACHE);
+
+  // Fetch and cache Pokemon data
+  // return cache;
   self.skipWaiting();
 });
+// );
+// Force the waiting service worker to become active
+// });
 
 self.addEventListener("fetch", (event) => {
   // Intercept API calls to Pokemon API
@@ -86,75 +97,72 @@ self.addEventListener("fetch", (event) => {
             return cachedResponse;
           }
           // Fallback to network if no cached response
-          return fetch(event.request).then((response) => {
-            cache.put("all-pokemon", response.clone());
-            return response;
-          }).catch(() => {
-            // If both cache and network fail, return a fallback
-            return new Response(JSON.stringify({ error: "No internet connection" }), {
-              headers: { "Content-Type": "application/json" },
-              status: 200
+          return fetch(event.request)
+            .then((response) => {
+              cache.put("all-pokemon", response.clone());
+              return response;
+            })
+            .catch(() => {
+              // If both cache and network fail, return a fallback
+              return new Response(
+                JSON.stringify({ error: "No internet connection" }),
+                {
+                  headers: { "Content-Type": "application/json" },
+                  status: 200,
+                }
+              );
             });
-          });
         });
       })
     );
   }
   // Default caching strategy for other requests
   else {
-    event.respondWith(
-      (async () => {
-        try {
-          // Try to fetch from network first
-          return await fetch(event.request);
-        } catch (error) {
-          // If network fails, handle offline scenario
-          if (event.request.destination === 'document') {
-            // Always return cached home page for document requests
-            const homePageResponse = await caches.match('/');
-            if (homePageResponse) {
-              return homePageResponse;
-            }
-            
-            // Fallback to cached index.html
-            const indexResponse = await caches.match('/index.html');
-            if (indexResponse) {
-              return indexResponse;
-            }
+    event.respondWith(async () => {
+      const cachedResponse = await caches.match(event.request);
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      try {
+        return await fetch(event.request);
+      } catch (error) {
+        // If network fails, handle offline scenario
+        if (event.request.destination === "document") {
+          // Always return cached home page for document requests
+          const homePageResponse = await caches.match("/");
+          if (homePageResponse) {
+            return homePageResponse;
           }
-          
-          // Try to match any cached response
-          const cachedResponse = await caches.match(event.request);
-          if (cachedResponse) {
-            return cachedResponse;
-          }
-          
+
           // Absolute last resort
-          return new Response('Offline', { 
-            status: 200, 
-            headers: { 'Content-Type': 'text/html' }
+          return new Response("Offline", {
+            status: 200,
+            headers: { "Content-Type": "text/html" },
           });
         }
-      })()
-    );
+      }
+    });
   }
 });
 
 // Activate event: Clean up old caches
 self.addEventListener("activate", (event) => {
-  const cacheWhitelist = [CACHE_NAME, POKEMON_API_CACHE];
+  const cacheWhitelist = [PWA_CACHE, POKEMON_API_CACHE];
 
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    }).then(() => {
-      return self.clients.claim();
-    })
+    caches
+      .keys()
+      .then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cacheName) => {
+            if (cacheWhitelist.indexOf(cacheName) === -1) {
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      })
+      .then(() => {
+        return self.clients.claim();
+      })
   );
 });

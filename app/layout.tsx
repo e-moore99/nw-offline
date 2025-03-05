@@ -18,8 +18,9 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
-  useEffect(() => {
+}>) 
+{
+  // useEffect(() => {
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker
@@ -35,7 +36,7 @@ export default function RootLayout({
           });
       });
     }
-  }, []);
+  // }, []);
 
   return (
     <html lang="en">
