@@ -1,168 +1,28 @@
-const PWA_CACHE = "pokemon-pwa-cache-v2";
-const POKEMON_API_CACHE = "pokemon-api-cache-v2";
-const POKEMON_API_BASE_URL = "https://pokeapi.co/api/v2/pokemon";
+const PAGES_CACHE = "pages-cache-v1";
+const POKEMON_CACHE = "pokemon-cache-v1";
+const pokemonUrl = "https://pokeapi.co/api/v2/pokemon";
+const allPokemonUrl = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
 
-const ASSETS_TO_CACHE = [
-  // routes
-  "/",
-  "/cart",
-  // static files
-  "/index.html",
-  "/manifest.json",
-  // "/favicon.ico",
-  // "/offline.html",
-  // css files
-  "/app/globals.css",
-  "/app/cart/page.module.css",
-  "/app/page.module.css",
-  "/app/components/itemCard.module.css",
-  "/app/components/search.module.css",
-  "/app/components/header.module.css",
-  "/app/components/cartItemCard.module.css",
-  // pages + ts files
-  "/app/layout.tsx",
-  "/app/page.tsx",
-  "/app/cart/page.tsx",
-  "/app/lib/fetch.ts",
-  "/app/lib/cart.ts",
-  // components
-  "/app/components/itemCard.tsx",
-  "/app/components/Search.tsx",
-  "/app/components/header.tsx",
-  "/app/components/cartItemCard.tsx",
-];
+const pagesToCache = ["/", "/cart", "/manifest.json"];
 
-async function fetchAllPokemonData() {
-  try {
-    const initialResponse = await fetch(
-      `${POKEMON_API_BASE_URL}?limit=1304&offset=0`
-    );
-    const data = await initialResponse.json();
-    const pokemonData = await Promise.all(
-      data.results.map(async (pokemon) => {
-        const detailResponse = await fetch(pokemon.url);
-        return await detailResponse.json();
-      })
-    );
-    console.log("cached pokemon! Slay");
-    return pokemonData;
-  } catch (err) {
-    console.error("Error fetching Pokemon data to cache:", err);
-    return [];
-  }
-}
+const addResourcesToCache = async (resources) => {
+  const cache = await caches.open("pages-cache-v1");
+  await cache.addAll(resources);
+};
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    (async () => {
-      const cache = await caches.open(PWA_CACHE);
-      try {
-        await cache.addAll(ASSETS_TO_CACHE);
-        console.log("Cached assets: ", ASSETS_TO_CACHE);
-      } catch (err) {
-        console.error("Error caching assets: ", err);
-      }
-
-      const pokemonData = await fetchAllPokemonData();
-      const pokemonCache = await caches.open(POKEMON_API_CACHE);
-      await pokemonCache.put(
-        "all-pokemon",
-        new Response(JSON.stringify(pokemonData), {
-          headers: { "Content-Type": "application/json" },
-        })
-      );
-      console.log("Cached ", pokemonData.length, " Pokemon");
-    })()
-  );
-
-  // caches.open(PWA_CACHE).then((cache) => {
-  //   // Cache all site assets
-  //   cache.addAll(ASSETS_TO_CACHE);
-
-  // Fetch and cache Pokemon data
-  // return cache;
-  self.skipWaiting();
+  event.waitUntil(addResourcesToCache(pagesToCache));
 });
-// );
-// Force the waiting service worker to become active
-// });
+
+const cacheFirst = async (req) => {
+  const responseFromCache = await caches.match(req);
+  if (responseFromCache) {
+    return responseFromCache;
+  }
+  return fetch(req);
+};
 
 self.addEventListener("fetch", (event) => {
-  // Intercept API calls to Pokemon API
-  if (event.request.url.startsWith(POKEMON_API_BASE_URL)) {
-    event.respondWith(
-      caches.open(POKEMON_API_CACHE).then((cache) => {
-        return cache.match("all-pokemon").then((cachedResponse) => {
-          if (cachedResponse) {
-            return cachedResponse;
-          }
-          // Fallback to network if no cached response
-          return fetch(event.request)
-            .then((response) => {
-              cache.put("all-pokemon", response.clone());
-              return response;
-            })
-            .catch(() => {
-              // If both cache and network fail, return a fallback
-              return new Response(
-                JSON.stringify({ error: "No internet connection" }),
-                {
-                  headers: { "Content-Type": "application/json" },
-                  status: 200,
-                }
-              );
-            });
-        });
-      })
-    );
-  }
-  // Default caching strategy for other requests
-  else {
-    event.respondWith(async () => {
-      const cachedResponse = await caches.match(event.request);
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      try {
-        return await fetch(event.request);
-      } catch (error) {
-        // If network fails, handle offline scenario
-        if (event.request.destination === "document") {
-          // Always return cached home page for document requests
-          const homePageResponse = await caches.match("/");
-          if (homePageResponse) {
-            return homePageResponse;
-          }
-
-          // Absolute last resort
-          return new Response("Offline", {
-            status: 200,
-            headers: { "Content-Type": "text/html" },
-          });
-        }
-      }
-    });
-  }
-});
-
-// Activate event: Clean up old caches
-self.addEventListener("activate", (event) => {
-  const cacheWhitelist = [PWA_CACHE, POKEMON_API_CACHE];
-
-  event.waitUntil(
-    caches
-      .keys()
-      .then((cacheNames) => {
-        return Promise.all(
-          cacheNames.map((cacheName) => {
-            if (cacheWhitelist.indexOf(cacheName) === -1) {
-              return caches.delete(cacheName);
-            }
-          })
-        );
-      })
-      .then(() => {
-        return self.clients.claim();
-      })
-  );
+  event.respondWith(cacheFirst(event.request));
+  console.log(event.request, event.request.url);
 });

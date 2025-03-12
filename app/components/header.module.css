@@ -15,6 +15,15 @@
   font-size: 1.5rem;
 }
 
+.headerTopRight {
+  display: flex;
+  gap: 2rem;
+}
+
+.offlineBtn {
+  font-weight: 700;
+}
+
 .headerBottom {
   height: 70%;
   display: flex;
@@ -22,6 +31,130 @@
   align-items: center;
 }
 
+.popup {
+  position: absolute;
+  top: 35%;
+  right: 23%;
+  background-color: white;
+  width: 54%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  border: 1px solid #666666;
+}
+
+.popActive{
+  position: absolute;
+  top: 35%;
+  right: 23%;
+  background-color: white;
+  width: 54%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  border: 1px solid #666666;
+}
+
+.popup h2 {
+  font-weight: 800;
+  font-size: 24px;
+  padding-bottom: 2%;
+  display: flex;
+  justify-content: center;
+}
+.popActive h2 {
+  font-weight: 800;
+  font-size: 24px;
+  padding-bottom: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.wifiSymbol {
+  background-color: #e11a2c;
+  width: 95px;
+  height: 95px;
+  border-radius: 80px;
+  position: absolute;
+  top: -17%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupTopBtn {
+  width: 100%;
+  height: 10%;
+  padding-top: 1%;
+  padding-right: 1%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.popupBody {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.bodyContent {
+  width: 80%;
+  border: 1px solid #cccccc;
+  color: #666666;
+  font-size: 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 2% 0 15%;  
+  align-items: center;
+  margin-left: 10%;
+}
+.bodyContent p {
+  padding: 0.5%;
+}
+
+.infoBtn {
+  width: 3%;
+  height: 60%;
+  border-radius: 30px;
+  background-color: #571060;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.offlineTitle {
+ font-weight: 700;
+ font-size: 18px;
+ line-height: 28px;
+ padding-left: 10%;
+}
+
+.offlineFunc {
+  width: 80%;
+  border: 1px solid #cccccc;
+  color: #666666;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  
+  margin-left: 10%;
+}
+
+.offlineFunc p {
+  padding: 1% 0 1% 2%;
+  border-bottom: 1px solid #E7E5E1;
+}
 
 .cartIcon {
   display: flex;
@@ -37,5 +170,4 @@
   .headerBottom {
     height: 80%;
   }
-  
 }
