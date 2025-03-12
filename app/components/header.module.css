@@ -22,6 +22,33 @@
 
 .offlineBtn {
   font-weight: 700;
+  position: relative;
+}
+
+.smallPopup {
+  position: absolute;
+  top: 7%;
+  left: 80%;
+  width: 15%;
+  height: 10%;
+  background-color: white;
+  border: 1px solid #E7E5E1;
+  padding: 0.5%;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.50));
+}
+
+.smallPopup h3 {
+  font-size: 13px;
+  font-weight: 700;
+  padding-bottom: 1%;
+}
+
+.smallPopup p {
+  font-size: 10px;
+  font-weight: 400;
+  color: #666;
+  border-bottom: 0.45px solid #E7E5E1;
+  padding: 0.5% 0;
 }
 
 .headerBottom {
@@ -32,7 +59,7 @@
 }
 
 .popup {
-  position: absolute;
+  position: fixed;
   top: 35%;
   right: 23%;
   background-color: white;
@@ -47,7 +74,7 @@
 }
 
 .popActive{
-  position: absolute;
+  position: fixed;
   top: 35%;
   right: 23%;
   background-color: white;

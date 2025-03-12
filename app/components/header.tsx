@@ -19,6 +19,7 @@ export default function Header({
   const cartArray = useAppSelector((state) => state.cart);
   const [isOpen, setOpen] = React.useState<boolean>(false);
   const [active, setActive] = React.useState<boolean>(false);
+  const [isClicked, setClicked] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     setCartItems(cartArray.length);
@@ -32,6 +33,10 @@ export default function Header({
     setActive((prev) => !prev);
   };
 
+  const toggleNavPop = () => {
+    setClicked((prev) => !prev);
+  };
+
   return (
     <>
       <div className={styles.header}>
@@ -41,7 +46,9 @@ export default function Header({
             <h1>Welcome to PokeStore!</h1>
           </Link>
           <div className={styles.headerTopRight}>
-            <button className={styles.offlineBtn}>You're offline</button>
+            <button onClick={toggleNavPop} className={styles.offlineBtn}>
+              You're offline
+            </button>
 
             <button onClick={toggleOpenHandler}>
               <WifiIcon className="w-6" />
@@ -59,8 +66,14 @@ export default function Header({
         </div>
       </div>
       {/* This is the popup box on the navbar to give you info */}
-      <div>Offline Mode</div>
-
+      {isClicked ? (
+        <div className={styles.smallPopup}>
+          <h3>Offline mode functionalities</h3>
+          <p>Browse product catalogues</p>
+          <p>View product details such as decsription, images, and price</p>
+          <p>Add products to the trolley</p>
+        </div>
+      ) : null}
       {/* This is the main "you've lost connectivity" popup */}
       {isOpen ? (
         <div className={active ? styles.popActive : styles.popup}>
