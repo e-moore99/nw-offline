@@ -1,10 +1,9 @@
 import styles from "./header.module.css";
 import Link from "next/link";
 import Search from "./Search";
-import { ShoppingCartIcon, WifiIcon } from "@heroicons/react/24/outline";
+import { ShoppingCartIcon, WifiIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import { useAppSelector } from "@/redux/store";
-import Pokeball from "@/public/pokeball.png";
 import NWLogo from "@/public/nw-logo.svg";
 import offline from "@/public/nrk_offline.png";
 import Image from "next/image";
@@ -105,6 +104,15 @@ export default function Header({
           </div>
         </div>
         <div className={styles.headerBottom}>
+          <button>Groceries <ChevronDownIcon className="w-4"/> </button>
+          <button>Specials</button>
+          <button>Everyday Low Price</button>
+          <button>Mailer</button>
+          <button>Recipes <ChevronDownIcon className="w-4"/></button>
+          <button>Discover <ChevronDownIcon className="w-4"/></button>
+          <button>Clubcard</button>
+          <button>My Lists</button>
+          <button>Ways to save</button>
         </div>
       </div>
       {/* This is the popup box on the navbar to give you info */}

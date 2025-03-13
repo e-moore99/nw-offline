@@ -1,0 +1,18 @@
+.home {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.salesBnr {
+    height: 60vh;
+    width: 100%;
+    background-color: #e11a2c;
+    color: #fff;
+}
+
+.categoryBtn {
+    height: 20vh;
+    width: 100%;
+    background-color: rgb(145, 184, 218);
+}

@@ -7,6 +7,7 @@ import { updateCart } from "@/redux/features/cart-slice";
 import Header from "./components/header";
 import ItemCard from "./components/itemCard";
 import styles from "./page.module.css";
+import HomePage from "./components/Home";
 
 export default function Home() {
   const [pokemon, setPokemon] = React.useState<Pokemon[]>([]);
@@ -68,7 +69,9 @@ export default function Home() {
       <Header setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
       <div className={styles.container}>
         {loading ? (
-          <p>Waiting for you to search for what you need!</p>
+          <>
+          <HomePage />
+          </>
         ) : (
           <div className={styles.displayArea}>
             {pokemon &&
