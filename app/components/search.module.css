@@ -1,7 +1,21 @@
 .input {
-    height: 40%;
-    width: 80%;
+    height: 100%;
+    width: 100%;
     border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.input Button {
+    background-color: #f3f3f3;
+    padding: 1.5% 1%;
+}
+
+.inputBox {
+    width: 60%;
+    background-color: #f3f3f3;
+    padding: 1.5% 1%;
 }
 
 @media screen and (max-width: 450px) {

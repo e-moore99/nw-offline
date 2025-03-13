@@ -1,14 +1,38 @@
 .header {
-  background-color: rgb(176, 250, 250);
-  height: 30vh;
+  height: 21vh;
+}
+
+.pickupBnr{
+  height: 21%;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #ca1928;
+  color: white;
+}
+
+.pickupBnrLeft {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  gap: 2%;
+}
+
+.pickupBnrRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2%;
+  width: 30%;
 }
 
 .headerTop {
-  height: 30%;
+  height: 46%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2%;
+  background-color: white;
+  border-bottom: 0.5px solid #b4b4b4;
 }
 
 .headerTop h1 {
@@ -52,10 +76,12 @@
 }
 
 .headerBottom {
-  height: 70%;
+  height: 33%;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* border-bottom: 0.5px solid #b4b4b4; */
+  box-shadow: #b4b4b4 0px 4px 4px;
 }
 
 .popup {
@@ -181,6 +207,11 @@
 .offlineFunc p {
   padding: 1% 0 1% 2%;
   border-bottom: 1px solid #E7E5E1;
+}
+
+.searchBar {
+  height: 80%;
+  width: 60%;
 }
 
 .cartIcon {

@@ -23,10 +23,11 @@ export default function Search({
 
   return (
     <>
+    <div className={styles.input}>
       <input
         type="text"
         placeholder="Search for anything!"
-        className={styles.input}
+        className={styles.inputBox}
         onChange={(e) => debouncedSearch(e.target.value)}
         onKeyDown={handleKeyDown}
       />
@@ -42,6 +43,7 @@ export default function Search({
       >
         Find all!
       </button>
+      </div>
     </>
   );
 }

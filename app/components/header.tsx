@@ -5,6 +5,7 @@ import { ShoppingCartIcon, WifiIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import { useAppSelector } from "@/redux/store";
 import Pokeball from "@/public/pokeball.png";
+import NWLogo from "@/public/nw-logo.svg";
 import offline from "@/public/nrk_offline.png";
 import Image from "next/image";
 
@@ -37,22 +38,64 @@ export default function Header({
     setClicked((prev) => !prev);
   };
 
+  const [isOnline, setOnline] = React.useState<boolean>(true);
+
+  // if (!navigator.onLine) {
+  //   setTimeout(() => {
+  //     setOnline(false);
+  //   }, 2000);
+  // } else {
+  //   setOnline(true);
+  // }
+
+  // const updateNetworkStatus = () => {
+  //   setOnline(navigator.onLine);
+  // };
+
+  // //   sometimes, the load event does not trigger on some browsers, that is why manually calling updateNetworkStatus on initial mount
+  // React.useEffect(() => {
+  //   updateNetworkStatus();
+  // }, []);
+
+  // React.useEffect(() => {
+  //   window.addEventListener("online", updateNetworkStatus);
+  //   window.addEventListener("offline", updateNetworkStatus);
+
+  //   return () => {
+  //     window.removeEventListener("online", updateNetworkStatus);
+  //     window.removeEventListener("offline", updateNetworkStatus);
+  //   };
+  // }, [navigator.onLine]);
+
   return (
     <>
       <div className={styles.header}>
-        <div className={styles.headerTop}>
-          <Link href="/" className="flex items-center">
-            <Image src={Pokeball} alt="Pokeball" className="w-8" />
-            <h1>Welcome to PokeStore!</h1>
-          </Link>
-          <div className={styles.headerTopRight}>
-            <button onClick={toggleNavPop} className={styles.offlineBtn}>
+        <div className={styles.pickupBnr}>
+          <div className={styles.pickupBnrLeft}>
+          <h3>New World Mt Roskill</h3>
+          <h3>Collect from New World Mt Roskill</h3>
+          <button>Book a slot</button>
+          </div>
+          <div className={styles.pickupBnrRight}>
+          <button onClick={toggleNavPop} className={styles.offlineBtn}>
               You're offline
             </button>
 
             <button onClick={toggleOpenHandler}>
               <WifiIcon className="w-6" />
             </button>
+            <h3>Login or register</h3>
+          </div>
+        </div>
+        <div className={styles.headerTop}>
+          <Link href="/" className="flex items-center">
+            <Image src={NWLogo} alt="New World logo" className="w-25 p" />
+          </Link>
+          <div className={styles.searchBar}>
+          <Search setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
+          </div>
+          <div className={styles.headerTopRight}>
+            
             <Link href="/cart">
               <div className={styles.cartIcon}>
                 <ShoppingCartIcon className="w-6" />
@@ -62,7 +105,6 @@ export default function Header({
           </div>
         </div>
         <div className={styles.headerBottom}>
-          <Search setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
         </div>
       </div>
       {/* This is the popup box on the navbar to give you info */}
@@ -75,7 +117,7 @@ export default function Header({
         </div>
       ) : null}
       {/* This is the main "you've lost connectivity" popup */}
-      {isOpen ? (
+      {navigator.onLine ? null : (
         <div className={active ? styles.popActive : styles.popup}>
           <div className={styles.wifiSymbol}>
             <Image src={offline} alt="Offline" className="w-16" />
@@ -117,7 +159,7 @@ export default function Header({
             ) : null}
           </div>
         </div>
-      ) : null}
+      )}
       ;
     </>
   );
