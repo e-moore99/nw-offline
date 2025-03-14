@@ -9,10 +9,17 @@
     width: 100%;
     background-color: #e11a2c;
     color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .categoryBtn {
     height: 20vh;
     width: 100%;
-    background-color: rgb(145, 184, 218);
+    /* background-color: rgb(145, 184, 218); */
+    display: flex;
+    align-items: center;
+    gap: 2%;
+    padding-left: 3%;
 }

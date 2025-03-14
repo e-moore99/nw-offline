@@ -8,6 +8,7 @@ import Header from "./components/header";
 import ItemCard from "./components/itemCard";
 import styles from "./page.module.css";
 import HomePage from "./components/Home";
+import Footer from "./components/Footer";
 
 export default function Home() {
   const [pokemon, setPokemon] = React.useState<Pokemon[]>([]);
@@ -91,6 +92,7 @@ export default function Home() {
           </div>
         )}
       </div>
+      <Footer />
     </>
   );
 }

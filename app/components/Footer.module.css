@@ -1,0 +1,45 @@
+.footer{
+    height: 75vh;
+    width: 100%;
+    background-color: #000000;
+    color: white;
+}
+
+.footerTop {
+    width: 100%;
+    height: 80%;
+    border-bottom: 0.5px solid #3e3e3e;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 2%;
+}
+
+.footerTop h4 {
+    font-weight: 700;
+}
+
+.footerTop ul {
+    font-size: 14px;
+    padding-top: 8px;
+}
+
+.footerLinks {
+    width: 15%;
+}
+
+.appDiv {
+    width: 15%;
+    border: 0.5px solid #3e3e3e;
+    padding: 1%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.footerBtm {
+    height: 20%;
+    display: flex;
+    align-items: center;
+    padding-left: 2%;
+}
