@@ -77,13 +77,7 @@ export default function Header({
           <button>Book a slot</button>
           </div>
           <div className={styles.pickupBnrRight}>
-          <button onClick={toggleNavPop} className={styles.offlineBtn}>
-              You're offline
-            </button>
-
-            <button onClick={toggleOpenHandler}>
-              <WifiIcon className="w-6" />
-            </button>
+          
             <h3>Login or register</h3>
           </div>
         </div>
@@ -95,7 +89,20 @@ export default function Header({
           <Search setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
           </div>
           <div className={styles.headerTopRight}>
-            
+          <button onClick={toggleNavPop} className={styles.offlineBtn}>
+              You're offline
+            </button>
+            {isClicked ? (
+        <div className={styles.smallPopup}>
+          <h3>Offline mode functionalities</h3>
+          <p>Browse product catalogues</p>
+          <p>View product details such as decsription, images, and price</p>
+          <p>Add products to the trolley</p>
+        </div>
+      ) : null}
+            <button onClick={toggleOpenHandler}>
+              <WifiIcon className="w-6" />
+            </button>
             <Link href="/cart">
               <div className={styles.cartIcon}>
                 <ShoppingCartIcon className="w-6" />
@@ -118,14 +125,7 @@ export default function Header({
         </div>
       </div>
       {/* This is the popup box on the navbar to give you info */}
-      {isClicked ? (
-        <div className={styles.smallPopup}>
-          <h3>Offline mode functionalities</h3>
-          <p>Browse product catalogues</p>
-          <p>View product details such as decsription, images, and price</p>
-          <p>Add products to the trolley</p>
-        </div>
-      ) : null}
+     
       {/* This is the main "you've lost connectivity" popup */}
       {navigator.onLine ? null : (
         <div className={active ? styles.popActive : styles.popup}>
