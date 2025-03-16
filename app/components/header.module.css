@@ -1,5 +1,11 @@
 .header {
-  height: 21vh;
+  height: 32vh;
+}
+
+.fixedHeader{
+  position: sticky;
+  top: 0;
+  width: 100%;
 }
 
 .pickupBnr{
@@ -9,7 +15,6 @@
   background-color: #ca1928;
   color: white;
   width: 100%;
-  /* position: fixed; */
 }
 
 .pickupBnrLeft {
@@ -35,7 +40,6 @@
   padding: 2%;
   background-color: white;
   border-bottom: 0.5px solid #b4b4b4;
-  /* position: fixed; */
   width: 100%;
 }
 

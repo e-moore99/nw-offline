@@ -15,13 +15,13 @@
 }
 
 .categoryBtn {
-    height: 20vh;
+    height: 25vh;
     width: 100%;
     /* background-color: rgb(145, 184, 218); */
     display: flex;
     align-items: center;
-    gap: 2%;
-    padding-left: 3%;
+    gap: 3%;
+    padding-left: 4%;
     color: rgb(42, 17, 48);
     font-weight: 400;
 }
@@ -37,6 +37,12 @@
     color: rgb(42, 17, 48);
 }
 
+
+.registerBtn {
+    padding-right: 3%;
+    border-right: 1px solid lightgray
+}
+
 .shopSpecials {
     width: 100%;
     height: 120vh;
@@ -46,4 +52,37 @@
 .articles {
     width: 100%;
     height: 100vh;
+}
+
+.shopWithUs {
+    width: 100%;
+    height: 70vh;
+    background-color: rgb(244, 244, 244);
+    display: flex;
+}
+
+.shopWUsLeft {
+    height: 100%;
+    width: 60%;
+    display: flex;
+    align-items: flex-start;  
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-left: 10%;
+    padding-top: 2%;
+}
+.shopWUsLeft h1{
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+.shopWUsLeft h2{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.shopWithUs Image {
+    width: 40%;
+    height: 100%;
+    padding-right: 10%;
+    background-color: white;
 }

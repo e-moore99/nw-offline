@@ -69,6 +69,7 @@ export default function Header({
   return (
     <>
       <div className={styles.header}>
+        <div className={styles.fixedHeader}>
         <div className={styles.pickupBnr}>
           <div className={styles.pickupBnrLeft}>
           <h3>New World Mt Roskill</h3>
@@ -102,6 +103,7 @@ export default function Header({
               </div>
             </Link>
           </div>
+        </div>
         </div>
         <div className={styles.headerBottom}>
           <button>Groceries <ChevronDownIcon className="w-4"/> </button>
