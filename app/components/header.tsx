@@ -1,7 +1,14 @@
 import styles from "./header.module.css";
 import Link from "next/link";
 import Search from "./Search";
-import { ShoppingCartIcon, WifiIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+import {
+  ShoppingCartIcon,
+  WifiIcon,
+  ChevronDownIcon,
+  BuildingStorefrontIcon,
+  ShoppingBagIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
 import React from "react";
 import { useAppSelector } from "@/redux/store";
 import NWLogo from "@/public/nw-logo.svg";
@@ -70,62 +77,74 @@ export default function Header({
     <>
       <div className={styles.header}>
         <div className={styles.fixedHeader}>
-        <div className={styles.pickupBnr}>
-          <div className={styles.pickupBnrLeft}>
-          <h3>New World Mt Roskill</h3>
-          <h3>Collect from New World Mt Roskill</h3>
-          <button>Book a slot</button>
+          <div className={styles.pickupBnr}>
+            <div className={styles.pickupBnrLeft}>
+              <h3><BuildingStorefrontIcon className="w-6" />New World Mt Roskill</h3>
+              <h3>
+                <ShoppingBagIcon className="w-6" />
+                Collect from New World Mt Roskill
+              </h3>
+              <button className={styles.bookSlot}>Book a slot</button>
+            </div>
+            <div className={styles.pickupBnrRight}>
+              <h3><UserIcon className="w-6"/>Login or register</h3>
+            </div>
           </div>
-          <div className={styles.pickupBnrRight}>
-          
-            <h3>Login or register</h3>
-          </div>
-        </div>
-        <div className={styles.headerTop}>
-          <Link href="/" className="flex items-center">
-            <Image src={NWLogo} alt="New World logo" className="w-25 p" />
-          </Link>
-          <div className={styles.searchBar}>
-          <Search setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
-          </div>
-          <div className={styles.headerTopRight}>
-          <button onClick={toggleNavPop} className={styles.offlineBtn}>
-              You're offline
-            </button>
-            {isClicked ? (
-        <div className={styles.smallPopup}>
-          <h3>Offline mode functionalities</h3>
-          <p>Browse product catalogues</p>
-          <p>View product details such as decsription, images, and price</p>
-          <p>Add products to the trolley</p>
-        </div>
-      ) : null}
-            <button onClick={toggleOpenHandler}>
-              <WifiIcon className="w-6" />
-            </button>
-            <Link href="/cart">
-              <div className={styles.cartIcon}>
-                <ShoppingCartIcon className="w-6" />
-                <p>{cartItems}</p>
-              </div>
+          <div className={styles.headerTop}>
+            <Link href="/" className="flex items-center">
+              <Image src={NWLogo} alt="New World logo" className="w-25 p" />
             </Link>
+            <div className={styles.searchBar}>
+              <Search
+                setSearchQuery={setSearchQuery}
+                handleSearch={handleSearch}
+              />
+            </div>
+            <div className={styles.headerTopRight}>
+              <button onClick={toggleNavPop} className={styles.offlineBtn}>
+                You're offline
+              </button>
+              {isClicked ? (
+                <div className={styles.smallPopup}>
+                  <h3>Offline mode functionalities</h3>
+                  <p>Browse product catalogues</p>
+                  <p>
+                    View product details such as decsription, images, and price
+                  </p>
+                  <p>Add products to the trolley</p>
+                </div>
+              ) : null}
+              <button onClick={toggleOpenHandler}>
+                <WifiIcon className="w-6" />
+              </button>
+              <Link href="/cart">
+                <div className={styles.cartIcon}>
+                  <ShoppingCartIcon className="w-6" />
+                  <p>{cartItems}</p>
+                </div>
+              </Link>
+            </div>
           </div>
-        </div>
         </div>
         <div className={styles.headerBottom}>
-          <button>Groceries <ChevronDownIcon className="w-4"/> </button>
+          <button>
+            Groceries <ChevronDownIcon className="w-4" />{" "}
+          </button>
           <button>Specials</button>
           <button>Everyday Low Price</button>
           <button>Mailer</button>
-          <button>Recipes <ChevronDownIcon className="w-4"/></button>
-          <button>Discover <ChevronDownIcon className="w-4"/></button>
+          <button>
+            Recipes <ChevronDownIcon className="w-4" />
+          </button>
+          <button>
+            Discover <ChevronDownIcon className="w-4" />
+          </button>
           <button>Clubcard</button>
           <button>My Lists</button>
           <button>Ways to save</button>
         </div>
       </div>
       {/* This is the popup box on the navbar to give you info */}
-     
       {/* This is the main "you've lost connectivity" popup */}
       {navigator.onLine ? null : (
         <div className={active ? styles.popActive : styles.popup}>
