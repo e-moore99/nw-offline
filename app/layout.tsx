@@ -19,38 +19,38 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const registerServiceWorker = async () => {
-    if ("serviceWorker" in navigator) {
-      try {
-        const register = await navigator.serviceWorker.register(
-          "/service-worker.js",
-          {
-            scope: `/`,
-          }
-        );
-        if (register.installing) {
-          console.log("Service worker installing");
-        } else if (register.waiting) {
-          console.log("Service worker installed");
-        } else if (register.active) {
-          console.log("Service worker active");
-        }
-        console.log("Service worker registered", register);
-      } catch (error) {
-        console.error("Service worker registration failed", error);
-      }
-    }
-    // window.addEventListener('load', () => {
-    //     navigator.serviceWorker.register('/service-worker.js')
-    //         .then((registration) => {
-    //             console.log('Service Worker registered with scope:', registration.scope);
-    //         })
-    //         .catch((error) => {
-    //             console.error('Service Worker registration failed:', error);
-    //         });
-    // });
-  };
-  registerServiceWorker();
+  // const registerServiceWorker = async () => {
+  //   if ("serviceWorker" in navigator) {
+  //     try {
+  //       const register = await navigator.serviceWorker.register(
+  //         "/service-worker.js",
+  //         {
+  //           scope: `/`,
+  //         }
+  //       );
+  //       if (register.installing) {
+  //         console.log("Service worker installing");
+  //       } else if (register.waiting) {
+  //         console.log("Service worker installed");
+  //       } else if (register.active) {
+  //         console.log("Service worker active");
+  //       }
+  //       console.log("Service worker registered", register);
+  //     } catch (error) {
+  //       console.error("Service worker registration failed", error);
+  //     }
+  //   }
+  //   // window.addEventListener('load', () => {
+  //   //     navigator.serviceWorker.register('/service-worker.js')
+  //   //         .then((registration) => {
+  //   //             console.log('Service Worker registered with scope:', registration.scope);
+  //   //         })
+  //   //         .catch((error) => {
+  //   //             console.error('Service Worker registration failed:', error);
+  //   //         });
+  //   // });
+  // };
+  // registerServiceWorker();
   // useEffect(() => {
   // if ("serviceWorker" in navigator) {
   //   window.addEventListener("load", () => {

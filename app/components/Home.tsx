@@ -13,6 +13,7 @@ import {
 import NWLogo from "@/public/nw-logo.svg";
 import Image from "next/image";
 import Carrot from "@/public/carrot.png";
+import Plate from "@/public/plate.jpg";
 
 const HomePage = () => {
   return (
@@ -60,7 +61,43 @@ const HomePage = () => {
         <h1>Shop Specials</h1>
       </div>
       <div className={styles.articles}>
-        <h1>Articles</h1>
+        <div className={styles.article1}>
+          <Image src={Plate} alt="Logo"></Image>
+          <div className={styles.articleBottom}>
+            <div>
+              <h2>Need dinner, fast?</h2>
+              <p>
+                Check out our collection of tasty dinner ideas, ready in 35
+                minutes or less.
+              </p>
+            </div>
+            <button>See the recipes</button>
+          </div>
+        </div>
+        <div className={styles.article1}>
+          <Image src={Plate} alt="Logo"></Image>
+          <div className={styles.articleBottom}>
+            <div>
+              <h2>It's Baby Week at New World</h2>
+              <p>Get the best of Baby & Toddler this week.</p>
+            </div>
+            <button>Shop now</button>
+          </div>
+        </div>
+        <div className={styles.article1}>
+          <Image src={Plate} alt="Logo"></Image>
+          <div className={styles.articleBottom}>
+            <div>
+              <h2>Our Chicken Pad Thai meal kit, that's now simply better</h2>
+              <p>
+                We've made one of our favourite meal kits, the chicken pad thai,
+                simply better. Better still, pick one up tonight and see for
+                yourself.
+              </p>
+            </div>
+            <button>Shop now</button>
+          </div>
+        </div>
       </div>
       <div className={styles.shopWithUs}>
         <div className={styles.shopWUsLeft}>
