@@ -9,6 +9,7 @@ import ItemCard from "./components/itemCard";
 import styles from "./page.module.css";
 import HomePage from "./components/Home";
 import Footer from "./components/Footer";
+import SearchResults from "./components/SearchResults";
 
 export default function Home() {
   const [pokemon, setPokemon] = React.useState<Pokemon[]>([]);
@@ -37,6 +38,7 @@ export default function Home() {
       });
     }
     setPokemon(searchedPokemon);
+    console.log("Fetched Pokemon: ", pokemon);
     setLoading(false);
   };
 
@@ -71,25 +73,28 @@ export default function Home() {
       <div className={styles.container}>
         {loading ? (
           <>
-          <HomePage />
+            <HomePage />
           </>
         ) : (
-          <div className={styles.displayArea}>
-            {pokemon &&
-              Array.isArray(pokemon) &&
-              pokemon.map((poke) => (
-                <ItemCard
-                  addToCart={() => addToCart(poke)}
-                  key={poke.id + 1}
-                  name={poke.name}
-                  id={poke.id}
-                  image={
-                    poke.sprites?.front_default ||
-                    "https://media.istockphoto.com/id/1399588872/vector/corrupted-pixel-file-icon-damage-document-symbol-sign-broken-data-vector.jpg?s=612x612&w=0&k=20&c=ffG6gVLUPfxZkTwjeqdxD67LWd8R1pQTIyIVUi-Igx0="
-                  }
-                />
-              ))}
-          </div>
+          // <div className={styles.displayArea}>
+          //   {pokemon &&
+          //     Array.isArray(pokemon) &&
+          //     pokemon.map((poke) => (
+          //       <ItemCard
+          //         addToCart={() => addToCart(poke)}
+          //         key={poke.id + 1}
+          //         name={poke.name}
+          //         id={poke.id}
+          //         image={
+          //           poke.sprites?.front_default ||
+          //           "https://media.istockphoto.com/id/1399588872/vector/corrupted-pixel-file-icon-damage-document-symbol-sign-broken-data-vector.jpg?s=612x612&w=0&k=20&c=ffG6gVLUPfxZkTwjeqdxD67LWd8R1pQTIyIVUi-Igx0="
+          //         }
+          //       />
+          //     ))}
+          // </div>
+          <>
+            <SearchResults pokemon={pokemon} searchQuery={searchQuery} />
+          </>
         )}
       </div>
       <Footer />
