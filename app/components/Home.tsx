@@ -17,7 +17,7 @@ import Carrot from "@/public/carrot.png";
 const HomePage = () => {
   return (
     <div className={styles.home}>
-      <div className={styles.salesBnr}>Meat week!</div>
+      <div className={styles.salesBnr}><h1>Special of the week!</h1><button>Shop now</button></div>
       <div className={styles.categoryBtn}>
         <button>
           <div className={styles.categoryBtnCircle}>
