@@ -146,7 +146,7 @@ export default function Header({
       </div>
       {/* This is the popup box on the navbar to give you info */}
       {/* This is the main "you've lost connectivity" popup */}
-      {navigator.onLine ? null : (
+      {isOpen ? (
         <div className={active ? styles.popActive : styles.popup}>
           <div className={styles.wifiSymbol}>
             <Image src={offline} alt="Offline" className="w-16" />
@@ -188,7 +188,7 @@ export default function Header({
             ) : null}
           </div>
         </div>
-      )}
+      ) : null}
       ;
     </>
   );

@@ -12,6 +12,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: 800;
+    font-size: 3rem;
 }
 
 .categoryBtn {
@@ -56,28 +58,48 @@
 
 .shopWithUs {
     width: 100%;
-    height: 70vh;
+    height: 75vh;
     background-color: rgb(244, 244, 244);
     display: flex;
 }
 
 .shopWUsLeft {
     height: 100%;
-    width: 60%;
+    width: 50%;
     display: flex;
     align-items: flex-start;  
     flex-direction: column;
     justify-content: flex-start;
-    padding-left: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
     padding-top: 2%;
 }
 .shopWUsLeft h1{
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-size: 2rem;
+    font-weight: 800;
 }
 .shopWUsLeft h2{
-    font-size: 1.5rem;
-    font-weight: 700;
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: 800;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4%;
+}
+
+.shopWUsLeft ul {
+    padding-left: 14%;
+    font-size: 14px;
+}
+
+.shopWUsRight {
+    height: 100%;
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
 }
 
 .shopWithUs Image {
