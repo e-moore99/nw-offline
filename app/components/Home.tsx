@@ -10,10 +10,10 @@ import {
   TruckIcon,
   BuildingStorefrontIcon,
 } from "@heroicons/react/24/outline";
-import NWLogo from "@/public/nw-logo.svg";
 import Image from "next/image";
 import Carrot from "@/public/carrot.png";
 import Plate from "@/public/plate.jpg";
+import NWShopping from "@/public/nw-shopping.png";
 
 const HomePage = () => {
   return (
@@ -62,7 +62,7 @@ const HomePage = () => {
       </div>
       <div className={styles.articles}>
         <div className={styles.article1}>
-          <Image src={Plate} alt="Logo"></Image>
+          <Image src={Plate} alt="Food"></Image>
           <div className={styles.articleBottom}>
             <div>
               <h2>Need dinner, fast?</h2>
@@ -75,7 +75,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className={styles.article1}>
-          <Image src={Plate} alt="Logo"></Image>
+          <Image src={Plate} alt="Food"></Image>
           <div className={styles.articleBottom}>
             <div>
               <h2>It's Baby Week at New World</h2>
@@ -85,7 +85,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className={styles.article1}>
-          <Image src={Plate} alt="Logo"></Image>
+          <Image src={Plate} alt="Food"></Image>
           <div className={styles.articleBottom}>
             <div>
               <h2>Our Chicken Pad Thai meal kit, that's now simply better</h2>
@@ -130,7 +130,7 @@ const HomePage = () => {
           </ul>
         </div>
         <div className={styles.shopWUsRight}>
-          <Image src={NWLogo} alt="Logo"></Image>
+          <Image src={NWShopping} alt="Shopping"></Image>
         </div>
       </div>
     </div>

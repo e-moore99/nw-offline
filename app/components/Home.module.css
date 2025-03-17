@@ -111,6 +111,7 @@
   border-radius: 3px;
   padding: 1% 5%;
 }
+
 .articleBottom button:hover {
   border: 2px solid rgb(77, 0, 77);
   border-radius: 3px;
@@ -162,12 +163,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: rgb(244, 244, 244);
 }
 
 .shopWithUs Image {
   width: 40%;
   height: 100%;
   padding-right: 10%;
-  background-color: white;
 }
