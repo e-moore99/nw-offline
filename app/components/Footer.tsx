@@ -1,5 +1,12 @@
 import React from "react";
 import styles from "./Footer.module.css";
+import Image from "next/image";
+import Instagram from "@/public/instagram.png";
+import Facebook from "@/public/facebook.png";
+import Frolley from "@/public/frolley.png";
+import FSLogo from "@/public/Foodstuffs_Logo_White.png";
+import AppStore from "@/public/app-store-badge.png";
+import PlayStore from "@/public/google-play-badge.png";
 
 const Footer = () => {
   return (
@@ -41,12 +48,21 @@ const Footer = () => {
           <ul>Pams</ul>
           <ul>News</ul>
         </div>
-        <div className={styles.footerLinks}>
+        <div className={styles.followUs}>
           <h4>Follow us</h4>
-          <br />
+          <div>
+            <Image className="w-7 pt-4" src={Facebook} alt="fb" />
+            <Image className="w-7 pt-4" src={Instagram} alt="ig" />
+          </div>
+          
+            <Image className="w-30 pt-4" src={FSLogo} alt="logo" />
+            <Image className="w-12 pt-4" src={Frolley} alt="frolley" />
+          
         </div>
         <div className={styles.appDiv}>
           <p>Download the New World app</p>
+          <Image className="w-25 pt-4" src={AppStore} alt="app store" />
+          <Image className="w-25 pt-4" src={PlayStore} alt="play store" />
         </div>
       </div>
       <div className={styles.footerBtm}>
