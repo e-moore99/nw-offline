@@ -1,122 +1,127 @@
 .home {
-    width: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .salesBnr {
-    height: 60vh;
-    width: 100%;
-    background-color: #e11a2c;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  height: 60vh;
+  width: 100%;
+  background-color: #e11a2c;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.salesBnr h1{
-    font-size: 3rem;
-    font-weight: 800;
+.salesBnr h1 {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.salesBnr p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  padding-bottom: 2%;
 }
 
 .salesBnr button {
-    background-color: #fff;
-    padding: 0.5% 1.5%;
-    color: rgb(42, 17, 48);
-    font-weight: 700;
-    border-radius: 5px;
+  background-color: #fff;
+  padding: 0.5% 1.5%;
+  color: rgb(42, 17, 48);
+  font-weight: 700;
+  border-radius: 5px;
 }
 
 .categoryBtn {
-    height: 25vh;
-    width: 100%;
-    /* background-color: rgb(145, 184, 218); */
-    display: flex;
-    align-items: center;
-    gap: 3%;
-    padding-left: 4%;
-    color: rgb(42, 17, 48);
-    font-weight: 400;
+  height: 25vh;
+  width: 100%;
+  /* background-color: rgb(145, 184, 218); */
+  display: flex;
+  align-items: center;
+  gap: 3%;
+  padding-left: 4%;
+  color: rgb(42, 17, 48);
+  font-weight: 400;
 }
 
 .categoryBtnCircle {
-    width: 80px;
-    height: 80px;
-    border-radius: 50px;
-    background-color: rgb(248, 239, 250);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgb(42, 17, 48);
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  background-color: rgb(248, 239, 250);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(42, 17, 48);
 }
 
-
 .registerBtn {
-    padding-right: 3%;
-    border-right: 1px solid lightgray
+  padding-right: 3%;
+  border-right: 1px solid lightgray;
 }
 
 .shopSpecials {
-    width: 100%;
-    height: 120vh;
-    background-color: rgb(244, 244, 244);
+  width: 100%;
+  height: 120vh;
+  background-color: rgb(244, 244, 244);
 }
 
 .articles {
-    width: 100%;
-    height: 100vh;
+  width: 100%;
+  height: 100vh;
 }
 
 .shopWithUs {
-    width: 100%;
-    height: 75vh;
-    background-color: rgb(244, 244, 244);
-    display: flex;
+  width: 100%;
+  height: 75vh;
+  background-color: rgb(244, 244, 244);
+  display: flex;
 }
 
 .shopWUsLeft {
-    height: 100%;
-    width: 50%;
-    display: flex;
-    align-items: flex-start;  
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 2%;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 2%;
 }
-.shopWUsLeft h1{
-    font-size: 2rem;
-    font-weight: 800;
+.shopWUsLeft h1 {
+  font-size: 2rem;
+  font-weight: 800;
 }
-.shopWUsLeft h2{
-    width: 100%;
-    font-size: 1.2rem;
-    font-weight: 800;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 4%;
+.shopWUsLeft h2 {
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: 800;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4%;
 }
 
 .shopWUsLeft ul {
-    padding-left: 14%;
-    font-size: 14px;
+  padding-left: 14%;
+  font-size: 14px;
 }
 
 .shopWUsRight {
-    height: 100%;
-    width: 45%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
+  height: 100%;
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
 }
 
 .shopWithUs Image {
-    width: 40%;
-    height: 100%;
-    padding-right: 10%;
-    background-color: white;
+  width: 40%;
+  height: 100%;
+  padding-right: 10%;
+  background-color: white;
 }

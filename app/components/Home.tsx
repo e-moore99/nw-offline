@@ -17,7 +17,11 @@ import Carrot from "@/public/carrot.png";
 const HomePage = () => {
   return (
     <div className={styles.home}>
-      <div className={styles.salesBnr}><h1>Special of the week!</h1><button>Shop now</button></div>
+      <div className={styles.salesBnr}>
+        <h1>Why wait till Easter?</h1>
+        <p>Hot Cross Buns are here, fresh and ready for you to enjoy.</p>
+        <button>Shop now</button>
+      </div>
       <div className={styles.categoryBtn}>
         <button>
           <div className={styles.categoryBtnCircle}>
@@ -60,20 +64,36 @@ const HomePage = () => {
       </div>
       <div className={styles.shopWithUs}>
         <div className={styles.shopWUsLeft}>
-        <h1>Why Shop Online With Us?</h1> <br />
-        <h2><ClockIcon className="w-12 text-red-600" />You shop, anytime</h2>
-        <ul>With New World online, your local store's range and specials are all at your fingertips.</ul>
-        <br />
-        <h2>
-        <Image src={Carrot} alt="Carrot"></Image>
-        We pick the freshest & finest</h2>
-        <ul>Our personal shoppers pick your items just as you would. You can even leave them instructions.</ul>
-        <br />
-        <h2><TruckIcon className="w-12 text-red-600" />We deliver, or you pick up</h2>
-        <ul>Straight to your door, or on your way home. Get your groceries the way that suits you.</ul>
+          <h1>Why Shop Online With Us?</h1> <br />
+          <h2>
+            <ClockIcon className="w-12 text-red-600" />
+            You shop, anytime
+          </h2>
+          <ul>
+            With New World online, your local store's range and specials are all
+            at your fingertips.
+          </ul>
+          <br />
+          <h2>
+            <Image src={Carrot} alt="Carrot"></Image>
+            We pick the freshest & finest
+          </h2>
+          <ul>
+            Our personal shoppers pick your items just as you would. You can
+            even leave them instructions.
+          </ul>
+          <br />
+          <h2>
+            <TruckIcon className="w-12 text-red-600" />
+            We deliver, or you pick up
+          </h2>
+          <ul>
+            Straight to your door, or on your way home. Get your groceries the
+            way that suits you.
+          </ul>
         </div>
         <div className={styles.shopWUsRight}>
-        <Image src={NWLogo} alt="Logo"></Image>
+          <Image src={NWLogo} alt="Logo"></Image>
         </div>
       </div>
     </div>
