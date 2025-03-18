@@ -1,12 +1,13 @@
 "use client";
 import { useEffect } from "react";
 import Header from ".././components/header";
+import Footer from "../components/Footer";
 import React from "react";
 import CartItemCard from "../components/cartItemCard";
 import styles from "./page.module.css";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/redux/store";
-import { updateCart } from "@/redux/features/cart-slice";
+import { cart, updateCart } from "@/redux/features/cart-slice";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 
 interface CartItem {
@@ -49,6 +50,10 @@ export default function Cart() {
     tempCartItems.splice(index, 1);
     dispatch(updateCart(tempCartItems));
   };
+  const emptyCart = () => {
+    const cartItems: CartItem[] = [];
+    dispatch(updateCart(cartItems));
+  };
 
   return (
     <>
@@ -87,13 +92,11 @@ export default function Cart() {
           <div className={styles.orderSummary}>  
           <h2>Order summary</h2>
           </div>
-          <button className={styles.emptyTrolley}>Empty trolley</button>
+          <button className={styles.emptyTrolley} onClick={emptyCart}>Empty trolley</button>
         </div>
         </div>
       </div>
-      <div>
-        <h1>Total: {}</h1>
-      </div>
+      <Footer />
     </>
   );
 }
