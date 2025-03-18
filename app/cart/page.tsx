@@ -87,6 +87,7 @@ export default function Cart() {
           <div className={styles.orderSummary}>  
           <h2>Order summary</h2>
           </div>
+          <button className={styles.emptyTrolley}>Empty trolley</button>
         </div>
         </div>
       </div>

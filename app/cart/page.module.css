@@ -65,6 +65,7 @@
   width: 33%;
   display: flex;
   flex-direction: column;
+  gap: 2%;
 }
 
 .orderSummary {
@@ -73,4 +74,12 @@
   height: 70vh;
   display: flex;
   flex-direction: column;
+}
+
+.emptyTrolley{
+  width: 100%;
+  height: 8vh;
+  padding: 3%;
+  font-weight: 700;
+  color: rgb(114, 2, 114);
 }
