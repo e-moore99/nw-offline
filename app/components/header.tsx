@@ -189,7 +189,6 @@ export default function Header({
           </div>
         </div>
       ) : null}
-      ;
     </>
   );
 }

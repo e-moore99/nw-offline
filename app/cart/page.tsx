@@ -7,6 +7,7 @@ import styles from "./page.module.css";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { updateCart } from "@/redux/features/cart-slice";
+import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 
 interface CartItem {
   name: string;
@@ -37,7 +38,9 @@ export default function Cart() {
   };
   const decreaseItems = (index: number) => {
     const tempCartItems = cartArray.map((item, i) =>
-      i === index && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
+      i === index && item.quantity > 1
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
     );
     dispatch(updateCart(tempCartItems));
   };
@@ -50,21 +53,31 @@ export default function Cart() {
   return (
     <>
       <Header setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
-      <div className={styles.cartContainer}>
-        {cartItems.length === 0 ? <h1>Cart is empty!</h1> : null}
-        <div>
-          {cartItems.map((item, index) => (
-            <CartItemCard
-              key={index}
-              name={item.name}
-              id={item.id}
-              image={item.sprites.front_default}
-              quantity={item.quantity}
-              increaseItems={() => increaseItems(index)}
-              decreaseItems={() => decreaseItems(index)}
-              removeItem={() => removeItem(index)}
-            />
-          ))}
+      <div className={styles.cart}>
+        <h1>Your Trolley</h1>
+        <div className={styles.collectingFrom}>
+          <ShoppingBagIcon className="w-14" />
+          <p>
+            You're collecting from <b>New World Mt Roskill</b>
+          </p>
+          <button>Select timeslot</button>
+        </div>
+        <div className={styles.cartContainer}>
+          {cartItems.length === 0 ? <h1>Cart is empty!</h1> : null}
+          <div>
+            {cartItems.map((item, index) => (
+              <CartItemCard
+                key={index}
+                name={item.name}
+                id={item.id}
+                image={item.sprites.front_default}
+                quantity={item.quantity}
+                increaseItems={() => increaseItems(index)}
+                decreaseItems={() => decreaseItems(index)}
+                removeItem={() => removeItem(index)}
+              />
+            ))}
+          </div>
         </div>
       </div>
       <div>

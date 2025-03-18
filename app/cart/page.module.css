@@ -1,3 +1,35 @@
+.cart{
+  background-color: rgb(244, 244, 244);
+}
+
+.cart h1 {
+  display: flex;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 2rem;
+  padding-top: 3%;
+  padding-bottom: 2%;
+}
+
+.collectingFrom {
+  background-color: white;
+  width: 90%;
+  height: 17vh;
+  margin-left: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2%;
+}
+
+.collectingFrom button{
+  border: 2px solid rgb(114, 2, 114);
+  color: rgb(114, 2, 114);
+  border-radius: 3px;
+  padding: 0.5% 2%;
+  font-weight: 700;
+}
+
 .cartContainer {
   display: flex;
   flex-direction: column;

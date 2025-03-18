@@ -76,22 +76,6 @@ export default function Home() {
             <HomePage />
           </>
         ) : (
-          // <div className={styles.displayArea}>
-          //   {pokemon &&
-          //     Array.isArray(pokemon) &&
-          //     pokemon.map((poke) => (
-          //       <ItemCard
-          //         addToCart={() => addToCart(poke)}
-          //         key={poke.id + 1}
-          //         name={poke.name}
-          //         id={poke.id}
-          //         image={
-          //           poke.sprites?.front_default ||
-          //           "https://media.istockphoto.com/id/1399588872/vector/corrupted-pixel-file-icon-damage-document-symbol-sign-broken-data-vector.jpg?s=612x612&w=0&k=20&c=ffG6gVLUPfxZkTwjeqdxD67LWd8R1pQTIyIVUi-Igx0="
-          //         }
-          //       />
-          //     ))}
-          // </div>
           <>
             <SearchResults pokemon={pokemon} searchQuery={searchQuery} />
           </>
