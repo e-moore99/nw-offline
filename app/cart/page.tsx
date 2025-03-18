@@ -93,7 +93,39 @@ export default function Cart() {
           </div>
           <div className={styles.cartBoxRight}>
             <div className={styles.orderSummary}>
-              <h2>Order summary</h2>
+              <div className={styles.orderSummaryTop}>
+                <h2>Order summary</h2>
+                <p>{cartItems.length} items</p>
+                <div>
+                  <input type="text" placeholder="Promo code" />
+                  <button>Apply</button>
+                </div>
+                <div className={styles.orderPriceBreakdown}>
+                  <div>
+                  <h3>Groceries</h3>
+                  <p>
+                    Service fee <InformationCircleIcon className="w-6" />
+                  </p>
+                  <p>
+                    Bag fee <InformationCircleIcon className="w-6" />
+                  </p>
+                  </div>
+                <div>
+                  <h3>Total price</h3>
+                  <p>$0.00</p>
+                  <p>$1.00</p>
+                </div>
+                </div>
+              </div>
+              <div className={styles.orderSummaryBottom}>
+                <div className={styles.estimatedTotal}>
+                  <h2>Estimated total</h2>
+                  <h2>Total price</h2>
+                </div>
+                <p>Incl. GST</p>
+                <button className={styles.checkoutBtn}>Checkout</button>
+                <button className={styles.listBtn}>Save trolley to a list</button>
+              </div>
             </div>
             <button className={styles.emptyTrolley} onClick={emptyCart}>
               Empty trolley

@@ -23,8 +23,8 @@
 }
 
 .collectingFrom button {
-  border: 2px solid rgb(114, 2, 114);
-  color: rgb(114, 2, 114);
+  border: 2px solid #571060;
+  color: #571060;
   border-radius: 3px;
   padding: 0.5% 2%;
   font-weight: 700;
@@ -52,9 +52,6 @@
   width: 65%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* margin-top: 20px; */
 }
 
 .cartItems {
@@ -73,6 +70,65 @@
   height: 70vh;
   display: flex;
   flex-direction: column;
+  padding: 4%;
+}
+
+.orderSummary h2 {
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.orderSummaryTop {
+  height: 60%;
+}
+
+.orderPriceBreakdown {
+  display: flex;
+  justify-content: space-between;
+  height: 60%;
+  border-bottom: 1px solid lightgray;
+
+}
+
+.orderPriceBreakdown p {
+  display: flex;
+  align-items: center;
+}
+
+.orderSummaryBottom {
+  height: 40%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4%;
+}
+
+.estimatedTotal{
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkoutBtn{
+  width: 100%;
+  height: 25%;
+  background-color: #571060;
+  color: white;
+  font-weight: 800;
+  font-size: 14px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.listBtn{
+  height: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #571060;
+  font-weight: 700;
+  font-size: 12px;
 }
 
 .emptyTrolley {
@@ -81,7 +137,7 @@
   padding: 3%;
   margin-top: 3%;
   font-weight: 700;
-  color: rgb(114, 2, 114);
+  color: #571060;
 }
 
 .disclaimer {
