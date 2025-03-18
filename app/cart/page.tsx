@@ -11,6 +11,7 @@ import { cart, updateCart } from "@/redux/features/cart-slice";
 import {
   ShoppingBagIcon,
   InformationCircleIcon,
+  H3Icon,
 } from "@heroicons/react/24/outline";
 
 interface CartItem {
@@ -58,6 +59,12 @@ export default function Cart() {
     dispatch(updateCart(cartItems));
   };
 
+  const calculateTotalPrice = () => {
+    return cartItems.reduce((total, item) => total + item.id * item.quantity, 0);
+  };
+ 
+  const total = calculateTotalPrice();
+
   return (
     <>
       <Header setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
@@ -96,12 +103,12 @@ export default function Cart() {
               <div className={styles.orderSummaryTop}>
                 <h2>Order summary</h2>
                 <p>{cartItems.length} items</p>
-                <div>
+                <div className={styles.promoCode}>
                   <input type="text" placeholder="Promo code" />
                   <button>Apply</button>
                 </div>
                 <div className={styles.orderPriceBreakdown}>
-                  <div>
+                  <div className={styles.priceBreakdownLeft}>
                   <h3>Groceries</h3>
                   <p>
                     Service fee <InformationCircleIcon className="w-6" />
@@ -110,8 +117,8 @@ export default function Cart() {
                     Bag fee <InformationCircleIcon className="w-6" />
                   </p>
                   </div>
-                <div>
-                  <h3>Total price</h3>
+                <div className={styles.priceBreakdownRight}>
+                  <h3>${cartItems ? total.toFixed(2) : 0.00}</h3>
                   <p>$0.00</p>
                   <p>$1.00</p>
                 </div>
@@ -120,7 +127,7 @@ export default function Cart() {
               <div className={styles.orderSummaryBottom}>
                 <div className={styles.estimatedTotal}>
                   <h2>Estimated total</h2>
-                  <h2>Total price</h2>
+                  <h2>${cartItems ? ((total+1).toFixed(2)) : 0.00}</h2>
                 </div>
                 <p>Incl. GST</p>
                 <button className={styles.checkoutBtn}>Checkout</button>

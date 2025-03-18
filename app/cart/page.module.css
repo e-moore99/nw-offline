@@ -71,6 +71,7 @@
   display: flex;
   flex-direction: column;
   padding: 4%;
+
 }
 
 .orderSummary h2 {
@@ -79,7 +80,33 @@
 }
 
 .orderSummaryTop {
-  height: 60%;
+  height: 55%;
+  display: flex;
+  flex-direction: column;
+  gap: 3%;
+}
+
+.promoCode {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.promoCode input {
+  width: 75%;
+  border: 1px solid #571060;
+  padding: 2%;
+  border-radius: 3px;
+}
+
+.promoCode button {
+  width: 20%;
+  border: 2px solid #571060;
+  color: #571060;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 2%;
+  border-radius: 3px;
 }
 
 .orderPriceBreakdown {
@@ -87,20 +114,39 @@
   justify-content: space-between;
   height: 60%;
   border-bottom: 1px solid lightgray;
-
 }
 
 .orderPriceBreakdown p {
   display: flex;
   align-items: center;
 }
+.orderPriceBreakdown h3 {
+  font-weight: 700;
+}
+
+.priceBreakdownLeft{
+  display: flex;
+  flex-direction: column;
+  gap: 3%;
+}
+
+.priceBreakdownRight{
+  display: flex;
+  flex-direction: column;
+  gap: 3%;
+}
 
 .orderSummaryBottom {
-  height: 40%;
+  height: 45%;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 4%;
+  padding-top: 5%;
+}
+
+.orderSummaryBottom p {
+  color: gray;
 }
 
 .estimatedTotal{
