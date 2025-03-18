@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./cartItemCard.module.css";
 import Image from "next/image";
-import { TrashIcon, PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, PlusIcon, MinusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function CartItemCard(props: {
   name: string;
@@ -27,18 +27,26 @@ export default function CartItemCard(props: {
         </div>
         <div className={styles.cartItemRight}>
           <div className={styles.btnBox}>
-            <button onClick={props.decreaseItems}>
+            <h3 className={styles.quantity}>{props.quantity}</h3>
+            <h3 className={styles.each}>ea</h3>
+            <button
+              onClick={props.decreaseItems}
+              className={styles.quantityBtn}
+            >
               <MinusIcon className="w-6" />
             </button>
-            <h3>{props.quantity}</h3>
-            <button onClick={props.increaseItems}>
+            <button
+              onClick={props.increaseItems}
+              className={styles.quantityBtn}
+            >
               <PlusIcon className="w-6" />
             </button>
-            <button onClick={props.removeItem}>
-              <TrashIcon className="w-6" />
-            </button>
           </div>
-          <h4>Price: ${props.id * props.quantity}</h4>
+          <h4>${props.id}</h4>
+
+          <button onClick={props.removeItem} className={styles.removeBtn}>
+            <XMarkIcon className="w-6" />
+          </button>
         </div>
       </div>
     </>

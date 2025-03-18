@@ -54,7 +54,7 @@ export default function Cart() {
     <>
       <Header setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
       <div className={styles.cart}>
-        <h1>Your Trolley</h1>
+        <h1 className={styles.pageTitle}>Your Trolley</h1>
         <div className={styles.collectingFrom}>
           <ShoppingBagIcon className="w-14" />
           <p>
@@ -68,7 +68,7 @@ export default function Cart() {
         <div className={styles.cartCheckoutBox}>
         <div className={styles.cartContainer}>
           {cartItems.length === 0 ? <h1>Cart is empty!</h1> : null}
-          <div>
+          <div className={styles.cartItems}>
             {cartItems.map((item, index) => (
               <CartItemCard
                 key={index}
@@ -81,6 +81,11 @@ export default function Cart() {
                 removeItem={() => removeItem(index)}
               />
             ))}
+          </div>
+        </div>
+        <div className={styles.cartBoxRight}>
+          <div className={styles.orderSummary}>  
+          <h2>Order summary</h2>
           </div>
         </div>
         </div>
