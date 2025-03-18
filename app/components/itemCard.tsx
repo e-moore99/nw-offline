@@ -10,21 +10,19 @@ export default function ItemCard(props: {
   return (
     <>
       <div className={styles.itemCard}>
-        <div>
+        
           <h1>{props.name}</h1>
+        
           <Image
             src={props.image}
             alt="Pokemon image"
             width={150}
             height={100}
           />
-        </div>
-        <div>
-          <h3>#{props.id}</h3>
-        </div>
+        
         <div className={styles.cartAdd}>
           <h2>${props.id}</h2>
-          <button onClick={props.addToCart}>Add to cart</button>
+          <button onClick={props.addToCart}>Add</button>
         </div>
       </div>
     </>

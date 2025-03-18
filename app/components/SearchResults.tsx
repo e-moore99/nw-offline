@@ -13,32 +13,9 @@ const SearchResults = ({
   pokemon: any;
   searchQuery: any;
 }) => {
-  // const [pokemon, setPokemon] = React.useState<Pokemon[]>([]);
   const dispatch = useDispatch<AppDispatch>();
   const cartArray = useAppSelector((state) => state.cart);
 
-  // const handleSearch = async () => {
-  //   if (!searchQuery) return;
-
-  //   setLoading(true);
-  //   let searchedPokemon;
-
-  //   if (searchQuery === "pokemon?limit=100000&offset=0") {
-  //     searchedPokemon = await fetchPokemon({
-  //       findAll: searchQuery,
-  //     });
-  //   } else if (isNaN(Number(searchQuery))) {
-  //     searchedPokemon = await fetchPokemon({
-  //       name: searchQuery,
-  //     });
-  //   } else {
-  //     searchedPokemon = await fetchPokemon({
-  //       id: Number(searchQuery),
-  //     });
-  //   }
-  //   setPokemon(searchedPokemon);
-  //   setLoading(false);
-  // };
   const addToCart = (pokemon: Pokemon) => {
     console.log("added to cart: ", pokemon);
     const itemIndex = cartArray.findIndex((item) => item.id === pokemon.id);
@@ -65,7 +42,7 @@ const SearchResults = ({
   }, [cartArray]);
   return (
     <>
-      <div>
+      <div className={styles.results}>
         <h1 className={styles.resultsHead}>
           Search results for "{searchQuery}"
         </h1>
