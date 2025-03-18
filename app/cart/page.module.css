@@ -13,9 +13,9 @@
 
 .collectingFrom {
   background-color: white;
-  width: 90%;
+  width: 94%;
   height: 17vh;
-  margin-left: 5%;
+  margin-left: 3%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,7 +30,24 @@
   font-weight: 700;
 }
 
+.pageTopAlert {
+  width: 94%;
+  height: 10vh;
+  margin-left: 3%;
+  background-color: rgb(250, 237, 202);
+  margin-top: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cartCheckoutBox {
+  display: flex;
+  width: 100%;
+}
+
 .cartContainer {
+  width: 55%;
   display: flex;
   flex-direction: column;
   align-items: center;

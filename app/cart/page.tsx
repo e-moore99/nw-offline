@@ -62,6 +62,10 @@ export default function Cart() {
           </p>
           <button>Select timeslot</button>
         </div>
+        <div className={styles.pageTopAlert}>
+          <p>! This is an alert banner !</p>
+        </div>
+        <div className={styles.cartCheckoutBox}>
         <div className={styles.cartContainer}>
           {cartItems.length === 0 ? <h1>Cart is empty!</h1> : null}
           <div>
@@ -78,6 +82,7 @@ export default function Cart() {
               />
             ))}
           </div>
+        </div>
         </div>
       </div>
       <div>
