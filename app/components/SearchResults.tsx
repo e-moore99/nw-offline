@@ -15,6 +15,7 @@ const SearchResults = ({
 }) => {
   const dispatch = useDispatch<AppDispatch>();
   const cartArray = useAppSelector((state) => state.cart);
+  const [cartQuantity, setCartQuantity] = React.useState<number>(0);
 
   const addToCart = (pokemon: Pokemon) => {
     console.log("added to cart: ", pokemon);
@@ -37,6 +38,14 @@ const SearchResults = ({
     }
   };
 
+  const numberInCart = (id: number) => {
+    const itemIndex = cartArray.findIndex((item) => item.id === id);
+    if (itemIndex !== -1) {
+      return cartArray[itemIndex].quantity;
+    }
+    return 0;
+  };
+
   useEffect(() => {
     console.log("Cart array: ", cartArray);
   }, [cartArray]);
@@ -51,6 +60,7 @@ const SearchResults = ({
             pokemon.map((poke) => (
               <ItemCard
                 addToCart={() => addToCart(poke)}
+                numberInCart={numberInCart(poke.id)}
                 key={poke.id + 1}
                 name={poke.name}
                 id={poke.id}
