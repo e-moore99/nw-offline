@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/redux/provider";

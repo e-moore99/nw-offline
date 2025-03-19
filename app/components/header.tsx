@@ -44,7 +44,7 @@ export default function Header({
     setClicked((prev) => !prev);
   };
 
-  const [isOnline, setOnline] = React.useState<boolean>(true);
+  // const [isOnline, setOnline] = React.useState<boolean>(true);
 
   // if (!navigator.onLine) {
   //   setTimeout(() => {

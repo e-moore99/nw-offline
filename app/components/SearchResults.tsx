@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Pokemon, fetchPokemon } from "../lib/fetch";
+import { Pokemon } from "../lib/types";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { updateCart } from "@/redux/features/cart-slice";
@@ -15,7 +15,6 @@ const SearchResults = ({
 }) => {
   const dispatch = useDispatch<AppDispatch>();
   const cartArray = useAppSelector((state) => state.cart);
-  const [cartQuantity, setCartQuantity] = React.useState<number>(0);
 
   const addToCart = (pokemon: Pokemon) => {
     console.log("added to cart: ", pokemon);

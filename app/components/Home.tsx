@@ -3,12 +3,10 @@ import styles from "./Home.module.css";
 import {
   CurrencyDollarIcon,
   CalendarDaysIcon,
-  ChevronDownIcon,
   UserIcon,
   UserPlusIcon,
   ClockIcon,
   TruckIcon,
-  BuildingStorefrontIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Carrot from "@/public/carrot.png";

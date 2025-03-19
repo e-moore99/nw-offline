@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./cartItemCard.module.css";
 import Image from "next/image";
-import { TrashIcon, PlusIcon, MinusIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, MinusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function CartItemCard(props: {
   name: string;

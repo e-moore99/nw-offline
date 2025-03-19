@@ -7,11 +7,10 @@ import CartItemCard from "../components/cartItemCard";
 import styles from "./page.module.css";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/redux/store";
-import { cart, updateCart } from "@/redux/features/cart-slice";
+import { updateCart } from "@/redux/features/cart-slice";
 import {
   ShoppingBagIcon,
   InformationCircleIcon,
-  H3Icon,
 } from "@heroicons/react/24/outline";
 
 interface CartItem {

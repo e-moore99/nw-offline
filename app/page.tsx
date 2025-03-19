@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { updateCart } from "@/redux/features/cart-slice";
 import Header from "./components/header";
-import ItemCard from "./components/itemCard";
 import styles from "./page.module.css";
 import HomePage from "./components/Home";
 import Footer from "./components/Footer";
@@ -43,26 +42,25 @@ export default function Home() {
     setLoading(false);
   };
 
-  const addToCart = (pokemon: Pokemon) => {
-    console.log("added to cart: ", pokemon);
-    const itemIndex = cartArray.findIndex((item) => item.id === pokemon.id);
+  //   console.log("added to cart: ", pokemon);
+  //   const itemIndex = cartArray.findIndex((item) => item.id === pokemon.id);
 
-    if (itemIndex !== -1) {
-      const updatedCart = cartArray.map((item, index) =>
-        index === itemIndex ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      dispatch(updateCart(updatedCart));
-    } else {
-      const newCartItem = {
-        name: pokemon.name,
-        id: pokemon.id,
-        sprites: pokemon.sprites,
-        quantity: 1,
-      };
-      const updatedCart = [...cartArray, newCartItem];
-      dispatch(updateCart(updatedCart));
-    }
-  };
+  //   if (itemIndex !== -1) {
+  //     const updatedCart = cartArray.map((item, index) =>
+  //       index === itemIndex ? { ...item, quantity: item.quantity + 1 } : item
+  //     );
+  //     dispatch(updateCart(updatedCart));
+  //   } else {
+  //     const newCartItem = {
+  //       name: pokemon.name,
+  //       id: pokemon.id,
+  //       sprites: pokemon.sprites,
+  //       quantity: 1,
+  //     };
+  //     const updatedCart = [...cartArray, newCartItem];
+  //     dispatch(updateCart(updatedCart));
+  //   }
+  // };
 
   useEffect(() => {
     console.log("Cart array: ", cartArray);
