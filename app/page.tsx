@@ -2,8 +2,7 @@
 import React, { useEffect } from "react";
 import { Pokemon } from "./lib/types";
 import { fetchPokemon } from "./lib/fetch";
-import { useDispatch } from "react-redux";
-import { AppDispatch, useAppSelector } from "@/redux/store";
+import { useAppSelector } from "@/redux/store";
 import Header from "./components/header";
 import styles from "./page.module.css";
 import HomePage from "./components/Home";

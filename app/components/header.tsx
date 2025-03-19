@@ -163,7 +163,7 @@ export default function Header({
             <h2>Offline mode activated</h2>
             <div className={styles.bodyContent}>
               <p>
-                Offline? Keep browsing, your trolley will sync when you're
+                Offline? Keep browsing, your trolley will sync when you&apos;re
                 online
               </p>
               <button
