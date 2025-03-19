@@ -1,8 +1,4 @@
-export interface Pokemon {
-  name: string;
-  id: number;
-  sprites: { front_default: string };
-}
+import { Pokemon } from "./types";
 
 export const fetchPokemon = async (options: {
   name?: string;

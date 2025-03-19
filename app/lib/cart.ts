@@ -1,10 +1,5 @@
 // Define the structure of a cart item
-export interface CartItem {
-  id: number;
-  name: string;
-  quantity: number;
-  price: number;
-}
+import { CartItem } from "./types";
 
 // Utility functions for managing the cart using localStorage
 export const CartUtils = {

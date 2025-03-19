@@ -1,3 +1,16 @@
+export interface CartItem {
+  id: number;
+  name: string;
+  quantity: number;
+  price: number;
+}
+
+export interface Pokemon {
+  name: string;
+  id: number;
+  sprites: { front_default: string };
+}
+
 // Don't worry about edge facets
 interface EdgeFacet {
     itemCode?: string;

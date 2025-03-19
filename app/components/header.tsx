@@ -128,7 +128,7 @@ export default function Header({
         </div>
         <div className={styles.headerBottom}>
           <button>
-            Groceries <ChevronDownIcon className="w-4" />{" "}
+            Groceries <ChevronDownIcon className="w-4" />
           </button>
           <button>Specials</button>
           <button>Everyday Low Price</button>
@@ -143,10 +143,12 @@ export default function Header({
           <button>My Lists</button>
           <button>Ways to save</button>
         </div>
+        
       </div>
       {/* This is the popup box on the navbar to give you info */}
       {/* This is the main "you've lost connectivity" popup */}
       {isOpen ? (
+        <>
         <div className={active ? styles.popActive : styles.popup}>
           <div className={styles.wifiSymbol}>
             <Image src={offline} alt="Offline" className="w-16" />
@@ -188,6 +190,12 @@ export default function Header({
             ) : null}
           </div>
         </div>
+        <div className={styles.productTree}>
+        <button>Featured </button>
+        <button>Fresh Foods & Bakery</button>
+        <button>Chilled, Frozen & Desserts</button>
+    </div>
+    </>
       ) : null}
     </>
   );

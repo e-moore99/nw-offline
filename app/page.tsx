@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
-import { Pokemon, fetchPokemon } from "./lib/fetch";
+import { Pokemon } from "./lib/types";
+import { fetchPokemon } from "./lib/fetch";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { updateCart } from "@/redux/features/cart-slice";
