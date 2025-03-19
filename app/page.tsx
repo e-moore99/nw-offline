@@ -4,7 +4,6 @@ import { Pokemon } from "./lib/types";
 import { fetchPokemon } from "./lib/fetch";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/redux/store";
-import { updateCart } from "@/redux/features/cart-slice";
 import Header from "./components/header";
 import styles from "./page.module.css";
 import HomePage from "./components/Home";
@@ -15,7 +14,6 @@ export default function Home() {
   const [pokemon, setPokemon] = React.useState<Pokemon[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [searchQuery, setSearchQuery] = React.useState<string>("");
-  const dispatch = useDispatch<AppDispatch>();
   const cartArray = useAppSelector((state) => state.cart);
 
   const handleSearch = async () => {

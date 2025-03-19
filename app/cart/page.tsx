@@ -72,7 +72,7 @@ export default function Cart() {
         <div className={styles.collectingFrom}>
           <ShoppingBagIcon className="w-14" />
           <p>
-            You're collecting from <b>New World Mt Roskill</b>
+            You&apos;re collecting from <b>New World Mt Roskill</b>
           </p>
           <button>Select timeslot</button>
         </div>

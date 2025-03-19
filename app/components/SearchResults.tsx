@@ -10,8 +10,8 @@ const SearchResults = ({
   pokemon,
   searchQuery,
 }: {
-  pokemon: any;
-  searchQuery: any;
+  pokemon: Pokemon[];
+  searchQuery: string;
 }) => {
   const dispatch = useDispatch<AppDispatch>();
   const cartArray = useAppSelector((state) => state.cart);
@@ -52,7 +52,7 @@ const SearchResults = ({
     <>
       <div className={styles.results}>
         <h1 className={styles.resultsHead}>
-          Search results for "{searchQuery}"
+          Search results for &quot;{searchQuery}&quot;
         </h1>
         <div className={styles.displayArea}>
           {pokemon && Array.isArray(pokemon) ? (

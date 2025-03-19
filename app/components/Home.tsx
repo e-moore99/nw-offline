@@ -76,7 +76,7 @@ const HomePage = () => {
           <Image src={Plate} alt="Food"></Image>
           <div className={styles.articleBottom}>
             <div>
-              <h2>It's Baby Week at New World</h2>
+              <h2>It&apos;s Baby Week at New World</h2>
               <p>Get the best of Baby & Toddler this week.</p>
             </div>
             <button>Shop now</button>
@@ -86,9 +86,9 @@ const HomePage = () => {
           <Image src={Plate} alt="Food"></Image>
           <div className={styles.articleBottom}>
             <div>
-              <h2>Our Chicken Pad Thai meal kit, that's now simply better</h2>
+              <h2>Our Chicken Pad Thai meal kit, that&apos;s now simply better</h2>
               <p>
-                We've made one of our favourite meal kits, the chicken pad thai,
+                We&apos;ve made one of our favourite meal kits, the chicken pad thai,
                 simply better. Better still, pick one up tonight and see for
                 yourself.
               </p>
@@ -105,7 +105,7 @@ const HomePage = () => {
             You shop, anytime
           </h2>
           <ul>
-            With New World online, your local store's range and specials are all
+            With New World online, your local store&apos;s range and specials are all
             at your fingertips.
           </ul>
           <br />

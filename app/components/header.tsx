@@ -102,7 +102,7 @@ export default function Header({
             </div>
             <div className={styles.headerTopRight}>
               <button onClick={toggleNavPop} className={styles.offlineBtn}>
-                You're offline
+                You&apos;re offline
               </button>
               {isClicked ? (
                 <div className={styles.smallPopup}>
