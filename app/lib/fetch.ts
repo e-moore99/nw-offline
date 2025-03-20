@@ -1,53 +1,57 @@
 import { Product, Pokemon } from "./types";
 
-import postgres from 'postgres';
+// import postgres from "postgres";
 
+// let fs;
+// if (typeof window === "undefined") {
+//   fs = require("fs");
+// }
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+// const sql = postgres(process.env.POSTGRES_URL!, { ssl: "require" });
 
-export async function fetchData() {
-  try {
-    const data = await sql<Product[]>`SELECT * FROM data`;
-    return data;
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch revenue data.');
-  }
-}
+// export async function fetchData() {
+//   try {
+//     const data = await sql<Product[]>`SELECT * FROM data`;
+//     return data;
+//   } catch (error) {
+//     console.error("Database Error:", error);
+//     throw new Error("Failed to fetch revenue data.");
+//   }
+// }
 
-export async function fetchByName(query: string) {
-  try {
-    const data = await sql<Product[]>`
-      SELECT * FROM data
-      WHERE name = ${`%${query}%`}`;
+// export async function fetchByQuery(query: string) {
+//   try {
+//     const data = await sql<Product[]>`
+//       SELECT * FROM data
+//       WHERE data.name OR data.brand = ${`%${query}%`}`;
 
-    const nameFetch = data.map((invoice) => ({
-      ...invoice,
-    }));
-    console.log("fetched by name", nameFetch);
-    return nameFetch;
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch the latest invoices.');
-  }
-}
+//     const nameFetch = data.map((invoice) => ({
+//       ...invoice,
+//     }));
+//     console.log("fetched by name", nameFetch);
+//     return nameFetch;
+//   } catch (error) {
+//     console.error("Database Error:", error);
+//     throw new Error("Failed to fetch the latest invoices.");
+//   }
+// }
 
-export async function fetchByBrand(query: string) {
-  try {
-    const data = await sql<Product[]>`
-      SELECT * FROM data
-      WHERE brand = ${`%${query}%`}`;
+// export async function fetchByBrand(query: string) {
+//   try {
+//     const data = await sql<Product[]>`
+//       SELECT * FROM data
+//       WHERE brand = ${`%${query}%`}`;
 
-    const brandFetch = data.map((invoice) => ({
-      ...invoice,
-    }));
-    console.log("fetched by name", brandFetch);
-    return brandFetch;
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch the latest invoices.');
-  }
-}
+//     const brandFetch = data.map((invoice) => ({
+//       ...invoice,
+//     }));
+//     console.log("fetched by name", brandFetch);
+//     return brandFetch;
+//   } catch (error) {
+//     console.error("Database Error:", error);
+//     throw new Error("Failed to fetch the latest invoices.");
+//   }
+// }
 
 const ITEMS_PER_PAGE = 6;
 // export async function fetchFilteredInvoices(
@@ -106,9 +110,6 @@ const ITEMS_PER_PAGE = 6;
 //   }
 // }
 
-
-
-
 export const fetchPokemon = async (options: {
   name?: string;
   id?: number;
@@ -118,14 +119,19 @@ export const fetchPokemon = async (options: {
     const { name, id, findAll } = options;
 
     // search cached data before online
-    const cachedData = await caches.match('all-pokemon');
+    const cachedData = await caches.match("all-pokemon");
     if (cachedData) {
       const allPokemonData = await cachedData.json();
 
       if (findAll) {
-        return allPokemonData.filter((pokemon: Pokemon) => pokemon.name.toLowerCase().includes(findAll.toLowerCase()))
-      } else if (name) {  
-        return allPokemonData.filter((pokemon: Pokemon) => pokemon.name.toLowerCase() === name.toLowerCase());
+        return allPokemonData.filter((pokemon: Pokemon) =>
+          pokemon.name.toLowerCase().includes(findAll.toLowerCase())
+        );
+      } else if (name) {
+        return allPokemonData.filter(
+          (pokemon: Pokemon) =>
+            pokemon.name.toLowerCase() === name.toLowerCase()
+        );
       } else if (id) {
         return allPokemonData.filter((pokemon: Pokemon) => pokemon.id === id);
       } else {

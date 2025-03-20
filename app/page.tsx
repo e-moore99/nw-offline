@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { Pokemon } from "./lib/types";
-import { fetchPokemon } from "./lib/fetch";
+import { fetchPokemon} from "./lib/fetch";
 import { useAppSelector } from "@/redux/store";
 import Header from "./components/header";
 import styles from "./page.module.css";
@@ -38,6 +38,10 @@ export default function Home() {
     console.log("Fetched Pokemon: ", pokemon);
     setLoading(false);
   };
+
+  // const searchProducts = async () => {
+  //   fetchByQuery(searchQuery);
+  // };
 
   //   console.log("added to cart: ", pokemon);
   //   const itemIndex = cartArray.findIndex((item) => item.id === pokemon.id);

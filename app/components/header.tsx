@@ -150,7 +150,7 @@ export default function Header({
       {isOpen ? (
         <>
         <div className={active ? styles.popActive : styles.popup}>
-          <div className={styles.wifiSymbol}>
+          <div className={active? styles.wifiSymbolActive : styles.wifiSymbol}>
             <Image src={offline} alt="Offline" className="w-16" />
           </div>
           <div className={styles.popupTopBtn}>
