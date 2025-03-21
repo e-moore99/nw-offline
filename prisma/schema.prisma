@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+    
+
+        // price: {
+        //   isSaleValueCardDependent: false,
+        //   value: 719,
+        //   retailValue: 719,
+        //   hasLimit: false,
+        // },
+        // images: {
+        //   lg: "https://a.fsimg.co.nz/qa/product/retail/fan/image/master/5023660.png",
+        //   md: "https://a.fsimg.co.nz/qa/product/retail/fan/image/400x400/5023660.png",
+        //   sm: "https://a.fsimg.co.nz/qa/product/retail/fan/image/200x200/5023660.png",
+        //   xs: "https://a.fsimg.co.nz/qa/product/retail/fan/image/100x100/5023660.png",
+        // },
+
+        // unitPrice: {
+        //   plainText: "$1.44/100g",
+        //   value: 144,
+        //   type: "g",
+        //   amount: 100,
+        // },
+
+model Product {
+    id                    String   @id @default(cuid())
+    availability          String[] // Array of availability options
+    href                  String
+    name                  String
+    subtitle              String
+    brand                 String
+    price                 Json
+    images                Json
+    isRestrictedByAge     Boolean
+    liquorFlag            Boolean
+    isTobacco             Boolean
+    originRegulated       Boolean
+    singlePromo           Json? // Assuming singlePromo can be a JSON object
+    promotionUnitPrice    Json? // Assuming promotionUnitPrice can be a JSON object 
+    weighable             Json     // Assuming weighable can be a JSON object
+    saleTypes             String[] // Array of sale types
+    unitOfMeasure         String
+    unitPrice             Json
+    categories            String[] // Array of categories
+    campaignBadgeUrl      String?
+}

@@ -1,0 +1,32 @@
+-- CreateTable
+CREATE TABLE "Product" (
+    "productId" TEXT NOT NULL,
+    "brand" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "subtitle" TEXT NOT NULL,
+    "href" TEXT NOT NULL,
+    "displayName" TEXT NOT NULL,
+    "availability" TEXT[],
+    "saleType" TEXT NOT NULL,
+    "image_lg" TEXT NOT NULL,
+    "image_md" TEXT NOT NULL,
+    "image_sm" TEXT NOT NULL,
+    "image_xs" TEXT NOT NULL,
+    "price_isSaleValueCardDependent" BOOLEAN NOT NULL,
+    "price_value" INTEGER NOT NULL,
+    "price_retailValue" INTEGER NOT NULL,
+    "price_hasLimit" BOOLEAN NOT NULL,
+    "restrictedFlag" BOOLEAN NOT NULL,
+    "tobaccoFlag" BOOLEAN NOT NULL,
+    "liquorFlag" BOOLEAN NOT NULL,
+    "originRegulated" BOOLEAN NOT NULL,
+    "originStatement" TEXT NOT NULL,
+    "unitOfMeasure" TEXT NOT NULL,
+    "unitPrice_plainText" TEXT NOT NULL,
+    "unitPrice_value" INTEGER NOT NULL,
+    "unitPrice_type" TEXT NOT NULL,
+    "unitPrice_amount" INTEGER NOT NULL,
+    "categories" TEXT NOT NULL,
+
+    CONSTRAINT "Product_pkey" PRIMARY KEY ("productId")
+);
