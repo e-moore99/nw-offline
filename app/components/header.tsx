@@ -11,16 +11,18 @@ import {
 } from "@heroicons/react/24/outline";
 import React from "react";
 import { useAppSelector } from "@/redux/store";
-import NWLogo from "@/public/nw-logo.svg";
-import offline from "@/public/nrk_offline.png";
+// import NWLogo from "./public/nw-logo.svg";
+// import offline from "@/public/nrk_offline.png";
 import Image from "next/image";
 
 export default function Header({
   setSearchQuery,
   handleSearch,
+  searchProducts,
 }: {
   setSearchQuery: (query: string) => void;
   handleSearch: () => void;
+  searchProducts: () => void;
 }) {
   const [cartItems, setCartItems] = React.useState<number>(0);
   const cartArray = useAppSelector((state) => state.cart);
@@ -92,12 +94,14 @@ export default function Header({
           </div>
           <div className={styles.headerTop}>
             <Link href="/" className="flex items-center">
-              <Image src={NWLogo} alt="New World logo" className="w-25 p" />
+              {/* <Image src={NWLogo} alt="New World logo" className="w-25 p" /> */}
+              <h1>New World</h1>
             </Link>
             <div className={styles.searchBar}>
               <Search
                 setSearchQuery={setSearchQuery}
                 handleSearch={handleSearch}
+                searchProducts={searchProducts}
               />
             </div>
             <div className={styles.headerTopRight}>
@@ -151,7 +155,8 @@ export default function Header({
         <>
         <div className={active ? styles.popActive : styles.popup}>
           <div className={styles.wifiSymbol}>
-            <Image src={offline} alt="Offline" className="w-16" />
+            {/* <Image src={offline} alt="Offline" className="w-16" /> */}
+            <h1>Offline</h1>
           </div>
           <div className={styles.popupTopBtn}>
             <button onClick={toggleOpenHandler}>

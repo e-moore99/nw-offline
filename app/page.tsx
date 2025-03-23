@@ -8,11 +8,13 @@ import styles from "./page.module.css";
 import HomePage from "./components/Home";
 import Footer from "./components/Footer";
 import SearchResults from "./components/SearchResults";
+import axios from "axios";
 
 export default function Home() {
   const [pokemon, setPokemon] = React.useState<Pokemon[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [searchQuery, setSearchQuery] = React.useState<string>("");
+  const [products, setProducts] = React.useState<any[]>([]);
   const cartArray = useAppSelector((state) => state.cart);
 
   const handleSearch = async () => {
@@ -38,26 +40,15 @@ export default function Home() {
     console.log("Fetched Pokemon: ", pokemon);
     setLoading(false);
   };
-
-  //   console.log("added to cart: ", pokemon);
-  //   const itemIndex = cartArray.findIndex((item) => item.id === pokemon.id);
-
-  //   if (itemIndex !== -1) {
-  //     const updatedCart = cartArray.map((item, index) =>
-  //       index === itemIndex ? { ...item, quantity: item.quantity + 1 } : item
-  //     );
-  //     dispatch(updateCart(updatedCart));
-  //   } else {
-  //     const newCartItem = {
-  //       name: pokemon.name,
-  //       id: pokemon.id,
-  //       sprites: pokemon.sprites,
-  //       quantity: 1,
-  //     };
-  //     const updatedCart = [...cartArray, newCartItem];
-  //     dispatch(updateCart(updatedCart));
-  //   }
-  // };
+  const searchProducts = async () => {
+    try {
+      const response = await axios.get(`/api/products?query=${searchQuery}`);
+      setProducts(response.data);
+      console.log("success searching!", response.data);
+    } catch (err) {
+      console.error("error with product search", err)
+    }
+  };
 
   useEffect(() => {
     console.log("Cart array: ", cartArray);
@@ -65,7 +56,7 @@ export default function Home() {
 
   return (
     <>
-      <Header setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
+      <Header setSearchQuery={setSearchQuery} handleSearch={handleSearch} searchProducts={searchProducts}/>
       <div className={styles.container}>
         {loading ? (
           <>
@@ -73,7 +64,7 @@ export default function Home() {
           </>
         ) : (
           <>
-            <SearchResults pokemon={pokemon} searchQuery={searchQuery} />
+            <SearchResults products={products} pokemon={pokemon} searchQuery={searchQuery} />
           </>
         )}
       </div>

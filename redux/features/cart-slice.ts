@@ -1,9 +1,10 @@
+import { Images } from "@/app/lib/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface CartItemState {
+export interface CartItemState {
   name: string;
-  id: number;
-  sprites: { front_default: string };
+  id: string;
+  images: Images;
   quantity: number;
 }
 

@@ -13,28 +13,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-    
-
-        // price: {
-        //   isSaleValueCardDependent: false,
-        //   value: 719,
-        //   retailValue: 719,
-        //   hasLimit: false,
-        // },
-        // images: {
-        //   lg: "https://a.fsimg.co.nz/qa/product/retail/fan/image/master/5023660.png",
-        //   md: "https://a.fsimg.co.nz/qa/product/retail/fan/image/400x400/5023660.png",
-        //   sm: "https://a.fsimg.co.nz/qa/product/retail/fan/image/200x200/5023660.png",
-        //   xs: "https://a.fsimg.co.nz/qa/product/retail/fan/image/100x100/5023660.png",
-        // },
-
-        // unitPrice: {
-        //   plainText: "$1.44/100g",
-        //   value: 144,
-        //   type: "g",
-        //   amount: 100,
-        // },
-
 model Product {
     id                    String   @id @default(cuid())
     availability          String[] // Array of availability options

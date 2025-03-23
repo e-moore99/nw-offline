@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { Pokemon } from "../lib/types";
+import { Pokemon, Product } from "../lib/types";
+import { CartItemState } from "@/redux/features/cart-slice";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { updateCart } from "@/redux/features/cart-slice";
@@ -8,17 +9,19 @@ import styles from "./searchResults.module.css";
 
 const SearchResults = ({
   pokemon,
+  products,
   searchQuery,
 }: {
   pokemon: Pokemon[];
+  products: Product[];
   searchQuery: string;
 }) => {
   const dispatch = useDispatch<AppDispatch>();
   const cartArray = useAppSelector((state) => state.cart);
 
-  const addToCart = (pokemon: Pokemon) => {
-    console.log("added to cart: ", pokemon);
-    const itemIndex = cartArray.findIndex((item) => item.id === pokemon.id);
+  const addToCart = (product: Product) => {
+    console.log("added to cart: ", product);
+    const itemIndex = cartArray.findIndex((item) => item.id === product.id);
 
     if (itemIndex !== -1) {
       const updatedCart = cartArray.map((item, index) =>
@@ -26,10 +29,14 @@ const SearchResults = ({
       );
       dispatch(updateCart(updatedCart));
     } else {
-      const newCartItem = {
-        name: pokemon.name,
-        id: pokemon.id,
-        sprites: pokemon.sprites,
+      if (!product.name || !product.id) {
+        console.error("Product name or id is undefined");
+        return;
+      }
+      const newCartItem: CartItemState = {
+        name: product.name,
+        id: product.id,
+        images: product.images,
         quantity: 1,
       };
       const updatedCart = [...cartArray, newCartItem];
@@ -37,7 +44,7 @@ const SearchResults = ({
     }
   };
 
-  const numberInCart = (id: number) => {
+  const numberInCart = (id: string) => {
     const itemIndex = cartArray.findIndex((item) => item.id === id);
     if (itemIndex !== -1) {
       return cartArray[itemIndex].quantity;
@@ -55,18 +62,18 @@ const SearchResults = ({
           Search results for &quot;{searchQuery}&quot;
         </h1>
         <div className={styles.displayArea}>
-          {pokemon && Array.isArray(pokemon) ? (
-            pokemon.map((poke) => (
+          {products && Array.isArray(products) ? (
+            products.map((product) => (
               <ItemCard
-                addToCart={() => addToCart(poke)}
-                numberInCart={numberInCart(poke.id)}
-                key={poke.id + 1}
-                name={poke.name}
-                id={poke.id}
-                image={
-                  poke.sprites?.front_default ||
-                  "https://media.istockphoto.com/id/1399588872/vector/corrupted-pixel-file-icon-damage-document-symbol-sign-broken-data-vector.jpg?s=612x612&w=0&k=20&c=ffG6gVLUPfxZkTwjeqdxD67LWd8R1pQTIyIVUi-Igx0="
-                }
+              addToCart={() => addToCart(product)}
+              numberInCart={product.id ? numberInCart(product.id) : 0}
+              key={product.id}
+              name={product.name}
+              id={product.id}
+              subtitle={product.subtitle}
+              price={product.price}
+              images={product.images}
+              unitPrice={product.unitPrice}
               />
             ))
           ) : (
