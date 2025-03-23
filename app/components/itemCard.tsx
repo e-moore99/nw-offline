@@ -13,6 +13,7 @@ export default function ItemCard(props: {
   addToCart: () => void;
   numberInCart: number;
 }) {
+  const value = Number(props.price.value)/100;
   return (
     <>
       <div className={props.numberInCart ? styles.itemCardNIC : styles.itemCard}>
@@ -21,7 +22,8 @@ export default function ItemCard(props: {
         <Image src={props.images.md} alt="Pokemon image" width={150} height={100} />
 
         <div className={styles.cartAdd}>
-          <h2>$({props.price.value}/100)</h2> <h2>{props.unitPrice.plainText}</h2>
+          <div>
+          <h2>${value}</h2> <h6>{props.unitPrice.plainText}</h6></div>
           <button onClick={props.addToCart}>Add</button>
         </div>
         {props.numberInCart > 0 ? <p>{props.numberInCart} in trolley</p> : null}

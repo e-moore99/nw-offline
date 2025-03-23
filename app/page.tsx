@@ -45,6 +45,7 @@ export default function Home() {
       const response = await axios.get(`/api/products?query=${searchQuery}`);
       setProducts(response.data);
       console.log("success searching!", response.data);
+      setLoading(false);
     } catch (err) {
       console.error("error with product search", err)
     }

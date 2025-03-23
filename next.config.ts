@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: true,
   images: {
-    domains: ['raw.githubusercontent.com', 'media.istockphoto.com']
+    domains: ['raw.githubusercontent.com', 'media.istockphoto.com','a.fsimg.co.nz'],
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {
