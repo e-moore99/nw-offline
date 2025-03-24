@@ -56,7 +56,10 @@ const HomePage = () => {
         <button>Pets</button>
       </div>
       <div className={styles.shopSpecials}>
-        <h1>Shop Specials</h1>
+        <div className={styles.shopSpecialsbody}>
+          <h1>Shop our specials! </h1> 
+          <button>View all</button>
+        </div>
       </div>
       <div className={styles.articles}>
         <div className={styles.article1}>
@@ -86,11 +89,13 @@ const HomePage = () => {
           <Image src={Plate} alt="Food"></Image>
           <div className={styles.articleBottom}>
             <div>
-              <h2>Our Chicken Pad Thai meal kit, that&apos;s now simply better</h2>
+              <h2>
+                Our Chicken Pad Thai meal kit, that&apos;s now simply better
+              </h2>
               <p>
-                We&apos;ve made one of our favourite meal kits, the chicken pad thai,
-                simply better. Better still, pick one up tonight and see for
-                yourself.
+                We&apos;ve made one of our favourite meal kits, the chicken pad
+                thai, simply better. Better still, pick one up tonight and see
+                for yourself.
               </p>
             </div>
             <button>Shop now</button>
@@ -105,8 +110,8 @@ const HomePage = () => {
             You shop, anytime
           </h2>
           <ul>
-            With New World online, your local store&apos;s range and specials are all
-            at your fingertips.
+            With New World online, your local store&apos;s range and specials
+            are all at your fingertips.
           </ul>
           <br />
           <h2>

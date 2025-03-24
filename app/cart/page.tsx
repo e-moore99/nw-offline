@@ -25,9 +25,6 @@ export default function Cart() {
     setCartItems(cartArray);
   }, [cartArray]);
 
-  const handleSearch = async () => {
-    console.log("Wrong page to search on!", searchQuery);
-  };
   const searchProducts = async () => {
     console.log("Wrong page to search on!", searchQuery);
   };
