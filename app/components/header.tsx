@@ -8,11 +8,12 @@ import {
   BuildingStorefrontIcon,
   ShoppingBagIcon,
   UserIcon,
+  XMarkIcon
 } from "@heroicons/react/24/outline";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppSelector } from "@/redux/store";
-// import NWLogo from "./public/nw-logo.svg";
-// import offline from "@/public/nrk_offline.png";
+import NWLogo from "../../public/nw-logo.svg";
+import offline from "../../public/nrk_offline.png";
 import Image from "next/image";
 
 export default function Header({
@@ -26,9 +27,14 @@ export default function Header({
 }) {
   const [cartItems, setCartItems] = React.useState<number>(0);
   const cartArray = useAppSelector((state) => state.cart);
+  // this is for the product tree
   const [isOpen, setOpen] = React.useState<boolean>(false);
+  // further info in offline popup
   const [active, setActive] = React.useState<boolean>(false);
+  // small offline popup
   const [isClicked, setClicked] = React.useState<boolean>(false);
+  // this is to close main offline popup
+  const [close, setClose] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     setCartItems(cartArray.length);
@@ -46,34 +52,25 @@ export default function Header({
     setClicked((prev) => !prev);
   };
 
-  // const [isOnline, setOnline] = React.useState<boolean>(true);
+  const toggleClosePopup = () => {
+    setClose((prev) => !prev);
+  }
 
-  // if (!navigator.onLine) {
-  //   setTimeout(() => {
-  //     setOnline(false);
-  //   }, 2000);
-  // } else {
-  //   setOnline(true);
-  // }
-
-  // const updateNetworkStatus = () => {
-  //   setOnline(navigator.onLine);
-  // };
-
-  // //   sometimes, the load event does not trigger on some browsers, that is why manually calling updateNetworkStatus on initial mount
-  // React.useEffect(() => {
-  //   updateNetworkStatus();
-  // }, []);
-
-  // React.useEffect(() => {
-  //   window.addEventListener("online", updateNetworkStatus);
-  //   window.addEventListener("offline", updateNetworkStatus);
-
-  //   return () => {
-  //     window.removeEventListener("online", updateNetworkStatus);
-  //     window.removeEventListener("offline", updateNetworkStatus);
-  //   };
-  // }, [navigator.onLine]);
+    const [isOnline, setOnline] = React.useState<boolean>(navigator.onLine); // Initialize with current online status
+  
+    useEffect(() => {
+      const handleOnline = () => setOnline(true);
+      const handleOffline = () => setOnline(false);
+  
+      window.addEventListener('online', handleOnline);
+      window.addEventListener('offline', handleOffline);
+  
+      // Cleanup function to remove event listeners
+      return () => {
+        window.removeEventListener('online', handleOnline);
+        window.removeEventListener('offline', handleOffline);
+      };
+    }, []); 
 
   return (
     <>
@@ -94,8 +91,7 @@ export default function Header({
           </div>
           <div className={styles.headerTop}>
             <Link href="/" className="flex items-center">
-              {/* <Image src={NWLogo} alt="New World logo" className="w-25 p" /> */}
-              <h1>New World</h1>
+              <Image src={NWLogo} alt="New World logo" className="w-25 p" />
             </Link>
             <div className={styles.searchBar}>
               <Search
@@ -105,9 +101,10 @@ export default function Header({
               />
             </div>
             <div className={styles.headerTopRight}>
+              {isOnline? null :
               <button onClick={toggleNavPop} className={styles.offlineBtn}>
-                You&apos;re offline
-              </button>
+                You&apos;re offline <WifiIcon className="w-6" />
+              </button>}
               {isClicked ? (
                 <div className={styles.smallPopup}>
                   <h3>Offline mode functionalities</h3>
@@ -117,10 +114,7 @@ export default function Header({
                   </p>
                   <p>Add products to the trolley</p>
                 </div>
-              ) : null}
-              <button onClick={toggleOpenHandler}>
-                <WifiIcon className="w-6" />
-              </button>
+              ) : null} 
               <Link href="/cart">
                 <div className={styles.cartIcon}>
                   <ShoppingCartIcon className="w-6" />
@@ -131,9 +125,14 @@ export default function Header({
           </div>
         </div>
         <div className={styles.headerBottom}>
-          <button>
+          <button onClick={toggleOpenHandler}>
             Groceries <ChevronDownIcon className="w-4" />
           </button>
+          {isOpen?    <div className={styles.productTree}>
+        <button>Featured </button>
+        <button>Fresh Foods & Bakery</button>
+        <button>Chilled, Frozen & Desserts</button>
+    </div> : null}
           <button>Specials</button>
           <button>Everyday Low Price</button>
           <button>Mailer</button>
@@ -151,17 +150,18 @@ export default function Header({
       </div>
       {/* This is the popup box on the navbar to give you info */}
       {/* This is the main "you've lost connectivity" popup */}
-      {isOpen ? (
+    {isOnline ? null : (
+        !close && (
         <>
         <div className={active ? styles.popActive : styles.popup}>
           <div className={styles.wifiSymbol}>
-            {/* <Image src={offline} alt="Offline" className="w-16" /> */}
-            <h1>Offline</h1>
+            <Image src={offline} alt="Offline" className="w-16" />
           </div>
           <div className={styles.popupTopBtn}>
-            <button onClick={toggleOpenHandler}>
-              <WifiIcon className="w-6" />
+            <button onClick={toggleClosePopup}>
+              <XMarkIcon className="w-6" />
             </button>
+           
           </div>
 
           <div className={styles.popupBody}>
@@ -195,13 +195,8 @@ export default function Header({
             ) : null}
           </div>
         </div>
-        <div className={styles.productTree}>
-        <button>Featured </button>
-        <button>Fresh Foods & Bakery</button>
-        <button>Chilled, Frozen & Desserts</button>
-    </div>
-    </>
-      ) : null}
+    </>)
+      )}
     </>
   );
 }

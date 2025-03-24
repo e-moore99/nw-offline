@@ -82,6 +82,10 @@
 .offlineBtn {
   font-weight: 700;
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1%;
+  width: 10vw;
 }
 
 .smallPopup {

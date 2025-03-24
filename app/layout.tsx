@@ -76,7 +76,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ffffff" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PokeStore</title>
+        <title>New World Offline</title>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
