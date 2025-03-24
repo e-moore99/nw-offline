@@ -8,7 +8,7 @@ import {
   BuildingStorefrontIcon,
   ShoppingBagIcon,
   UserIcon,
-  XMarkIcon
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import React, { useEffect } from "react";
 import { useAppSelector } from "@/redux/store";
@@ -18,11 +18,9 @@ import Image from "next/image";
 
 export default function Header({
   setSearchQuery,
-  handleSearch,
   searchProducts,
 }: {
   setSearchQuery: (query: string) => void;
-  handleSearch: () => void;
   searchProducts: () => void;
 }) {
   const [cartItems, setCartItems] = React.useState<number>(0);
@@ -54,23 +52,23 @@ export default function Header({
 
   const toggleClosePopup = () => {
     setClose((prev) => !prev);
-  }
+  };
 
-    const [isOnline, setOnline] = React.useState<boolean>(navigator.onLine); // Initialize with current online status
-  
-    useEffect(() => {
-      const handleOnline = () => setOnline(true);
-      const handleOffline = () => setOnline(false);
-  
-      window.addEventListener('online', handleOnline);
-      window.addEventListener('offline', handleOffline);
-  
-      // Cleanup function to remove event listeners
-      return () => {
-        window.removeEventListener('online', handleOnline);
-        window.removeEventListener('offline', handleOffline);
-      };
-    }, []); 
+  const [isOnline, setOnline] = React.useState<boolean>(navigator.onLine); // Initialize with current online status
+
+  useEffect(() => {
+    const handleOnline = () => setOnline(true);
+    const handleOffline = () => setOnline(false);
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    // Cleanup function to remove event listeners
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
 
   return (
     <>
@@ -78,7 +76,10 @@ export default function Header({
         <div className={styles.fixedHeader}>
           <div className={styles.pickupBnr}>
             <div className={styles.pickupBnrLeft}>
-              <h3><BuildingStorefrontIcon className="w-6" />New World Mt Roskill</h3>
+              <h3>
+                <BuildingStorefrontIcon className="w-6" />
+                New World Mt Roskill
+              </h3>
               <h3>
                 <ShoppingBagIcon className="w-6" />
                 Collect from New World Mt Roskill
@@ -86,7 +87,10 @@ export default function Header({
               <button className={styles.bookSlot}>Book a slot</button>
             </div>
             <div className={styles.pickupBnrRight}>
-              <h3><UserIcon className="w-6"/>Login or register</h3>
+              <h3>
+                <UserIcon className="w-6" />
+                Login or register
+              </h3>
             </div>
           </div>
           <div className={styles.headerTop}>
@@ -96,15 +100,15 @@ export default function Header({
             <div className={styles.searchBar}>
               <Search
                 setSearchQuery={setSearchQuery}
-                handleSearch={handleSearch}
                 searchProducts={searchProducts}
               />
             </div>
             <div className={styles.headerTopRight}>
-              {isOnline? null :
-              <button onClick={toggleNavPop} className={styles.offlineBtn}>
-                You&apos;re offline <WifiIcon className="w-6" />
-              </button>}
+              {isOnline ? null : (
+                <button onClick={toggleNavPop} className={styles.offlineBtn}>
+                  You&apos;re offline <WifiIcon className="w-6" />
+                </button>
+              )}
               {isClicked ? (
                 <div className={styles.smallPopup}>
                   <h3>Offline mode functionalities</h3>
@@ -114,7 +118,7 @@ export default function Header({
                   </p>
                   <p>Add products to the trolley</p>
                 </div>
-              ) : null} 
+              ) : null}
               <Link href="/cart">
                 <div className={styles.cartIcon}>
                   <ShoppingCartIcon className="w-6" />
@@ -128,11 +132,6 @@ export default function Header({
           <button onClick={toggleOpenHandler}>
             Groceries <ChevronDownIcon className="w-4" />
           </button>
-          {isOpen?    <div className={styles.productTree}>
-        <button>Featured </button>
-        <button>Fresh Foods & Bakery</button>
-        <button>Chilled, Frozen & Desserts</button>
-    </div> : null}
           <button>Specials</button>
           <button>Everyday Low Price</button>
           <button>Mailer</button>
@@ -146,57 +145,67 @@ export default function Header({
           <button>My Lists</button>
           <button>Ways to save</button>
         </div>
-        
       </div>
-      {/* This is the popup box on the navbar to give you info */}
-      {/* This is the main "you've lost connectivity" popup */}
-    {isOnline ? null : (
-        !close && (
-        <>
-        <div className={active ? styles.popActive : styles.popup}>
-          <div className={styles.wifiSymbol}>
-            <Image src={offline} alt="Offline" className="w-16" />
-          </div>
-          <div className={styles.popupTopBtn}>
-            <button onClick={toggleClosePopup}>
-              <XMarkIcon className="w-6" />
-            </button>
-           
-          </div>
-
-          <div className={styles.popupBody}>
-            <h2>Offline mode activated</h2>
-            <div className={styles.bodyContent}>
-              <p>
-                Offline? Keep browsing, your trolley will sync when you&apos;re
-                online
-              </p>
-              <button
-                onClick={handleActive}
-                className={active ? styles.infoBtnActive : styles.infoBtn}
-              >
-                {active ? "^" : "i"}
-              </button>
-            </div>
-
-            {active ? (
-              <>
-                <h4 className={styles.offlineTitle}>
-                  Offline mode functionalities
-                </h4>
-                <div className={styles.offlineFunc}>
-                  <p>Browse product catalogues</p>
-                  <p>
-                    View product details such as description, images, and price
-                  </p>
-                  <p>Add products to the trolley</p>
-                </div>
-              </>
-            ) : null}
+      {/* this is the product tree filter thing */}
+      {isOpen ? (
+        <div className={styles.productTree}>
+          <div className={styles.productTreeCat1}>
+          <button>Featured </button>
+          <button>Fresh Foods & Bakery</button>
+          <button>Chilled, Frozen & Desserts</button>
           </div>
         </div>
-    </>)
-      )}
+      ) : null}
+      {/* This is the popup box on the navbar to give you info */}
+      {/* This is the main "you've lost connectivity" popup */}
+      {isOnline
+        ? null
+        : !close && (
+            <>
+              <div className={active ? styles.popActive : styles.popup}>
+                <div className={styles.wifiSymbol}>
+                  <Image src={offline} alt="Offline" className="w-16" />
+                </div>
+                <div className={styles.popupTopBtn}>
+                  <button onClick={toggleClosePopup}>
+                    <XMarkIcon className="w-6" />
+                  </button>
+                </div>
+
+                <div className={styles.popupBody}>
+                  <h2>Offline mode activated</h2>
+                  <div className={styles.bodyContent}>
+                    <p>
+                      Offline? Keep browsing, your trolley will sync when
+                      you&apos;re online
+                    </p>
+                    <button
+                      onClick={handleActive}
+                      className={active ? styles.infoBtnActive : styles.infoBtn}
+                    >
+                      {active ? "^" : "i"}
+                    </button>
+                  </div>
+
+                  {active ? (
+                    <>
+                      <h4 className={styles.offlineTitle}>
+                        Offline mode functionalities
+                      </h4>
+                      <div className={styles.offlineFunc}>
+                        <p>Browse product catalogues</p>
+                        <p>
+                          View product details such as description, images, and
+                          price
+                        </p>
+                        <p>Add products to the trolley</p>
+                      </div>
+                    </>
+                  ) : null}
+                </div>
+              </div>
+            </>
+          )}
     </>
   );
 }

@@ -14,12 +14,6 @@ import {
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 
-// interface CartItem {
-//   name: string;
-//   id: string;
-//   sprites: { front_default: string };
-//   quantity: number;
-// }
 
 export default function Cart() {
   const [cartItems, setCartItems] = React.useState<CartItemState[]>([]);
@@ -75,7 +69,6 @@ export default function Cart() {
     <>
       <Header
         setSearchQuery={setSearchQuery}
-        handleSearch={handleSearch}
         searchProducts={searchProducts}
       />
       <div className={styles.cart}>

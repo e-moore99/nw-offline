@@ -6,11 +6,9 @@ import { useDebouncedCallback } from "use-debounce";
 
 export default function Search({
   setSearchQuery,
-  handleSearch,
   searchProducts,
 }: {
   setSearchQuery: (query: string) => void;
-  handleSearch: () => void;
   searchProducts: () => void;
 }) {
   // this is for updating the url with the search query
@@ -29,13 +27,11 @@ export default function Search({
     // }
     // replace(`${pathname}?${params.toString()}`);
     setSearchQuery(term);
-    handleSearch();
     searchProducts(); 
   }, 300);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleSearch();
       searchProducts();
     }
   };
@@ -53,16 +49,6 @@ export default function Search({
         />
         <button onClick={searchProducts} className={styles.button}>
           <MagnifyingGlassIcon className="w-6" />
-        </button>
-        <button
-          onClick={() => {
-            setSearchQuery("pokemon?limit=100000&offset=0");
-            handleSearch();
-            searchProducts();
-          }}
-          className={styles.button}
-        >
-          Find all!
         </button>
       </div>
     </>

@@ -1,4 +1,4 @@
-import { Pokemon } from "./types";
+import { Pokemon, Product } from "./types";
 
 export const fetchPokemon = async (options: {
   name?: string;

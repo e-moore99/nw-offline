@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Pokemon, Product } from "../lib/types";
+import { Product } from "../lib/types";
 import { CartItemState } from "@/redux/features/cart-slice";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/redux/store";
@@ -8,11 +8,9 @@ import ItemCard from "../components/itemCard";
 import styles from "./searchResults.module.css";
 
 const SearchResults = ({
-  pokemon,
   products,
   searchQuery,
 }: {
-  pokemon: Pokemon[];
   products: Product[];
   searchQuery: string;
 }) => {
