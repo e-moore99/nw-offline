@@ -1,6 +1,6 @@
 .itemCard {
   width: 17vw;
-  height: 50vh;
+  height: 70vh;
   background-color: white;
   padding: 1% 1% 4% 1%;
   overflow: hidden;
@@ -13,7 +13,7 @@
 
 .itemCardNIC {
   width: 17vw;
-  height: 50vh;
+  height: 70vh;
   background-color: white;
   padding: 1% 1% 1% 1%;
   overflow: hidden;
@@ -21,15 +21,45 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 20px
+}
+
+.numInCart {
+  margin-top: -45px;
+}
+
+.cartAdd {
+  display: flex;
+  gap: 3vw;
+  width: 100%;
+  padding-right: 2%;
+  /* padding-bottom: 5%; */
 }
 
 .cartAdd h2 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
   width: 40%;
 }
+.cartAdd button {
+  border: 2px solid rgb(77, 0, 77);
+  border-radius: 3px;
+  color: white;
+  background-color: rgb(77, 0, 77);
+  cursor: pointer;
+  width: 50%;
+  font-weight: 700;
+}
 
+.priceBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.priceBox p {
+  font-size: 12px;
+  color: gray;
+}
 
 @media screen and (min-width: 450px) and (max-width: 700px) {
   .itemCard {
@@ -41,22 +71,4 @@
   .itemCard {
     width: 80vw;
   }
-}
-
-.cartAdd {
-  display: flex;
-  justify-content: space-between;
-  gap: 3vw;
-  width: 100%;
-  /* padding-bottom: 5%; */
-}
-
-.cartAdd button {
-  border: 2px solid rgb(77, 0, 77);
-  border-radius: 3px;
-  padding: 1% 20%;
-  color: white;
-  background-color: rgb(77, 0, 77);
-  cursor: pointer;
-  width: 60%;
 }

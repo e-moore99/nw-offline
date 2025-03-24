@@ -55,7 +55,7 @@ export default function Cart() {
 
   const calculateTotalPrice = () => {
     return cartItems.reduce(
-      (total, item) => total + Number(item.id) * item.quantity,
+      (total, item) => total + ((Number(item.price.value) * item.quantity) / 100),
       0
     );
   };

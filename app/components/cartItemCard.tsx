@@ -23,13 +23,15 @@ export default function CartItemCard(props: {
       <div className={styles.cartItemCard}>
         <div className={styles.cartItemLeft}>
           <Image
-            src={props.images.sm}
+            src={props.images.xs}
             alt="Product image"
-            height={100}
-            width={150}
+            height={50}
+            width={100}
           />
-
+          <div>
           <h1>{props.name}</h1>
+          <p>{props.subtitle}</p>
+          </div>
         </div>
         <div className={styles.cartItemRight}>
           <div className={styles.btnBox}>
