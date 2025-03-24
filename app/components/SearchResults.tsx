@@ -1,24 +1,31 @@
 import React, { useEffect } from "react";
-import { Pokemon } from "../lib/types";
+import { Pokemon, Product } from "../lib/types";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { updateCart } from "@/redux/features/cart-slice";
 import ItemCard from "../components/itemCard";
 import styles from "./searchResults.module.css";
+import { fetchProductsByQuery } from "../lib/fetch";
 
-const SearchResults = ({
-  pokemon,
-  searchQuery,
+import { FC } from "react";
+
+const SearchResults: FC<{ query: string; products: Product[] }> = async ({
+  // pokemon,
+  query,
 }: {
-  pokemon: Pokemon[];
-  searchQuery: string;
+  // pokemon: Pokemon[];
+  query: string;
 }) => {
   const dispatch = useDispatch<AppDispatch>();
   const cartArray = useAppSelector((state) => state.cart);
-
-  const addToCart = (pokemon: Pokemon) => {
-    console.log("added to cart: ", pokemon);
-    const itemIndex = cartArray.findIndex((item) => item.id === pokemon.id);
+  const products = await fetchProductsByQuery(query);
+  
+  // pokemon: Pokemon,
+  const addToCart = ( products: Product) => {
+    // pokemon
+    // item.id === pokemon.id ||
+    console.log("added to cart: ", products);
+    const itemIndex = cartArray.findIndex((item) =>  item.id === products.productId);
 
     if (itemIndex !== -1) {
       const updatedCart = cartArray.map((item, index) =>
@@ -27,9 +34,12 @@ const SearchResults = ({
       dispatch(updateCart(updatedCart));
     } else {
       const newCartItem = {
-        name: pokemon.name,
-        id: pokemon.id,
-        sprites: pokemon.sprites,
+        name: products.name,
+        id: products.productId,
+        sprites: { front_default: products.image_md || "https://media.istockphoto.com/id/1399588872/vector/corrupted-pixel-file-icon-damage-document-symbol-sign-broken-data-vector.jpg?s=612x612&w=0&k=20&c=ffG6gVLUPfxZkTwjeqdxD67LWd8R1pQTIyIVUi-Igx0=" },
+        // name: pokemon.name || products.name,
+        // id: pokemon.id || products.productId,
+        // sprites: pokemon.sprites || products.,
         quantity: 1,
       };
       const updatedCart = [...cartArray, newCartItem];
@@ -37,7 +47,7 @@ const SearchResults = ({
     }
   };
 
-  const numberInCart = (id: number) => {
+  const numberInCart = (id: string) => {
     const itemIndex = cartArray.findIndex((item) => item.id === id);
     if (itemIndex !== -1) {
       return cartArray[itemIndex].quantity;
@@ -52,19 +62,19 @@ const SearchResults = ({
     <>
       <div className={styles.results}>
         <h1 className={styles.resultsHead}>
-          Search results for &quot;{searchQuery}&quot;
+          Search results for &quot;{query}&quot;
         </h1>
         <div className={styles.displayArea}>
-          {pokemon && Array.isArray(pokemon) ? (
-            pokemon.map((poke) => (
+          {products && Array.isArray(products) ? (
+            products.map((item) => (
               <ItemCard
-                addToCart={() => addToCart(poke)}
-                numberInCart={numberInCart(poke.id)}
-                key={poke.id + 1}
-                name={poke.name}
-                id={poke.id}
+                addToCart={() => addToCart(item)}
+                numberInCart={numberInCart(item.productId)}
+                key={item.productId + 1}
+                name={item.name}
+                id={item.productId}
                 image={
-                  poke.sprites?.front_default ||
+                  item.image_md ||
                   "https://media.istockphoto.com/id/1399588872/vector/corrupted-pixel-file-icon-damage-document-symbol-sign-broken-data-vector.jpg?s=612x612&w=0&k=20&c=ffG6gVLUPfxZkTwjeqdxD67LWd8R1pQTIyIVUi-Igx0="
                 }
               />

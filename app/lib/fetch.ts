@@ -1,57 +1,28 @@
+import postgres from "postgres";
 import { Product, Pokemon } from "./types";
 
-// import postgres from "postgres";
+const sql = postgres(process.env.POSTGRES_URL!, { ssl: "require" });
 
-// let fs;
-// if (typeof window === "undefined") {
-//   fs = require("fs");
-// }
+export const fetchProductsByQuery = async (query: string) => {
+  try {
 
-// const sql = postgres(process.env.POSTGRES_URL!, { ssl: "require" });
+    const response = await fetch (`https://pokeapi.co/api/v2/${searchQuery}`)
+    // const response = await sql<Product[]>`
+    //   SELECT * FROM data
+    //  WHERE data.name ILIKE ${`%${query}%`} OR data.brand ILIKE ${`%${query}%`}`;
 
-// export async function fetchData() {
-//   try {
-//     const data = await sql<Product[]>`SELECT * FROM data`;
-//     return data;
-//   } catch (error) {
-//     console.error("Database Error:", error);
-//     throw new Error("Failed to fetch revenue data.");
-//   }
-// }
+    console.log("fetched by name", response);
+    if (response) {
+      return response;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch the latest invoices.");
+  }
+};
 
-// export async function fetchByQuery(query: string) {
-//   try {
-//     const data = await sql<Product[]>`
-//       SELECT * FROM data
-//       WHERE data.name OR data.brand = ${`%${query}%`}`;
-
-//     const nameFetch = data.map((invoice) => ({
-//       ...invoice,
-//     }));
-//     console.log("fetched by name", nameFetch);
-//     return nameFetch;
-//   } catch (error) {
-//     console.error("Database Error:", error);
-//     throw new Error("Failed to fetch the latest invoices.");
-//   }
-// }
-
-// export async function fetchByBrand(query: string) {
-//   try {
-//     const data = await sql<Product[]>`
-//       SELECT * FROM data
-//       WHERE brand = ${`%${query}%`}`;
-
-//     const brandFetch = data.map((invoice) => ({
-//       ...invoice,
-//     }));
-//     console.log("fetched by name", brandFetch);
-//     return brandFetch;
-//   } catch (error) {
-//     console.error("Database Error:", error);
-//     throw new Error("Failed to fetch the latest invoices.");
-//   }
-// }
 
 const ITEMS_PER_PAGE = 6;
 // export async function fetchFilteredInvoices(

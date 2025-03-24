@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function ItemCard(props: {
   name: string;
-  id: number;
+  id: string;
   image: string;
   addToCart: () => void;
   numberInCart: number;

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface CartItemState {
   name: string;
-  id: number;
+  id: string;
   sprites: { front_default: string };
   quantity: number;
 }
