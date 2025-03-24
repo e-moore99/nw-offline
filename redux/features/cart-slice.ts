@@ -1,9 +1,12 @@
-import { Images } from "@/app/lib/types";
+import { Images, Price, UnitPrice } from "@/app/lib/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface CartItemState {
   name: string;
   id: string;
+  subtitle: string;
+  price: Price;
+  unitPrice: UnitPrice;
   images: Images;
   quantity: number;
 }

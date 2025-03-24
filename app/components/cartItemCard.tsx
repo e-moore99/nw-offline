@@ -2,23 +2,29 @@ import React from "react";
 import styles from "./cartItemCard.module.css";
 import Image from "next/image";
 import { PlusIcon, MinusIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { UnitPrice, Price, Images } from "../lib/types";
 
 export default function CartItemCard(props: {
-  name: string;
-  id: number;
-  image: string;
+  name: string | undefined;
+  id: string | undefined;
+  subtitle: string;
+  price: Price;
+  images: Images;
+  unitPrice: UnitPrice;
   quantity: number;
   increaseItems: () => void;
   decreaseItems: () => void;
   removeItem: () => void;
 }) {
+
+  const value = Number(props.price.value) / 100;
   return (
     <>
       <div className={styles.cartItemCard}>
         <div className={styles.cartItemLeft}>
           <Image
-            src={props.image}
-            alt="Pokemon image"
+            src={props.images.sm}
+            alt="Product image"
             height={100}
             width={150}
           />
@@ -42,7 +48,7 @@ export default function CartItemCard(props: {
               <PlusIcon className="w-6" />
             </button>
           </div>
-          <h4>${props.id}</h4>
+          <h4>${value}</h4>
 
           <button onClick={props.removeItem} className={styles.removeBtn}>
             <XMarkIcon className="w-6" />

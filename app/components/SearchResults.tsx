@@ -38,6 +38,9 @@ const SearchResults = ({
         id: product.id,
         images: product.images,
         quantity: 1,
+        subtitle: product.subtitle,
+        price: product.price,
+        unitPrice: product.unitPrice
       };
       const updatedCart = [...cartArray, newCartItem];
       dispatch(updateCart(updatedCart));

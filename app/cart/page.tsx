@@ -4,6 +4,7 @@ import Header from ".././components/header";
 import Footer from "../components/Footer";
 import React from "react";
 import CartItemCard from "../components/cartItemCard";
+import { CartItemState } from "@/redux/features/cart-slice";
 import styles from "./page.module.css";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/redux/store";
@@ -13,15 +14,15 @@ import {
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 
-interface CartItem {
-  name: string;
-  id: number;
-  sprites: { front_default: string };
-  quantity: number;
-}
+// interface CartItem {
+//   name: string;
+//   id: string;
+//   sprites: { front_default: string };
+//   quantity: number;
+// }
 
 export default function Cart() {
-  const [cartItems, setCartItems] = React.useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = React.useState<CartItemState[]>([]);
   const [searchQuery, setSearchQuery] = React.useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
   const cartArray = useAppSelector((state) => state.cart);
@@ -31,6 +32,9 @@ export default function Cart() {
   }, [cartArray]);
 
   const handleSearch = async () => {
+    console.log("Wrong page to search on!", searchQuery);
+  };
+  const searchProducts = async () => {
     console.log("Wrong page to search on!", searchQuery);
   };
 
@@ -54,19 +58,26 @@ export default function Cart() {
     dispatch(updateCart(tempCartItems));
   };
   const emptyCart = () => {
-    const cartItems: CartItem[] = [];
+    const cartItems: CartItemState[] = [];
     dispatch(updateCart(cartItems));
   };
 
   const calculateTotalPrice = () => {
-    return cartItems.reduce((total, item) => total + item.id * item.quantity, 0);
+    return cartItems.reduce(
+      (total, item) => total + Number(item.id) * item.quantity,
+      0
+    );
   };
- 
+
   const total = calculateTotalPrice();
 
   return (
     <>
-      <Header setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
+      <Header
+        setSearchQuery={setSearchQuery}
+        handleSearch={handleSearch}
+        searchProducts={searchProducts}
+      />
       <div className={styles.cart}>
         <h1 className={styles.pageTitle}>Your Trolley</h1>
         <div className={styles.collectingFrom}>
@@ -85,10 +96,13 @@ export default function Cart() {
             <div className={styles.cartItems}>
               {cartItems.map((item, index) => (
                 <CartItemCard
+                  subtitle={item.subtitle}
+                  price={item.price}
+                  unitPrice={item.unitPrice}
                   key={index}
                   name={item.name}
                   id={item.id}
-                  image={item.sprites.front_default}
+                  images={item.images}
                   quantity={item.quantity}
                   increaseItems={() => increaseItems(index)}
                   decreaseItems={() => decreaseItems(index)}
@@ -108,29 +122,31 @@ export default function Cart() {
                 </div>
                 <div className={styles.orderPriceBreakdown}>
                   <div className={styles.priceBreakdownLeft}>
-                  <h3>Groceries</h3>
-                  <p>
-                    Service fee <InformationCircleIcon className="w-6" />
-                  </p>
-                  <p>
-                    Bag fee <InformationCircleIcon className="w-6" />
-                  </p>
+                    <h3>Groceries</h3>
+                    <p>
+                      Service fee <InformationCircleIcon className="w-6" />
+                    </p>
+                    <p>
+                      Bag fee <InformationCircleIcon className="w-6" />
+                    </p>
                   </div>
-                <div className={styles.priceBreakdownRight}>
-                  <h3>${cartItems ? total.toFixed(2) : 0.00}</h3>
-                  <p>$0.00</p>
-                  <p>$1.00</p>
-                </div>
+                  <div className={styles.priceBreakdownRight}>
+                    <h3>${cartItems ? total.toFixed(2) : 0.0}</h3>
+                    <p>$0.00</p>
+                    <p>$1.00</p>
+                  </div>
                 </div>
               </div>
               <div className={styles.orderSummaryBottom}>
                 <div className={styles.estimatedTotal}>
                   <h2>Estimated total</h2>
-                  <h2>${cartItems ? ((total+1).toFixed(2)) : 0.00}</h2>
+                  <h2>${cartItems ? (total + 1).toFixed(2) : 0.0}</h2>
                 </div>
                 <p>Incl. GST</p>
                 <button className={styles.checkoutBtn}>Checkout</button>
-                <button className={styles.listBtn}>Save trolley to a list</button>
+                <button className={styles.listBtn}>
+                  Save trolley to a list
+                </button>
               </div>
             </div>
             <button className={styles.emptyTrolley} onClick={emptyCart}>
