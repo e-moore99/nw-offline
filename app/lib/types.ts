@@ -1,5 +1,5 @@
 export interface CartItem {
-  id: number;
+  id: string;
   name: string;
   quantity: number;
   price: number;
@@ -10,7 +10,6 @@ export interface Pokemon {
   id: number;
   sprites: { front_default: string };
 }
-
 
 // This is just for displaying a little marketing badge on the product card / PDP
 interface CampaignBadgeContent {
@@ -78,6 +77,7 @@ interface PromotionProduct {
   comparativePrice?: UnitPrice;
 }
 
+
 export interface Images {
   lg: string;
   md: string;
@@ -108,7 +108,6 @@ export type Product = {
   originRegulated?: boolean;
   // description containing where the product is from
   originStatement?: string;
-
   // taxonomy of which categories the product belongs to (Level 0 - 2)
   categoryTrees?: CategoryTree[];
   // Does the product come under a marketing initiative (e.g Everyday Low Price)
@@ -130,3 +129,4 @@ export type Product = {
   unitPrice: UnitPrice;
   categories: string[]; // Array of categories
 };
+

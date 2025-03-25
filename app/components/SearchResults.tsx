@@ -6,6 +6,7 @@ import { AppDispatch, useAppSelector } from "@/redux/store";
 import { updateCart } from "@/redux/features/cart-slice";
 import ItemCard from "../components/itemCard";
 import styles from "./searchResults.module.css";
+import { fetchProductsByQuery } from "../lib/fetch";
 
 const SearchResults = ({
   products,
@@ -20,6 +21,7 @@ const SearchResults = ({
   const addToCart = (product: Product) => {
     console.log("added to cart: ", product);
     const itemIndex = cartArray.findIndex((item) => item.id === product.id);
+
 
     if (itemIndex !== -1) {
       const updatedCart = cartArray.map((item, index) =>
@@ -60,7 +62,7 @@ const SearchResults = ({
     <>
       <div className={styles.results}>
         <h1 className={styles.resultsHead}>
-          Search results for &quot;{searchQuery}&quot;
+          Search results for &quot;{query}&quot;
         </h1>
         <div className={styles.displayArea}>
           {products && Array.isArray(products) ? (

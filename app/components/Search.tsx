@@ -2,7 +2,7 @@
 import styles from "./search.module.css";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useDebouncedCallback } from "use-debounce";
-// import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 export default function Search({
   setSearchQuery,
@@ -12,9 +12,10 @@ export default function Search({
   searchProducts: () => void;
 }) {
   // this is for updating the url with the search query
-  // const searchParams = useSearchParams();
-  // const pathname = usePathname();
-  // const { replace } = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
 
 
   const debouncedSearch = useDebouncedCallback((term: string) => {
@@ -33,6 +34,7 @@ export default function Search({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       searchProducts();
+
     }
   };
 
@@ -45,11 +47,12 @@ export default function Search({
           className={styles.inputBox}
           onChange={(e) => debouncedSearch(e.target.value)}
           onKeyDown={handleKeyDown}
-          // defaultValue={searchParams.get('query')?.toString()} // this is for updating the url with the search query
+          defaultValue={searchParams.get('query')?.toString()} // this is for updating the url with the search query
         />
         <button onClick={searchProducts} className={styles.button}>
           <MagnifyingGlassIcon className="w-6" />
         </button>
+
       </div>
     </>
   );

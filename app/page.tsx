@@ -11,11 +11,12 @@ import { Product } from "./lib/types";
 
 export default function Home() {
   const [loading, setLoading] = React.useState<boolean>(true);
+  const [products, setProducts] = React.useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = React.useState<string>("");
   const [products, setProducts] = React.useState<Product[]>([]);
   const cartArray = useAppSelector((state) => state.cart);
 
-  useEffect(() => {
+useEffect(() => {
     const fetchAndCacheAllProducts = async () => {
       try {
         const cache = await caches.open("nw-product-cache-v1");
@@ -85,9 +86,12 @@ export default function Home() {
     console.log("Cart array: ", cartArray);
   }, [cartArray]);
 
+ 
+    
   return (
     <>
       <Header setSearchQuery={setSearchQuery} searchProducts={searchProducts} />
+
       <div className={styles.container}>
         {loading ? (
           <>

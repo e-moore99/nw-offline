@@ -1,4 +1,85 @@
-import { Pokemon } from "./types";
+import postgres from "postgres";
+import { Product, Pokemon } from "./types";
+
+const sql = postgres(process.env.POSTGRES_URL!, { ssl: "require" });
+
+export const fetchProductsByQuery = async (query: string) => {
+  try {
+
+    const response = await fetch (`https://pokeapi.co/api/v2/${searchQuery}`)
+    // const response = await sql<Product[]>`
+    //   SELECT * FROM data
+    //  WHERE data.name ILIKE ${`%${query}%`} OR data.brand ILIKE ${`%${query}%`}`;
+
+    console.log("fetched by name", response);
+    if (response) {
+      return response;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch the latest invoices.");
+  }
+};
+
+
+const ITEMS_PER_PAGE = 6;
+// export async function fetchFilteredInvoices(
+//   query: string,
+//   currentPage: number,
+// ) {
+//   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+//   try {
+//     const invoices = await sql<InvoicesTable[]>`
+//       SELECT
+//         invoices.id,
+//         invoices.amount,
+//         invoices.date,
+//         invoices.status,
+//         customers.name,
+//         customers.email,
+//         customers.image_url
+//       FROM invoices
+//       JOIN customers ON invoices.customer_id = customers.id
+//       WHERE
+//         customers.name ILIKE ${`%${query}%`} OR
+//         customers.email ILIKE ${`%${query}%`} OR
+//         invoices.amount::text ILIKE ${`%${query}%`} OR
+//         invoices.date::text ILIKE ${`%${query}%`} OR
+//         invoices.status ILIKE ${`%${query}%`}
+//       ORDER BY invoices.date DESC
+//       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+//     `;
+
+//     return invoices;
+//   } catch (error) {
+//     console.error('Database Error:', error);
+//     throw new Error('Failed to fetch invoices.');
+//   }
+// }
+
+// export async function fetchInvoicesPages(query: string) {
+//   try {
+//     const data = await sql`SELECT COUNT(*)
+//     FROM invoices
+//     JOIN customers ON invoices.customer_id = customers.id
+//     WHERE
+//       customers.name ILIKE ${`%${query}%`} OR
+//       customers.email ILIKE ${`%${query}%`} OR
+//       invoices.amount::text ILIKE ${`%${query}%`} OR
+//       invoices.date::text ILIKE ${`%${query}%`} OR
+//       invoices.status ILIKE ${`%${query}%`}
+//   `;
+
+//     const totalPages = Math.ceil(Number(data[0].count) / ITEMS_PER_PAGE);
+//     return totalPages;
+//   } catch (error) {
+//     console.error('Database Error:', error);
+//     throw new Error('Failed to fetch total number of invoices.');
+//   }
+// }
 
 export const fetchPokemon = async (options: {
   name?: string;
@@ -9,14 +90,19 @@ export const fetchPokemon = async (options: {
     const { name, id, findAll } = options;
 
     // search cached data before online
-    const cachedData = await caches.match('all-pokemon');
+    const cachedData = await caches.match("all-pokemon");
     if (cachedData) {
       const allPokemonData = await cachedData.json();
 
       if (findAll) {
-        return allPokemonData.filter((pokemon: Pokemon) => pokemon.name.toLowerCase().includes(findAll.toLowerCase()))
-      } else if (name) {  
-        return allPokemonData.filter((pokemon: Pokemon) => pokemon.name.toLowerCase() === name.toLowerCase());
+        return allPokemonData.filter((pokemon: Pokemon) =>
+          pokemon.name.toLowerCase().includes(findAll.toLowerCase())
+        );
+      } else if (name) {
+        return allPokemonData.filter(
+          (pokemon: Pokemon) =>
+            pokemon.name.toLowerCase() === name.toLowerCase()
+        );
       } else if (id) {
         return allPokemonData.filter((pokemon: Pokemon) => pokemon.id === id);
       } else {
