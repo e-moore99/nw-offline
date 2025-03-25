@@ -4,24 +4,24 @@ const withPWA = require('next-pwa')({
   dest: 'public', // Destination directory for the generated service worker
   register: true, // Register the service worker
   skipWaiting: true, // Immediately activate the service worker
-  swSrc: './service-worker.js', // Path to custom service worker
+  swSrc: './public/service-worker.js', // Path to custom service worker
   // disable: process.env.NODE_ENV === 'development', // Disable in development
-  runtimeCaching: [
-    {
-      urlPattern: /^(\/api\/all)$/, // Match your API endpoint
-      handler: 'NetworkFirst', // Use network first strategy
-      options: {
-        cacheName: 'nw-product-cache-v1',
-        expiration: {
-          maxEntries: 500,
-          maxAgeSeconds: 24 * 60 * 60, // 1 day
-        },
-        cacheableResponse: {
-          statuses: [0, 200], // Cache successful responses
-        },
-      },
-    },
-  ],
+  // runtimeCaching: [
+  //   {
+  //     urlPattern: /^(\/api\/all)$/, // Match your API endpoint
+  //     handler: 'NetworkFirst', // Use network first strategy
+  //     options: {
+  //       cacheName: 'nw-product-cache-v1',
+  //       expiration: {
+  //         maxEntries: 500,
+  //         maxAgeSeconds: 24 * 60 * 60, // 1 day
+  //       },
+  //       cacheableResponse: {
+  //         statuses: [0, 200], // Cache successful responses
+  //       },
+  //     },
+  //   },
+  // ],
 });
 
 const nextConfig: NextConfig = {
