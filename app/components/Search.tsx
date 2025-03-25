@@ -2,7 +2,7 @@
 import styles from "./search.module.css";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useDebouncedCallback } from "use-debounce";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export default function Search({
   setSearchQuery,

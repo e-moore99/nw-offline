@@ -1,6 +1,3 @@
-import { Pokemon } from "./types";
-
-
 export const fetchProductsByQuery = async (searchQuery: string) => {
   try {
 
