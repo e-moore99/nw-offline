@@ -29,7 +29,7 @@ export const CartUtils = {
   },
   
   // Remove a specific item from the cart
-  removeFromCart: (itemId: number): void => {
+  removeFromCart: (itemId: string): void => {
     let cart: CartItem[] = JSON.parse(localStorage.getItem('cart') || '[]');
     // Filter out the item with the matching ID
     cart = cart.filter(item => item.id !== itemId);
