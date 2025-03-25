@@ -6,7 +6,6 @@ import { AppDispatch, useAppSelector } from "@/redux/store";
 import { updateCart } from "@/redux/features/cart-slice";
 import ItemCard from "../components/itemCard";
 import styles from "./searchResults.module.css";
-import { fetchProductsByQuery } from "../lib/fetch";
 
 const SearchResults = ({
   products,
@@ -62,7 +61,7 @@ const SearchResults = ({
     <>
       <div className={styles.results}>
         <h1 className={styles.resultsHead}>
-          Search results for &quot;{query}&quot;
+          Search results for &quot;{searchQuery}&quot;
         </h1>
         <div className={styles.displayArea}>
           {products && Array.isArray(products) ? (

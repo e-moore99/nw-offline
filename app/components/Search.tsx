@@ -13,8 +13,8 @@ export default function Search({
 }) {
   // this is for updating the url with the search query
   const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+  // const pathname = usePathname();
+  // const { replace } = useRouter();
 
 
 
