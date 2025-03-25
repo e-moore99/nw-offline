@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import Header from ".././components/header";
 import Footer from "../components/Footer";
 import React from "react";
@@ -63,6 +63,7 @@ export default function Cart() {
   const total = calculateTotalPrice();
 
   return (
+    <Suspense fallback={<div>Loading cart...</div>}>
     <>
       <Header
         setSearchQuery={setSearchQuery}
@@ -163,5 +164,6 @@ export default function Cart() {
       </div>
       <Footer />
     </>
+    </Suspense>
   );
 }
