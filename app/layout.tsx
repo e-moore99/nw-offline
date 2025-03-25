@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Your app name",
-  description: "Your app description",
+  title: "New World PWA",
+  description: "A Progressive Web App for NW shopping, enabling online-offline browsing",
   generator: "Next.js",
   manifest: "/manifest.json",
   keywords: ["nextjs", "next14", "pwa", "next-pwa"],
