@@ -126,7 +126,7 @@ export type Product = {
   singlePromo: JSON; // Assuming singlePromo can be a JSON object
   promotionUnitPrice: JSON; // Assuming promotionUnitPrice can be a JSON object
   weighable: JSON; // Assuming weighable can be a JSON object
-  unitOfMeasure: String;
+  unitOfMeasure: string;
   unitPrice: UnitPrice;
-  categories: String[]; // Array of categories
+  categories: string[]; // Array of categories
 };

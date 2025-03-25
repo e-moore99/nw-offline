@@ -1,5 +1,3 @@
-// app/api/products/route.ts
-import { PrismaClient, Product } from "@prisma/client";
 import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/app/lib/prisma"; // Adjust path if needed
 

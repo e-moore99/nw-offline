@@ -1,7 +1,7 @@
 {
-  "name": "Pokemon PWA",
-  "short_name": "PokePWA",
-  "description": "A Progressive Web App for Pokemon shopping and browsing",
+  "name": "New World PWA",
+  "short_name": "NW PWA",
+  "description": "A Progressive Web App for NW shopping, enabling online-offline browsing",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

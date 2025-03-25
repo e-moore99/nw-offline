@@ -54,20 +54,24 @@ export default function Header({
     setClose((prev) => !prev);
   };
 
-  const [isOnline, setOnline] = React.useState<boolean>(navigator.onLine); // Initialize with current online status
+  const [isOnline, setOnline] = React.useState<boolean>(true); // Initialize with current online status
 
   useEffect(() => {
-    const handleOnline = () => setOnline(true);
-    const handleOffline = () => setOnline(false);
+    if (typeof navigator !== "undefined") {
+      // Only run this code on the client side
+      setOnline(navigator.onLine); // Initialize with current online status
+      const handleOnline = () => setOnline(true);
+      const handleOffline = () => setOnline(false);
 
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
+      window.addEventListener("online", handleOnline);
+      window.addEventListener("offline", handleOffline);
 
-    // Cleanup function to remove event listeners
-    return () => {
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-    };
+      // Cleanup function to remove event listeners
+      return () => {
+        window.removeEventListener("online", handleOnline);
+        window.removeEventListener("offline", handleOffline);
+      };
+    }
   }, []);
 
   return (
@@ -150,9 +154,9 @@ export default function Header({
       {isOpen ? (
         <div className={styles.productTree}>
           <div className={styles.productTreeCat1}>
-          <button>Featured </button>
-          <button>Fresh Foods & Bakery</button>
-          <button>Chilled, Frozen & Desserts</button>
+            <button>Featured </button>
+            <button>Fresh Foods & Bakery</button>
+            <button>Chilled, Frozen & Desserts</button>
           </div>
         </div>
       ) : null}

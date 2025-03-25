@@ -1,8 +1,9 @@
-"use client";
+// "use client";
 // import { useEffect } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/redux/provider";
+import { Metadata } from "next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,60 +15,26 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const metadata: Metadata = {
+  title: "Your app name",
+  description: "Your app description",
+  generator: "Next.js",
+  manifest: "/manifest.json",
+  keywords: ["nextjs", "next14", "pwa", "next-pwa"],
+  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#fff" }],
+  viewport:
+    "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
+  icons: [
+    { rel: "apple-touch-icon", url: "icon-192x192.png" },
+    { rel: "icon", url: "icon-192x192.png" },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const registerServiceWorker = async () => {
-  //   if ("serviceWorker" in navigator) {
-  //     try {
-  //       const register = await navigator.serviceWorker.register(
-  //         "/service-worker.js",
-  //         {
-  //           scope: `/`,
-  //         }
-  //       );
-  //       if (register.installing) {
-  //         console.log("Service worker installing");
-  //       } else if (register.waiting) {
-  //         console.log("Service worker installed");
-  //       } else if (register.active) {
-  //         console.log("Service worker active");
-  //       }
-  //       console.log("Service worker registered", register);
-  //     } catch (error) {
-  //       console.error("Service worker registration failed", error);
-  //     }
-  //   }
-  //   // window.addEventListener('load', () => {
-  //   //     navigator.serviceWorker.register('/service-worker.js')
-  //   //         .then((registration) => {
-  //   //             console.log('Service Worker registered with scope:', registration.scope);
-  //   //         })
-  //   //         .catch((error) => {
-  //   //             console.error('Service Worker registration failed:', error);
-  //   //         });
-  //   // });
-  // };
-  // registerServiceWorker();
-  // useEffect(() => {
-  // if ("serviceWorker" in navigator) {
-  //   window.addEventListener("load", () => {
-  //     navigator.serviceWorker
-  //       .register("/service-worker.js")
-  //       .then((registration) => {
-  //         console.log(
-  //           "Service Worker registered successfully:",
-  //           registration.scope
-  //         );
-  //       })
-  //       .catch((error) => {
-  //         console.log("Service Worker registration failed:", error);
-  //       });
-  //   });
-  // }
-  // }, []);
 
   return (
     <html lang="en">
