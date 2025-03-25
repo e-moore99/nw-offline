@@ -11,7 +11,6 @@ import { Product } from "./lib/types";
 
 export default function Home() {
   const [loading, setLoading] = React.useState<boolean>(true);
-  const [products, setProducts] = React.useState<Product[]>([]);
   const [searchQuery, setSearchQuery] = React.useState<string>("");
   const [products, setProducts] = React.useState<Product[]>([]);
   const cartArray = useAppSelector((state) => state.cart);
