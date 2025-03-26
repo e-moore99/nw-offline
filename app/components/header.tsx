@@ -108,6 +108,7 @@ export default function Header({
               />
             </div>
             <div className={styles.headerTopRight}>
+                 {/* This is the popup box on the navbar to give you info */}
               {isOnline ? null : (
                 <button onClick={toggleNavPop} className={styles.offlineBtn}>
                   You&apos;re offline <WifiIcon className="w-6" />
@@ -160,7 +161,7 @@ export default function Header({
           </div>
         </div>
       ) : null}
-      {/* This is the popup box on the navbar to give you info */}
+   
       {/* This is the main "you've lost connectivity" popup */}
       {isOnline
         ? null

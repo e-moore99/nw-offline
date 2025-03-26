@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# database information
+/prisma/seed.js
+/app/lib/dairy.json
+/app/lib/dairy.ts

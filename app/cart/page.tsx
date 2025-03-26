@@ -25,6 +25,26 @@ export default function Cart() {
     setCartItems(cartArray);
   }, [cartArray]);
 
+    const [isOnline, setOnline] = React.useState<boolean>(true); // Initialize with current online status
+  
+    useEffect(() => {
+      if (typeof navigator !== "undefined") {
+        // Only run this code on the client side
+        setOnline(navigator.onLine); // Initialize with current online status
+        const handleOnline = () => setOnline(true);
+        const handleOffline = () => setOnline(false);
+  
+        window.addEventListener("online", handleOnline);
+        window.addEventListener("offline", handleOffline);
+  
+        // Cleanup function to remove event listeners
+        return () => {
+          window.removeEventListener("online", handleOnline);
+          window.removeEventListener("offline", handleOffline);
+        };
+      }
+    }, []);
+
   const searchProducts = async () => {
     console.log("Wrong page to search on!", searchQuery);
   };
@@ -134,7 +154,7 @@ export default function Cart() {
                   <h2>${cartItems ? (total + 1).toFixed(2) : 0.0}</h2>
                 </div>
                 <p>Incl. GST</p>
-                <button className={styles.checkoutBtn}>Checkout</button>
+                <button className={isOnline? styles.checkoutBtn : styles.checkoutBtnOffline}>Checkout</button>
                 <button className={styles.listBtn}>
                   Save trolley to a list
                 </button>
