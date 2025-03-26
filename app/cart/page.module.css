@@ -254,6 +254,15 @@
   height: 60px;
 }
 
+.popupTopBtn {
+  width: 100%;
+  height: 10%;
+  padding-top: 1%;
+  padding-right: 1%;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .popupBody {
   height: 90%;
   width: 100%;

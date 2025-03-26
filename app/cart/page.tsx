@@ -16,7 +16,6 @@ import {
 } from "@heroicons/react/24/outline";
 import { TbShoppingCartOff } from "react-icons/tb";
 
-
 export default function Cart() {
   const [cartItems, setCartItems] = React.useState<CartItemState[]>([]);
   const [searchQuery, setSearchQuery] = React.useState<string>("");
@@ -110,13 +109,22 @@ export default function Cart() {
             </p>
             <button>Select timeslot</button>
           </div>
-          <div className={styles.pageTopAlert}>
-            <p>
-              We've made some changes to our checkout, when you add a new
-              payment card you will get a verification request from your bank.
-              Please see our FAQ for more details.
-            </p>
-          </div>
+          {isOnline ? (
+            <div className={styles.pageTopAlert}>
+              <p>
+                We've made some changes to our checkout, when you add a new
+                payment card you will get a verification request from your bank.
+                Please see our FAQ for more details.
+              </p>
+            </div>
+          ) : (
+            <div className={styles.pageTopAlert}>
+              <p>
+                You are currently in offline mode. Some product information,
+                such as prices and availability, may not be up to date.
+              </p>
+            </div>
+          )}
           <div className={styles.cartCheckoutBox}>
             <div className={styles.cartContainer}>
               {cartItems.length === 0 ? <h1>Cart is empty!</h1> : null}
@@ -171,7 +179,12 @@ export default function Cart() {
                   </div>
                   <p>Incl. GST</p>
                   {isOnline ? (
-                    <button onClick={handlePopup} className={styles.checkoutBtn}>Checkout</button>
+                    <button
+                      onClick={toggleClosePopup}
+                      className={styles.checkoutBtn}
+                    >
+                      Checkout
+                    </button>
                   ) : (
                     <button
                       onClick={handlePopup}
@@ -189,22 +202,42 @@ export default function Cart() {
               <button className={styles.emptyTrolley} onClick={emptyCart}>
                 Empty trolley
               </button>
-              <div className={styles.disclaimer}>
-                <InformationCircleIcon className="w-14" />
-                <p>
-                  Some of the items in your cart may have limits. If your order
-                  exceeds the advertised limit, you may only receive the limited
-                  amount.
-                </p>
-              </div>
-              <div className={styles.disclaimer}>
-                <InformationCircleIcon className="w-20" />
-                <p>
-                  Due to the delay between selecting your groceries and
-                  delivery, product origins may change before your order is
-                  picked and before you receive your products.
-                </p>
-              </div>
+              {isOnline ? (
+                <div className={styles.disclaimer}>
+                  <InformationCircleIcon className="w-14" />
+                  <p>
+                    Some of the items in your cart may have limits. If your
+                    order exceeds the advertised limit, you may only receive the
+                    limited amount.
+                  </p>
+                </div>
+              ) : (
+                <div className={styles.disclaimer}>
+                  <InformationCircleIcon className="w-14" />
+                  <p>
+                    Some of the items in your cart may have changed prices.
+                    Please check before checking out.
+                  </p>
+                </div>
+              )}
+              {isOnline ? (
+                <div className={styles.disclaimer}>
+                  <InformationCircleIcon className="w-20" />
+                  <p>
+                    Due to the delay between selecting your groceries and
+                    delivery, product origins may change before your order is
+                    picked and before you receive your products.
+                  </p>
+                </div>
+              ) : (
+                <div className={styles.disclaimer}>
+                  <InformationCircleIcon className="w-20" />
+                  <p>
+                    Checkout is unavailable while offline. You must be online
+                    and logged in to complete your purchase.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
