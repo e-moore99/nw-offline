@@ -78,7 +78,7 @@ export default function Header({
     <>
       <div className={styles.header}>
         <div className={styles.fixedHeader}>
-          <div className={styles.pickupBnr}>
+          <div className={ isOnline? styles.pickupBnrOnline : styles.pickupBnrOffline}>
             <div className={styles.pickupBnrLeft}>
               <h3>
                 <BuildingStorefrontIcon className="w-6" />

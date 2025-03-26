@@ -11,11 +11,20 @@
   /* box-shadow: #b4b4b4 0px 4px 4px; */
 }
 
-.pickupBnr {
+.pickupBnrOnline {
   height: 7vh;
   display: flex;
   justify-content: space-between;
   background-color: #ca1928;
+  color: white;
+  width: 100%;
+}
+
+.pickupBnrOffline {
+  height: 7vh;
+  display: flex;
+  justify-content: space-between;
+  background-color: #4A4949;
   color: white;
   width: 100%;
 }
@@ -255,9 +264,9 @@
 }
 
 .searchBar {
-  height: 80%;
-  width: 60%;
-  padding-left: 10%;
+  height: 95%;
+  width: 65%;
+  padding-left: 5%;
 }
 
 .cartIcon {
