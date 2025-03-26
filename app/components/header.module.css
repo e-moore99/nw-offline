@@ -193,6 +193,12 @@
   align-items: center;
 }
 
+.reactIcon {
+  color: white;
+  width: 80px;
+  height: 80px;
+}
+
 .popupTopBtn {
   width: 100%;
   height: 10%;

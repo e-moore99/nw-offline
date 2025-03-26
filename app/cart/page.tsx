@@ -99,7 +99,7 @@ export default function Cart() {
           <button>Select timeslot</button>
         </div>
         <div className={styles.pageTopAlert}>
-          <p>! This is an alert banner !</p>
+          <p>We've made some changes to our checkout, when you add a new payment card you will get a verification request from your bank. Please see our FAQ for more details.</p>
         </div>
         <div className={styles.cartCheckoutBox}>
           <div className={styles.cartContainer}>

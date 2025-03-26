@@ -12,7 +12,7 @@ import Image from "next/image";
 import Carrot from "@/public/carrot.png";
 import Plate from "@/public/plate.jpg";
 import NWShopping from "@/public/nw-shopping.png";
-import NWShoppingOffline from "@/public/home-img-grey.png";
+// import NWShoppingOffline from "@/public/home-img-grey.png";
 
 const HomePage = () => {
    const [isOnline, setOnline] = React.useState<boolean>(true); // Initialize with current online status

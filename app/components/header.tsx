@@ -10,10 +10,10 @@ import {
   UserIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { CiWifiOff } from "react-icons/ci";
 import React, { useEffect } from "react";
 import { useAppSelector } from "@/redux/store";
 import NWLogo from "../../public/nw-logo.svg";
-import offline from "../../public/nrk_offline.png";
 import Image from "next/image";
 
 export default function Header({
@@ -169,7 +169,7 @@ export default function Header({
             <>
               <div className={active ? styles.popActive : styles.popup}>
                 <div className={styles.wifiSymbol}>
-                  <Image src={offline} alt="Offline" className="w-16" />
+                <CiWifiOff className={styles.reactIcon}/>
                 </div>
                 <div className={styles.popupTopBtn}>
                   <button onClick={toggleClosePopup}>
