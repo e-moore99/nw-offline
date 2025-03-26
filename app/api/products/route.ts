@@ -5,6 +5,7 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("query");
   console.log("API /products called with query:", query); // Add this logging
+  console.log("DATABASE_URL_PRISMA:", process.env.DATABASE_URL_PRISMA); // Add this logging
   if (!query) {
     console.log("Query parameter is missing"); // Add this logging
     return NextResponse.json({ error: "Query parameter is required" }, { status: 400 });

@@ -3,6 +3,7 @@ import prisma from "@/app/lib/prisma"; // Adjust path if needed
 
 export async function GET() {
   console.log("API /all called"); // Add this logging
+  console.log("DATABASE_URL_PRISMA:", process.env.DATABASE_URL_PRISMA); // Add this logging
   try {
     const products = await prisma.product.findMany();
     // const count = await prisma.product.count();
