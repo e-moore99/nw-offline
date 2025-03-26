@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useAppSelector } from "@/redux/store";
 import Header from "./components/header";
 import styles from "./page.module.css";
@@ -89,6 +89,7 @@ useEffect(() => {
     
   return (
     <>
+    <Suspense fallback={<div>Loading page...</div>}>
       <Header setSearchQuery={setSearchQuery} searchProducts={searchProducts} />
 
       <div className={styles.container}>
@@ -103,6 +104,7 @@ useEffect(() => {
         )}
       </div>
       <Footer />
+      </Suspense>
     </>
   );
 }
