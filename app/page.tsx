@@ -52,7 +52,7 @@ useEffect(() => {
       const cache = await caches.open("nw-product-cache-v1");
       const cachedResponse = await cache.match(`/api/all`);
       if (cachedResponse) {
-        // Use Cached Data
+        // Use Cached Data first
         const allProducts = await cachedResponse.json();
 
         // filter products based on query
