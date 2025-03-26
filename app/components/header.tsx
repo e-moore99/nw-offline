@@ -15,6 +15,7 @@ import React, { useEffect } from "react";
 import { useAppSelector } from "@/redux/store";
 import NWLogo from "../../public/nw-logo.svg";
 import Image from "next/image";
+import { TbShoppingCart } from "react-icons/tb";
 
 export default function Header({
   setSearchQuery,
@@ -126,7 +127,7 @@ export default function Header({
               ) : null}
               <Link href="/cart">
                 <div className={styles.cartIcon}>
-                  <ShoppingCartIcon className="w-6" />
+                  <TbShoppingCart className="w-6 h-6" />
                   <p>{cartItems}</p>
                 </div>
               </Link>
