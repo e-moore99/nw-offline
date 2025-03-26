@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "./Home.module.css";
 import {
   CurrencyDollarIcon,
@@ -12,11 +12,30 @@ import Image from "next/image";
 import Carrot from "@/public/carrot.png";
 import Plate from "@/public/plate.jpg";
 import NWShopping from "@/public/nw-shopping.png";
+import NWShoppingOffline from "@/public/home-img-grey.png";
 
 const HomePage = () => {
+   const [isOnline, setOnline] = React.useState<boolean>(true); // Initialize with current online status
+  
+    useEffect(() => {
+      if (typeof navigator !== "undefined") {
+        setOnline(navigator.onLine); // Initialize with current online status
+        const handleOnline = () => setOnline(true);
+        const handleOffline = () => setOnline(false);
+  
+        window.addEventListener("online", handleOnline);
+        window.addEventListener("offline", handleOffline);
+  
+        // Cleanup function removes the event listeners
+        return () => {
+          window.removeEventListener("online", handleOnline);
+          window.removeEventListener("offline", handleOffline);
+        };
+      }
+    }, []);
   return (
     <div className={styles.home}>
-      <div className={styles.salesBnr}>
+      <div className={isOnline ? styles.salesBnr : styles.salesBnrOffline}>
         <h1>Why wait till Easter?</h1>
         <p>Hot Cross Buns are here, fresh and ready for you to enjoy.</p>
         <button>Shop now</button>
@@ -61,6 +80,7 @@ const HomePage = () => {
           <button>View all</button>
         </div>
       </div>
+      {isOnline ? (
       <div className={styles.articles}>
         <div className={styles.article1}>
           <Image src={Plate} alt="Food"></Image>
@@ -102,6 +122,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      ) : null}
       <div className={styles.shopWithUs}>
         <div className={styles.shopWUsLeft}>
           <h1>Why Shop Online With Us?</h1> <br />
@@ -133,7 +154,8 @@ const HomePage = () => {
           </ul>
         </div>
         <div className={styles.shopWUsRight}>
-          <Image src={NWShopping} alt="Shopping"></Image>
+          {isOnline ? <Image src={NWShopping} alt="Shopping"></Image> : <Image src={NWShoppingOffline} alt="Shopping"></Image> }
+          
         </div>
       </div>
     </div>

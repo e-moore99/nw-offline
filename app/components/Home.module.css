@@ -15,7 +15,23 @@
   justify-content: center;
   align-items: center;
 }
+
+.salesBnrOffline {
+  height: 60vh;
+  width: 100%;
+  background-color: #666666;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .salesBnr h1 {
+  font-size: 3rem;
+  font-weight: 800;
+}
+.salesBnrOffline h1 {
   font-size: 3rem;
   font-weight: 800;
 }
@@ -25,8 +41,20 @@
   font-weight: 300;
   padding-bottom: 2%;
 }
+.salesBnrOffline p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  padding-bottom: 2%;
+}
 
 .salesBnr button {
+  background-color: #fff;
+  padding: 0.5% 1.5%;
+  color: rgb(42, 17, 48);
+  font-weight: 700;
+  border-radius: 5px;
+}
+.salesBnrOffline button {
   background-color: #fff;
   padding: 0.5% 1.5%;
   color: rgb(42, 17, 48);
