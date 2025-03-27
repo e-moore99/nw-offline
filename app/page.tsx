@@ -6,7 +6,7 @@ import Header from "./components/header";
 import HomePage from "./components/Home";
 import Footer from "./components/Footer";
 // import SearchResults from "./components/SearchResults";
-import axios from "axios";
+// import axios from "axios";
 // import { Product } from "./lib/types";
 
 export default function Home() {
