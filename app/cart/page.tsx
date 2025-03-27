@@ -48,10 +48,6 @@ export default function Cart() {
     }
   }, []);
 
-  const searchProducts = async () => {
-    console.log("Wrong page to search on!", searchQuery);
-  };
-
   const increaseItems = (index: number) => {
     const tempCartItems = cartArray.map((item, i) =>
       i === index ? { ...item, quantity: item.quantity + 1 } : item
@@ -96,10 +92,7 @@ export default function Cart() {
   return (
     <Suspense fallback={<div>Loading cart...</div>}>
       <>
-        <Header
-          setSearchQuery={setSearchQuery}
-          searchProducts={searchProducts}
-        />
+        <Header />
         <div className={styles.cart}>
           <h1 className={styles.pageTitle}>Your Trolley</h1>
           <div className={styles.collectingFrom}>

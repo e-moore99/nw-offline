@@ -21,7 +21,6 @@ const SearchResults = ({
     console.log("added to cart: ", product);
     const itemIndex = cartArray.findIndex((item) => item.id === product.id);
 
-
     if (itemIndex !== -1) {
       const updatedCart = cartArray.map((item, index) =>
         index === itemIndex ? { ...item, quantity: item.quantity + 1 } : item
@@ -39,7 +38,7 @@ const SearchResults = ({
         quantity: 1,
         subtitle: product.subtitle,
         price: product.price,
-        unitPrice: product.unitPrice
+        unitPrice: product.unitPrice,
       };
       const updatedCart = [...cartArray, newCartItem];
       dispatch(updateCart(updatedCart));
@@ -67,15 +66,15 @@ const SearchResults = ({
           {products && Array.isArray(products) ? (
             products.map((product) => (
               <ItemCard
-              addToCart={() => addToCart(product)}
-              numberInCart={product.id ? numberInCart(product.id) : 0}
-              key={product.id}
-              name={product.name}
-              id={product.id}
-              subtitle={product.subtitle}
-              price={product.price}
-              images={product.images}
-              unitPrice={product.unitPrice}
+                addToCart={() => addToCart(product)}
+                numberInCart={product.id ? numberInCart(product.id) : 0}
+                key={product.id}
+                name={product.name}
+                id={product.id}
+                subtitle={product.subtitle}
+                price={product.price}
+                images={product.images}
+                unitPrice={product.unitPrice}
               />
             ))
           ) : (

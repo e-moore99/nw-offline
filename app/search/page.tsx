@@ -1,88 +1,107 @@
-import React, { useEffect } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { Product } from "../lib/types";
 import { CartItemState } from "@/redux/features/cart-slice";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { updateCart } from "@/redux/features/cart-slice";
 import ItemCard from "../components/itemCard";
-import styles from "./searchResults.module.css";
+import styles from "./page.module.css";
+import Header from "../components/header";
+import Footer from "../components/Footer";
+import SearchResults from "../components/SearchResults";
+import axios from "axios";
+import { useSearchParams } from "next/navigation";
 
-const SearchPage = ({
-  products,
-  searchQuery,
-}: {
-  products: Product[];
-  searchQuery: string;
-}) => {
-  const dispatch = useDispatch<AppDispatch>();
-  const cartArray = useAppSelector((state) => state.cart);
-
-  const addToCart = (product: Product) => {
-    console.log("added to cart: ", product);
-    const itemIndex = cartArray.findIndex((item) => item.id === product.id);
-
-
-    if (itemIndex !== -1) {
-      const updatedCart = cartArray.map((item, index) =>
-        index === itemIndex ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      dispatch(updateCart(updatedCart));
-    } else {
-      if (!product.name || !product.id) {
-        console.error("Product name or id is undefined");
-        return;
-      }
-      const newCartItem: CartItemState = {
-        name: product.name,
-        id: product.id,
-        images: product.images,
-        quantity: 1,
-        subtitle: product.subtitle,
-        price: product.price,
-        unitPrice: product.unitPrice
-      };
-      const updatedCart = [...cartArray, newCartItem];
-      dispatch(updateCart(updatedCart));
-    }
-  };
-
-  const numberInCart = (id: string) => {
-    const itemIndex = cartArray.findIndex((item) => item.id === id);
-    if (itemIndex !== -1) {
-      return cartArray[itemIndex].quantity;
-    }
-    return 0;
-  };
+const SearchPage = () => {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query") || "";
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    console.log("Cart array: ", cartArray);
-  }, [cartArray]);
+    const fetchAndCacheAllProducts = async () => {
+      try {
+        const cache = await caches.open("nw-product-cache-v1");
+        const cachedResponse = await cache.match("/api/all");
+
+        if (cachedResponse) {
+          const cachedData = await cachedResponse.json();
+          setProducts(cachedData);
+          console.log("Using cached all products data.");
+          return;
+        }
+
+        const response = await axios.get("/api/all");
+        setProducts(response.data);
+        await cache.put(
+          "/api/all",
+          new Response(JSON.stringify(response.data), {
+            headers: { "Content-Type": "application/json" },
+          })
+        );
+        console.log("Fetched and cached all products data.");
+      } catch (error) {
+        console.error("Error fetching and caching all products:", error);
+      }
+    };
+
+    fetchAndCacheAllProducts();
+  }, []);
+  useEffect(() => {
+    const searchProducts = async () => {
+      setLoading(true);
+      try {
+        // SW cache first
+        const cache = await caches.open("nw-product-cache-v1");
+        const cachedResponse = await cache.match(`/api/all`);
+        if (cachedResponse) {
+          // Use Cached Data first
+          const allProducts = await cachedResponse.json();
+
+          // filter products based on query
+          const filteredProducts = allProducts.filter((product: Product) =>
+            product.name?.toLowerCase().includes(query.toLowerCase())
+          );
+          setProducts(filteredProducts);
+          console.log("Using cached search results:", filteredProducts);
+          setLoading(false);
+          return; // Exit the function, as we've used cached data
+        }
+        // If no cache, fetch from network
+        const response = await axios.get(`/api/products?query=${query}`);
+        setProducts(response.data);
+        await cache.put(
+          `/api/products?query=${query}`,
+          new Response(JSON.stringify(response.data), {
+            headers: { "Content-Type": "application/json" },
+          })
+        );
+        console.log("success searching! cached results", response.data);
+        setLoading(false);
+      } catch (err) {
+        console.error("error with product search", err);
+        setLoading(false);
+      }
+    };
+    if (query) {
+      searchProducts();
+    }
+  }, [query]);
+
   return (
     <>
+      <Header />
       <div className={styles.results}>
-        <h1 className={styles.resultsHead}>
-          Search results for &quot;{searchQuery}&quot;
-        </h1>
-        <div className={styles.displayArea}>
-          {products && Array.isArray(products) ? (
-            products.map((product) => (
-              <ItemCard
-              addToCart={() => addToCart(product)}
-              numberInCart={product.id ? numberInCart(product.id) : 0}
-              key={product.id}
-              name={product.name}
-              id={product.id}
-              subtitle={product.subtitle}
-              price={product.price}
-              images={product.images}
-              unitPrice={product.unitPrice}
-              />
-            ))
-          ) : (
-            <p>No results found.</p>
-          )}
-        </div>
+        {loading ? (
+          <p>Loading search results...</p>
+        ) : products.length > 0 ? (
+          <SearchResults products={products} searchQuery={query} />
+        ) : (
+          <p>No results found for "{query}".</p>
+        )}
       </div>
+      <Footer />
     </>
   );
 };

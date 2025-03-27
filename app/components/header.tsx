@@ -14,16 +14,12 @@ import { useAppSelector } from "@/redux/store";
 import NWLogo from "../../public/nw-logo.svg";
 import Image from "next/image";
 import { TbShoppingCart } from "react-icons/tb";
+import { Product } from "../lib/types";
 
-export default function Header({
-  setSearchQuery,
-  searchProducts,
-}: {
-  setSearchQuery: (query: string) => void;
-  searchProducts: () => void;
-}) {
+export default function Header() {
   const [cartItems, setCartItems] = React.useState<number>(0);
   const cartArray = useAppSelector((state) => state.cart);
+
   // this is for the product tree
   const [isOpen, setOpen] = React.useState<boolean>(false);
   // further info in offline popup
@@ -77,7 +73,11 @@ export default function Header({
     <>
       <div className={styles.header}>
         <div className={styles.fixedHeader}>
-          <div className={ isOnline? styles.pickupBnrOnline : styles.pickupBnrOffline}>
+          <div
+            className={
+              isOnline ? styles.pickupBnrOnline : styles.pickupBnrOffline
+            }
+          >
             <div className={styles.pickupBnrLeft}>
               <h3>
                 <BuildingStorefrontIcon className="w-6" />
@@ -90,10 +90,13 @@ export default function Header({
               <button className={styles.bookSlot}>Book a slot</button>
             </div>
             <div className={styles.pickupBnrRight}>
-                  {/* This is the popup box on the navbar to give you info */}
-                  {isOnline ? null : (
+              {/* This is the popup box on the navbar to give you info */}
+              {isOnline ? null : (
                 <button onClick={toggleNavPop} className={styles.offlineBtn}>
-                  You&apos;re offline <div className={styles.youreOffline}><CiWifiOff className="w-6 h-6" /></div>
+                  You&apos;re offline{" "}
+                  <div className={styles.youreOffline}>
+                    <CiWifiOff className="w-6 h-6" />
+                  </div>
                 </button>
               )}
               {isClicked ? (
@@ -117,10 +120,7 @@ export default function Header({
               <Image src={NWLogo} alt="New World logo" className="w-25 p" />
             </Link>
             <div className={styles.searchBar}>
-              <Search
-                setSearchQuery={setSearchQuery}
-                searchProducts={searchProducts}
-              />
+              <Search/>
             </div>
             <div className={styles.headerTopRight}>
               <Link href="/cart">
@@ -160,7 +160,7 @@ export default function Header({
           </div>
         </div>
       ) : null}
-   
+
       {/* This is the main "you've lost connectivity" popup */}
       {isOnline
         ? null
@@ -168,7 +168,7 @@ export default function Header({
             <>
               <div className={active ? styles.popActive : styles.popup}>
                 <div className={styles.wifiSymbol}>
-                <CiWifiOff className={styles.reactIcon}/>
+                  <CiWifiOff className={styles.reactIcon} />
                 </div>
                 <div className={styles.popupTopBtn}>
                   <button onClick={toggleClosePopup}>

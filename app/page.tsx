@@ -15,7 +15,7 @@ export default function Home() {
   const [products, setProducts] = React.useState<Product[]>([]);
   const cartArray = useAppSelector((state) => state.cart);
 
-useEffect(() => {
+  useEffect(() => {
     const fetchAndCacheAllProducts = async () => {
       try {
         const cache = await caches.open("nw-product-cache-v1");
@@ -45,6 +45,25 @@ useEffect(() => {
     fetchAndCacheAllProducts();
   }, []);
 
+  const [isOnline, setOnline] = React.useState<boolean>(true); // Initialize with current online status
+
+  useEffect(() => {
+    if (typeof navigator !== "undefined") {
+      setOnline(navigator.onLine); // Initialize with current online status
+      const handleOnline = () => setOnline(true);
+      const handleOffline = () => setOnline(false);
+
+      window.addEventListener("online", handleOnline);
+      window.addEventListener("offline", handleOffline);
+
+      // Cleanup function removes the event listeners
+      return () => {
+        window.removeEventListener("online", handleOnline);
+        window.removeEventListener("offline", handleOffline);
+      };
+    }
+  }, []);
+
   const searchProducts = async () => {
     setLoading(true);
     try {
@@ -58,8 +77,8 @@ useEffect(() => {
         // filter products based on query
         const filteredProducts = allProducts.filter((product: Product) =>
           product.name?.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-        setProducts(filteredProducts );
+        );
+        setProducts(filteredProducts);
         console.log("Using cached search results:", filteredProducts);
         setLoading(false);
         return; // Exit the function, as we've used cached data
@@ -85,25 +104,25 @@ useEffect(() => {
     console.log("Cart array: ", cartArray);
   }, [cartArray]);
 
- 
-    
   return (
     <>
-    <Suspense fallback={<div>Loading page...</div>}>
-      <Header setSearchQuery={setSearchQuery} searchProducts={searchProducts} />
+      <Suspense fallback={<div>Loading page...</div>}>
+        <Header/>
 
-      <div className={styles.container}>
-        {loading ? (
-          <>
-            <HomePage />
-          </>
-        ) : (
-          <>
-            <SearchResults products={products} searchQuery={searchQuery} />
-          </>
-        )}
-      </div>
-      <Footer />
+        {/* <div className={styles.container}>
+          {loading ? (
+            <>
+              <HomePage />
+            </>
+          ) : (
+            <>
+              <SearchResults products={products} searchQuery={searchQuery} />
+            </>
+          )}
+        </div> */}
+        <HomePage />
+        {/* <SearchResults products={products} searchQuery={""} /> */}
+        <Footer />
       </Suspense>
     </>
   );
