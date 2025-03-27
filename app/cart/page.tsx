@@ -112,7 +112,7 @@ export default function Cart() {
           {isOnline ? (
             <div className={styles.pageTopAlert}>
               <p>
-                We've made some changes to our checkout, when you add a new
+                We&apos;ve made some changes to our checkout, when you add a new
                 payment card you will get a verification request from your bank.
                 Please see our FAQ for more details.
               </p>

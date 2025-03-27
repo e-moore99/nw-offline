@@ -85,6 +85,12 @@
   color: rgb(42, 17, 48);
 }
 
+.categories {
+  color: #571060;
+  font-weight: 700;
+  font-size: 14px;
+}
+
 .registerBtn {
   padding-right: 3%;
   border-right: 1px solid lightgray;

@@ -12,7 +12,14 @@ import Image from "next/image";
 import { PiCarrot } from "react-icons/pi";
 import Plate from "@/public/plate.jpg";
 import NWShopping from "@/public/nw-shopping.png";
-// import NWShoppingOffline from "@/public/home-img-grey.png";
+import Butchery from "@/public/butchery.svg";
+import Drinks from "@/public/drinks.svg";
+import FrozenFoods from "@/public/frozen-foods.svg";
+import FruitVeg from "@/public/fruit-vegetables.svg";
+import Liquor from "@/public/liquor.svg";
+import Pantry from "@/public/pantry.svg";
+import Pets from "@/public/pets.svg";
+import Snacks from "@/public/snack-foods.svg";
 
 const HomePage = () => {
   const [isOnline, setOnline] = React.useState<boolean>(true); // Initialize with current online status
@@ -45,34 +52,34 @@ const HomePage = () => {
           <div className={styles.categoryBtnCircle}>
             <CalendarDaysIcon className="w-10" />{" "}
           </div>
-          Book a slot
+          <p className={styles.categories}>Book a slot</p>
         </button>
         <button>
           <div className={styles.categoryBtnCircle}>
             <CurrencyDollarIcon className="w-10" />{" "}
           </div>
-          Specials
+          <p className={styles.categories}>Specials</p>
         </button>
         <button>
           <div className={styles.categoryBtnCircle}>
             <UserIcon className="w-10" />
           </div>
-          Login
+          <p className={styles.categories}>Login</p>
         </button>
         <button className={styles.registerBtn}>
           <div className={styles.categoryBtnCircle}>
             <UserPlusIcon className="w-10" />
           </div>
-          Register
+          <p className={styles.categories}>Register</p>
         </button>
-        <button>Beer, Cider & Wine</button>
-        <button>Butchery</button>
-        <button>Drinks</button>
-        <button>Chilled, Frozen & Dessert</button>
-        <button>Snack Foods</button>
-        <button>Fruit & Vegetables</button>
-        <button>Pantry</button>
-        <button>Pets</button>
+        <button className={styles.categories}>Beer, Cider & Wine</button>
+        <button className={styles.categories}>Butchery</button>
+        <button className={styles.categories}>Drinks</button>
+        <button className={styles.categories}>Chilled, Frozen & Dessert</button>
+        <button className={styles.categories}>Snack Foods</button>
+        <button className={styles.categories}>Fruit & Vegetables</button>
+        <button className={styles.categories}>Pantry</button>
+        <button className={styles.categories}>Pets</button>
       </div>
       <div className={styles.shopSpecials}>
         <div className={styles.shopSpecialsbody}>
