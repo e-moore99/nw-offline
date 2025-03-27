@@ -99,8 +99,8 @@
 
 .smallPopup {
   position: absolute;
-  top: 20vh;
-  left: 78%;
+  top: 8vh;
+  left: 70%;
   width: 15%;
   height: 17vh;
   background-color: white;
@@ -121,6 +121,13 @@
   color: #666;
   border-bottom: 0.45px solid #e7e5e1;
   padding: 0.5% 0;
+}
+
+.youreOffline {
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  background-color: #ca1928;
 }
 
 .popup {

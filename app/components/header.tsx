@@ -90,6 +90,22 @@ export default function Header({
               <button className={styles.bookSlot}>Book a slot</button>
             </div>
             <div className={styles.pickupBnrRight}>
+                  {/* This is the popup box on the navbar to give you info */}
+                  {isOnline ? null : (
+                <button onClick={toggleNavPop} className={styles.offlineBtn}>
+                  You&apos;re offline <div className={styles.youreOffline}><CiWifiOff className="w-6 h-6" /></div>
+                </button>
+              )}
+              {isClicked ? (
+                <div className={styles.smallPopup}>
+                  <h3>Offline mode functionalities</h3>
+                  <p>Browse product catalogues</p>
+                  <p>
+                    View product details such as decsription, images, and price
+                  </p>
+                  <p>Add products to the trolley</p>
+                </div>
+              ) : null}
               <h3>
                 <UserIcon className="w-6" />
                 Login or register
@@ -107,22 +123,6 @@ export default function Header({
               />
             </div>
             <div className={styles.headerTopRight}>
-                 {/* This is the popup box on the navbar to give you info */}
-              {isOnline ? null : (
-                <button onClick={toggleNavPop} className={styles.offlineBtn}>
-                  You&apos;re offline <CiWifiOff className="w-6 h-6" />
-                </button>
-              )}
-              {isClicked ? (
-                <div className={styles.smallPopup}>
-                  <h3>Offline mode functionalities</h3>
-                  <p>Browse product catalogues</p>
-                  <p>
-                    View product details such as decsription, images, and price
-                  </p>
-                  <p>Add products to the trolley</p>
-                </div>
-              ) : null}
               <Link href="/cart">
                 <div className={styles.cartIcon}>
                   <TbShoppingCart className="w-6 h-6" />
