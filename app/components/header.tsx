@@ -2,7 +2,6 @@ import styles from "./header.module.css";
 import Link from "next/link";
 import Search from "./Search";
 import {
-  WifiIcon,
   ChevronDownIcon,
   BuildingStorefrontIcon,
   ShoppingBagIcon,
