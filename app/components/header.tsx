@@ -14,7 +14,6 @@ import { useAppSelector } from "@/redux/store";
 import NWLogo from "../../public/nw-logo.svg";
 import Image from "next/image";
 import { TbShoppingCart } from "react-icons/tb";
-import { Product } from "../lib/types";
 
 export default function Header() {
   const [cartItems, setCartItems] = React.useState<number>(0);

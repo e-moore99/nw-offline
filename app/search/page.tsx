@@ -1,11 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Product } from "../lib/types";
-import { CartItemState } from "@/redux/features/cart-slice";
-import { useDispatch } from "react-redux";
-import { AppDispatch, useAppSelector } from "@/redux/store";
-import { updateCart } from "@/redux/features/cart-slice";
-import ItemCard from "../components/itemCard";
 import styles from "./page.module.css";
 import Header from "../components/header";
 import Footer from "../components/Footer";

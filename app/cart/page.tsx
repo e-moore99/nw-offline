@@ -18,7 +18,6 @@ import { TbShoppingCartOff } from "react-icons/tb";
 
 export default function Cart() {
   const [cartItems, setCartItems] = React.useState<CartItemState[]>([]);
-  const [searchQuery, setSearchQuery] = React.useState<string>("");
   const [popupOpen, setPopupOpen] = React.useState<boolean>(false);
   const [close, setClose] = React.useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
