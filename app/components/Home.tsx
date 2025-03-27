@@ -72,14 +72,38 @@ const HomePage = () => {
           </div>
           <p className={styles.categories}>Register</p>
         </button>
-        <button className={styles.categories}>Beer, Cider & Wine</button>
-        <button className={styles.categories}>Butchery</button>
-        <button className={styles.categories}>Drinks</button>
-        <button className={styles.categories}>Chilled, Frozen & Dessert</button>
-        <button className={styles.categories}>Snack Foods</button>
-        <button className={styles.categories}>Fruit & Vegetables</button>
-        <button className={styles.categories}>Pantry</button>
-        <button className={styles.categories}>Pets</button>
+        <button className={styles.categories}>
+          <Image src={Liquor} alt="Liquor"></Image>
+          Beer, Cider & Wine
+        </button>
+        <button className={styles.categories}>
+          <Image src={Butchery} alt="Butchery"></Image>
+          Butchery
+        </button>
+        <button className={styles.categories}>
+          <Image src={Drinks} alt="Drinks"></Image>
+          Drinks
+        </button>
+        <button className={styles.categories}>
+          <Image src={FrozenFoods} alt="Frozens and Chilled"></Image>
+          Chilled, Frozen & Dessert
+        </button>
+        <button className={styles.categories}>
+          <Image src={Snacks} alt="Snack foods"></Image>
+          Snack Foods
+        </button>
+        <button className={styles.categories}>
+          <Image src={FruitVeg} alt="Fruit and Vegetables"></Image>
+          Fruit & Vegetables
+        </button>
+        <button className={styles.categories}>
+          <Image src={Pantry} alt="Pantry"></Image>
+          Pantry
+        </button>
+        <button className={styles.categories}>
+          <Image src={Pets} alt="Pets"></Image>
+          Pets
+        </button>
       </div>
       <div className={styles.shopSpecials}>
         <div className={styles.shopSpecialsbody}>

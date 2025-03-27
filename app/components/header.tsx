@@ -111,7 +111,7 @@ export default function Header({
                  {/* This is the popup box on the navbar to give you info */}
               {isOnline ? null : (
                 <button onClick={toggleNavPop} className={styles.offlineBtn}>
-                  You&apos;re offline <WifiIcon className="w-6" />
+                  You&apos;re offline <CiWifiOff className="w-6 h-6" />
                 </button>
               )}
               {isClicked ? (
