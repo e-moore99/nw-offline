@@ -1,4 +1,4 @@
-import { precacheAndRoute } from 'workbox-precaching';
+import { precacheAndRoute } from "workbox-precaching";
 
 const PAGES_CACHE = "pages-cache-v2";
 const PRODUCT_CACHE = "nw-product-cache-v1";
@@ -6,11 +6,12 @@ const allProductUrl = "/api/all";
 
 // Precache Next.js static assets and your custom pages
 precacheAndRoute([
-    { url: '/', revision: null },
-    { url: '/cart', revision: null },
-    { url: '/manifest.json', revision: null },
-    ...self.__WB_MANIFEST, // Add Next.js generated assets
-  ]);
+  { url: "/", revision: null },
+  { url: "/cart", revision: null },
+  { url: "/search", revision: null },
+  { url: "/manifest.json", revision: null },
+  ...self.__WB_MANIFEST, // Add Next.js generated assets
+]);
 
 // const addResourcesToCache = async (resources, cacheName) => {
 //   const cache = await caches.open(cacheName);
@@ -18,33 +19,34 @@ precacheAndRoute([
 // };
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    (async () => {
-        // cache all api data
-        try {
-            const response = await fetch(allProductUrl);
-            if (response.ok){
-                const data = await response.json();
-                const cache = await caches.open(PRODUCT_CACHE);
-                await cache.put(allProductUrl, new Response(JSON.stringify(data), {
-                    headers: {'Content-Type': 'application/json'}
-                }));
-            }
-        } catch (err) {
-            console.error('Failed to cache all products', err);
-        }
-        console.log("Service worker installed")
-    })
-  );
+  event.waitUntil(async () => {
+    // cache all api data
+    try {
+      const response = await fetch(allProductUrl);
+      if (response.ok) {
+        const data = await response.json();
+        const cache = await caches.open(PRODUCT_CACHE);
+        await cache.put(
+          allProductUrl,
+          new Response(JSON.stringify(data), {
+            headers: { "Content-Type": "application/json" },
+          })
+        );
+      }
+    } catch (err) {
+      console.error("Failed to cache all products", err);
+    }
+    console.log("Service worker installed");
+  });
 });
 
 const cacheFirst = async (req) => {
-    const responseFromCache = await caches.match(req);
-    if (responseFromCache) {
-      return responseFromCache;
-    }
-    return fetch(req);
-  };
+  const responseFromCache = await caches.match(req);
+  if (responseFromCache) {
+    return responseFromCache;
+  }
+  return fetch(req);
+};
 
 // async function getNextStaticAssets() {
 //   const manifest = await fetch("/_next/static/chunks/webpack-runtime.js");
@@ -85,32 +87,33 @@ const cacheFirst = async (req) => {
 // });
 
 self.addEventListener("fetch", (event) => {
-    event.respondWith(
-      (async () => {
-        const url = new URL(event.request.url);
-        if (url.pathname.startsWith('/api/')) {
-            return cacheFirst(event.request);
-        } else {
-            return cacheFirst(event.request);
-        }
-      })()
-    );
-    console.log(event.request, event.request.url);
-  });
-
+  event.respondWith(
+    (async () => {
+      const url = new URL(event.request.url);
+      if (url.pathname.startsWith("/api/")) {
+        return cacheFirst(event.request);
+      } else {
+        return cacheFirst(event.request);
+      }
+    })()
+  );
+  console.log(event.request, event.request.url);
+});
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== PAGES_CACHE && cacheName !== PRODUCT_CACHE) {
-            return caches.delete(cacheName);
-          }
-          return null;
-        }).filter(item => item !== null)
+        cacheNames
+          .map((cacheName) => {
+            if (cacheName !== PAGES_CACHE && cacheName !== PRODUCT_CACHE) {
+              return caches.delete(cacheName);
+            }
+            return null;
+          })
+          .filter((item) => item !== null)
       );
     })
   );
-  console.log('Service worker activated');
+  console.log("Service worker activated");
 });
