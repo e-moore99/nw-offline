@@ -8,6 +8,7 @@ import {
   ShoppingBagIcon,
   UserIcon,
   XMarkIcon,
+  WifiIcon,
 } from "@heroicons/react/24/outline";
 import { CiWifiOff } from "react-icons/ci";
 import React, { useEffect } from "react";
@@ -55,6 +56,17 @@ export default function Header({
   };
 
   const [isOnline, setOnline] = React.useState<boolean>(true); // Initialize with current online status
+  const [showOnlinePopup, setShowOnlinePopup] = React.useState<boolean>(false); // Control popup visibility
+  const prevIsOnline = React.useRef<boolean>(isOnline); // Track the previous state of isOnline
+
+  useEffect(() => {
+    // Check if isOnline changed from false to true
+    if (!prevIsOnline.current && isOnline) {
+      setShowOnlinePopup(true); // Show the popup
+      setTimeout(() => setShowOnlinePopup(false), 3000); // Hide the popup after 3 seconds
+    }
+    prevIsOnline.current = isOnline; // Update the previous state
+  }, [isOnline]);
 
   useEffect(() => {
     if (typeof navigator !== "undefined") {
@@ -78,7 +90,11 @@ export default function Header({
     <>
       <div className={styles.header}>
         <div className={styles.fixedHeader}>
-          <div className={ isOnline? styles.pickupBnrOnline : styles.pickupBnrOffline}>
+          <div
+            className={
+              isOnline ? styles.pickupBnrOnline : styles.pickupBnrOffline
+            }
+          >
             <div className={styles.pickupBnrLeft}>
               <h3>
                 <BuildingStorefrontIcon className="w-6" />
@@ -91,10 +107,13 @@ export default function Header({
               <button className={styles.bookSlot}>Book a slot</button>
             </div>
             <div className={styles.pickupBnrRight}>
-                  {/* This is the popup box on the navbar to give you info */}
-                  {isOnline ? null : (
+              {/* This is the popup box on the navbar to give you info */}
+              {isOnline ? null : (
                 <button onClick={toggleNavPop} className={styles.offlineBtn}>
-                  You&apos;re offline <div className={styles.youreOffline}><CiWifiOff className="w-6 h-6" /></div>
+                  You&apos;re offline{" "}
+                  <div className={styles.youreOffline}>
+                    <CiWifiOff className="w-6 h-6" />
+                  </div>
                 </button>
               )}
               {isClicked ? (
@@ -161,15 +180,19 @@ export default function Header({
           </div>
         </div>
       ) : null}
-   
+
       {/* This is the main "you've lost connectivity" popup */}
       {isOnline
         ? null
         : !close && (
             <>
               <div className={active ? styles.popActive : styles.popup}>
-                <div className={active ? styles.wifiSymbolActive : styles.wifiSymbol}>
-                <CiWifiOff className={styles.reactIcon}/>
+                <div
+                  className={
+                    active ? styles.wifiSymbolActive : styles.wifiSymbol
+                  }
+                >
+                  <CiWifiOff className={styles.reactIcon} />
                 </div>
                 <div className={styles.popupTopBtn}>
                   <button onClick={toggleClosePopup}>
@@ -211,6 +234,18 @@ export default function Header({
               </div>
             </>
           )}
+          {/* You're back online popup */}
+      {showOnlinePopup ? (
+        <div className={styles.onlinePopup}>
+          <div className={styles.wifiSymbol}>
+            <WifiIcon className={styles.reactIcon} />
+          </div>
+          <h2>Online mode activated</h2>
+          <div className={styles.bodyContent}>
+            <p>You&apos;re back online! You can now complete your checkout.</p>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 }
