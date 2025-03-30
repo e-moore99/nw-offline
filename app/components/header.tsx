@@ -3,6 +3,7 @@ import Link from "next/link";
 import Search from "./Search";
 import {
   ChevronDownIcon,
+  ChevronUpIcon,
   BuildingStorefrontIcon,
   ShoppingBagIcon,
   UserIcon,
@@ -167,7 +168,7 @@ export default function Header({
         : !close && (
             <>
               <div className={active ? styles.popActive : styles.popup}>
-                <div className={styles.wifiSymbol}>
+                <div className={active ? styles.wifiSymbolActive : styles.wifiSymbol}>
                 <CiWifiOff className={styles.reactIcon}/>
                 </div>
                 <div className={styles.popupTopBtn}>
@@ -187,7 +188,7 @@ export default function Header({
                       onClick={handleActive}
                       className={active ? styles.infoBtnActive : styles.infoBtn}
                     >
-                      {active ? "^" : "i"}
+                      {active ? <ChevronUpIcon className="w-6" /> : "i"}
                     </button>
                   </div>
 
