@@ -1,12 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./features/cart-slice";
-// import toggleOpenReducer from "./features/toggle-open";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 export const store = configureStore({
   reducer: {
     cart: cartReducer,
-    // toggleOpen: toggleOpenReducer,
   },
 });
 
